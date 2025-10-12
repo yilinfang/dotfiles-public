@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# This script is used to install some useful tools to ~/.local/bin/
+# This script will be run when 'chezmoi apply' is executed
+
+set -euo pipefail
+
+TARGET_DIR="$HOME/{{- .toolsInstallPath -}}"
+mkdir -p "$TARGET_DIR"
+
+FW_PATH="$TARGET_DIR/fw"
+FW_URL="https://raw.githubusercontent.com/yilinfang/fw/refs/heads/main/fw"
+
+# If wget is available
+if command -v wget &>/dev/null; then
+	wget -q "$FW_URL" -O "$FW_PATH"
+	chmod +x "$FW_PATH"
+elif command -v curl &>/dev/null; then
+	curl -sSL "$FW_URL" -o "$FW_PATH"
+	chmod +x "$FW_PATH"
+else
+	echo "Error: Neither wget nor curl is installed. Please install one of them to proceed."
+	exit 1
+fi

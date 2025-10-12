@@ -1,0 +1,36 @@
+[user]
+	name = Yilin Fang
+	email = qzfyl98@outlook.com
+[init]
+	defaultBranch = main
+[alias]
+	a = add
+	c = checkout
+	m = merge
+	aa = add -A
+	cb = checkout -b
+	ci = commit
+	cm = commit -m
+	st = status
+	mt = mergetool
+	pl = pull
+	ph = push
+	dlog = -c diff.external=difft log -p --ext-diff
+	dshow = -c diff.external=difft show --ext-diff
+	ddiff = -c diff.external=difft diff
+[core]
+	pager = delta
+[interactive]
+	diffFilter = delta --color-only
+[delta]
+	navigate = true
+	dark = true
+[merge]
+	conflictStyle = zdiff3
+	tool = nvim
+[mergetool]
+	prompt = false
+	keepBackup = false
+[mergetool "nvim"]
+	cmd = nvim -d \"$LOCAL\" \"$MERGED\" \"$REMOTE\"
+	trustExitCode = false

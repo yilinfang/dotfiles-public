@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+# This script is used to install internal tools for chezmoi to ~/.local/bin
+# This script will be run when 'chezmoi apply' is executed
+
+exit 0 # NOTE: Disable this script for now
+
+set -euo pipefail
+
+TARGET_DIR="$HOME/{{- .toolsInstallPath -}}"
+
+cat >"$TARGET_DIR/chezmoi_re-encrypt" <<"EOF"
+{{ template "chezmoi_re-encrypt.tmpl" . }}
+EOF
+chmod +x "$TARGET_DIR/chezmoi_re-encrypt"
+
+cat >"$TARGET_DIR/chezmoi_renew-keys" <<"EOF"
+{{ template "chezmoi_renew-keys.tmpl" . }}
+EOF
+chmod +x "$TARGET_DIR/chezmoi_renew-keys"
+
+cat >"$TARGET_DIR/chezmoi_test-template" <<"EOF"
+{{ template "chezmoi_test-template.tmpl" . }}
+EOF
+chmod +x "$TARGET_DIR/chezmoi_test-template"

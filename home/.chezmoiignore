@@ -1,0 +1,25 @@
+# Use source paths relative to `~`
+# For example, to ignore `~/.config/nvim/init.vim`, use `.config/nvim/init.vim`
+
+**/*bak*
+**/.git/
+**/.git/**
+**/tmp/
+**/tmp/**
+
+# MacOS
+**/.DS_Store
+
+{{ if .work }}
+# Ignored in work environment(PDE)
+.config/ghostty/
+.config/ghostty/**
+.config/kitty/
+.config/kitty/**
+.config/mise/
+.config/mise/**
+.config/starship.toml
+.gitconfig
+.zprofile
+.zshrc
+{{ end }}

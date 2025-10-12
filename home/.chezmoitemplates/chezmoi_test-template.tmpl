@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# Test chezmoi template
+# Usage: chezmoi_test-template <template-file>
+
+if [ $# -eq 0 ]; then
+	echo "Usage: $0 <template-file>" >&2
+	exit 1
+fi
+
+if [ ! -f "$1" ]; then
+	echo "Error: File '$1' not found" >&2
+	exit 1
+fi
+
+exec cat "$1" | chezmoi execute-template

@@ -1,0 +1,110 @@
+# Configuration file of lf
+# MODIFIED FROM (thanks MariaSolOs!) https://github.com/MariaSolOs/dotfiles/blob/main/.config/lf/lfrc
+
+# Set interpreter for shell commands.
+set shell sh
+
+# Safer shell options.
+set shellopts '-eu'
+
+# Show hidden files.
+set hidden
+
+# Show the size of files.
+set info size
+
+# Show the number of items inside directories.
+set dircounts
+
+# Set the custom previewer.
+set previewer ~/.lf/previewer
+
+# Synchronous opening.
+cmd open ${{
+
+# case $(file -Lb --mime-type -- $f) in
+# text/* | inode/x-empty | application/json | application/xml | application/javascript | \
+# 	application/x-yaml | application/toml | application/x-sh | application/x-shellscript)
+# 	"$EDITOR" -- $fx
+# 	;;
+# *)
+# 	for f in $fx; do
+# 		xdg-open -- $f >/dev/null 2>/dev/null &
+# 	done
+# 	;;
+# esac
+
+"$EDITOR" -- $fx
+
+}}
+
+# Also use enter for opening files.
+map <enter> open
+
+# Synchronous opening with initial directory preserved.
+# NOTE: Openning files with $EDITOR while preserving the initial directory when starting lf.
+#  $LF_OLD_PWD needs to be set before stariting lf, e.g. `LF_OLD_PWD="$PWD" lf`.
+cmd open-from-old-pwd ${{
+
+if [ -n "$LF_OLD_PWD" ] && [ -d "$LF_OLD_PWD" ]; then
+	cd "$LF_OLD_PWD"
+fi
+case $(file -Lb --mime-type -- $f) in
+text/* | inode/x-empty | application/json | application/xml | application/javascript | \
+	application/x-yaml | application/toml | application/x-sh | application/x-shellscript)
+	"$EDITOR" -- $fx
+	;;
+*)
+	for f in $fx; do
+		xdg-open -- $f >/dev/null 2>/dev/null &
+	done
+	;;
+esac
+
+}}
+map E open-from-old-pwd
+
+# Remove mappings I don't use.
+map i
+
+# Remove the default move after toggling.
+map <space> toggle
+
+# Also use tab for toggling selection.
+map <tab> toggle
+
+# Copy/add to the cut buffer.
+map x cut
+
+# Backtick for going to a bookmark.
+map ` mark-load
+
+# File creation.
+map a push %touch<space>
+cmd mkdir %mkdir -p "$@"
+map A push %mkdir<space>
+
+# Delete.
+map d delete
+
+#HACK: Yank selected file path to a temporary file
+# and open it in the defualt editor.
+cmd yank-path ${{
+
+tmpfile=$(mktemp)
+trap "rm -f '$tmpfile'" EXIT
+printf '%s' "$fx" > "$tmpfile"
+$EDITOR "$tmpfile"
+
+}}
+map Y yank-path
+
+# Change to initial directory when starting if uppon quitting.
+cmd quit-to-old-pwd ${{
+    if [ -n "$LF_OLD_PWD" ] && [ -d "$LF_OLD_PWD" ]; then
+        lf -remote "send $id :cd \"$LF_OLD_PWD\"; quit"
+    else
+        lf -remote "send $id :quit"
+    fi
+}}
+map Q quit-to-old-pwd
