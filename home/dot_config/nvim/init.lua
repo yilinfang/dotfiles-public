@@ -71,5 +71,16 @@ if vim.g.vscode then
     vscode.action('editor.toggleFold')
   end, opts)
 
-  -- TODO: Replace default marks with vscode bookmark extension
+  -- HACK: Toggle git changes
+  map('v', '<leader>g', function()
+    vscode.action('git.revertSelectedRanges')
+  end, opts)
+  map('n', '<leader>g', function()
+    vscode.action('git.revertSelectedRanges')
+  end, opts)
+
+  -- HACK: Toggle bookmarks
+  map('n', '<leader>b', function()
+    vscode.action('bookmarks.toggle')
+  end, opts)
 end
