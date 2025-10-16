@@ -1,0 +1,20 @@
+[tools]
+bat = "latest"
+delta = "latest"
+difftastic = { version = "latest", exe = "difft" }
+fd = "latest"
+fzf = "latest"
+lazygit = "latest"
+neovim = "0.11.4"
+node = "lts"
+"npm:czg" = "latest"
+pipx = "latest"
+python = "latest"
+ripgrep = "latest"
+"ubi:gokcehan/lf" = "latest"
+zoxide = "latest"
+
+[settings]
+disable_backends = ["asdf"]
+pipx.uvx = false
+python.compile = false

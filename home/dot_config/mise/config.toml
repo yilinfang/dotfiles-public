@@ -1,16 +1,10 @@
 [tools]
-bat = "latest"
-delta = "latest"
-difftastic = { version = "latest", exe = "difft" }
-fd = "latest"
-fzf = "latest"
-lazygit = "latest"
-neovim = "0.11.4"
-node = "lts"
 "npm:@bitwarden/cli" = "latest"
-"npm:czg" = "latest"
-python = "latest"
-ripgrep = "latest"
-"ubi:gokcehan/lf" = "latest"
+"npm:prettier" = "latest"
+"pipx:ruff" = "latest"
+shfmt = "latest"
+stylua = "latest"
 uv = "latest"
-zoxide = "latest"
+
+[settings]
+pipx.uvx = true

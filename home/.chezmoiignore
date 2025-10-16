@@ -16,8 +16,7 @@
 .config/ghostty/**
 .config/kitty/
 .config/kitty/**
-.config/mise/
-.config/mise/**
+.config/mise/config.toml
 .config/starship.toml
 .gitconfig
 .zprofile
