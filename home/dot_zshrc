@@ -35,7 +35,7 @@ zstyle ':omz:update' frequency 7 # NOTE: Update every 7 days
 # DISABLE_MAGIC_FUNCTIONS="true"
 
 # Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
+DISABLE_LS_COLORS="true" # NOTE: Use eza instead
 
 # Uncomment the following line to disable auto-setting terminal title.
 # DISABLE_AUTO_TITLE="true"
@@ -121,6 +121,7 @@ if command -v eza >/dev/null 2>&1; then
     alias lla='ll -a'
     alias lt='ls -l --tree --level=2 --total-size --git'
     alias lta='lt -a'
+    alias l='lla'
 fi
 
 # nvim-test
