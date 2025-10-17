@@ -8,8 +8,8 @@ adjust-underline-position = 4
 theme = "iTerm2 Tango Dark"
 
 # Window
-window-width = 100
-window-height = 40
+window-width = 90
+window-height = 30
 window-padding-balance = true
 window-padding-color = extend
 
