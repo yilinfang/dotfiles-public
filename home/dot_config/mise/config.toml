@@ -1,4 +1,5 @@
 [tools]
+jq = "latest"
 "npm:@bitwarden/cli" = "latest"
 "npm:prettier" = "latest"
 "pipx:ruff" = "latest"
