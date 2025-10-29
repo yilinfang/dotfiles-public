@@ -1,5 +1,7 @@
 [tools]
+age = "latest"
 bat = "latest"
+chezmoi = "latest"
 delta = "latest"
 difftastic = { version = "latest", exe = "difft" }
 fd = "latest"
