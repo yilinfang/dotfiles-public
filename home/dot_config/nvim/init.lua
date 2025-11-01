@@ -5,6 +5,13 @@ let maplocalleader = " "
 
 nnoremap <leader>/ :noh<CR>
 
+" HACK: Disable <C-u> and <C-d> scrolling since they are buggy in vscode-neovim
+"  to keep muscle memory consistent between vscode-neovim and standalone neovim
+nnoremap <C-u> <Nop>
+nnoremap <C-d> <Nop>
+vnoremap <C-u> <Nop>
+vnoremap <C-d> <Nop>
+
 if exists('g:vscode')
   set shadafile=NONE
   " https://github.com/vscode-neovim/vscode-neovim/issues/602#issuecomment-1839802239
