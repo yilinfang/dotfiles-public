@@ -18,8 +18,9 @@ bash <(curl -fsSL https://raw.githubusercontent.com/yilinfang/dotfiles-public/re
 ```bash
 # Remove existing chezmoi config
 rm -rf ~/.config/chezmoi
-# Remove existing chezmoi data (optional)
+# Remove existing chezmoi data
 rm -rf ~/.local/share/chezmoi
+rm -rf ~/.chezmoi/dotfiles
 # Install dotfiles
 chezmoi init --apply https://github.com/yilinfang/dotfiles-public.git -S ~/.chezmoi/dotfiles
 # Setup shell
@@ -38,8 +39,8 @@ rm -rf ~/.config/chezmoi
 rm -rf ~/.local/share/chezmoi
 rm -rf ~/.chezmoi/dotfiles
 # Install dotfiles
-mise exec age chezmoi -- chezmoi init --apply https://github.com/yilinfang/dotfiles.git -S ~/.chezmoi/dotfiles
+mise exec age chezmoi -- chezmoi init --apply https://github.com/yilinfang/dotfiles-public.git -S ~/.chezmoi/dotfiles
 # Setup shell
-mise exec chezmoi cd
+mise exec chezmoi -- chezmoi cd
 bash scripts/pde/setup-shell.sh
 ```

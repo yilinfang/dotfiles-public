@@ -31,9 +31,9 @@ rm -rf ~/.config/chezmoi
 rm -rf ~/.local/share/chezmoi
 rm -rf ~/.chezmoi/dotfiles
 # Install dotfiles
-IS_PDE=true mise exec age chezmoi -- chezmoi init --apply https://github.com/yilinfang/dotfiles.git -S ~/.chezmoi/dotfiles
+IS_PDE=true mise exec age chezmoi -- chezmoi init --apply https://github.com/yilinfang/dotfiles-public.git -S ~/.chezmoi/dotfiles
 # Setup shell
-mise exec chezmoi cd
+mise exec chezmoi -- chezmoi cd
 cd scripts/pde
 bash ./setup-shell.sh
 # Optional
