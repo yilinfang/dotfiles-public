@@ -7,8 +7,8 @@ nnoremap <leader>/ :noh<CR>
 
 " HACK: Disable <C-u> and <C-d> scrolling since they are buggy in vscode-neovim
 "  to keep muscle memory consistent between vscode-neovim and standalone neovim
-nnoremap <C-u> <Nop>
-nnoremap <C-d> <Nop>
+"nnoremap <C-u> <Nop>
+"nnoremap <C-d> <Nop>
 vnoremap <C-u> <Nop>
 vnoremap <C-d> <Nop>
 
