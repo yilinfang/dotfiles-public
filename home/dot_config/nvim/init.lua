@@ -36,17 +36,17 @@ if vim.g.vscode then
   local opts = { noremap = true, silent = true }
 
   -- HACK: Save without formatting
-  map('n', '<leader>w', function()
-    vscode.action('workbench.action.files.saveWithoutFormatting')
-  end, opts)
+  -- map('n', '<leader>w', function()
+  --   vscode.action('workbench.action.files.saveWithoutFormatting')
+  -- end, opts)
 
   -- HACK: Add keymaps for formatting
-  map('n', '<leader>f', function()
-    vscode.action('editor.action.formatDocument')
-  end, opts)
-  map('v', '<leader>f', function()
-    vscode.action('editor.action.formatSelection')
-  end, opts)
+  -- map('n', '<leader>f', function()
+  --   vscode.action('editor.action.formatDocument')
+  -- end, opts)
+  -- map('v', '<leader>f', function()
+  --   vscode.action('editor.action.formatSelection')
+  -- end, opts)
 
   -- HACK: Toggle folding
   -- map('n', 'zM', function()
@@ -75,12 +75,12 @@ if vim.g.vscode then
   -- map('v', '<leader>g', function()
   --   vscode.action('git.revertSelectedRanges')
   -- end, opts)
-  map('n', '<leader>g', function()
-    vscode.action('git.revertSelectedRanges')
-  end, opts)
+  -- map('n', '<leader>g', function()
+  --   vscode.action('git.revertSelectedRanges')
+  -- end, opts)
 
   -- HACK: Toggle bookmarks
-  map('n', '<leader>b', function()
-    vscode.action('bookmarks.toggle')
-  end, opts)
+  -- map('n', '<leader>b', function()
+  --   vscode.action('bookmarks.toggle')
+  -- end, opts)
 end
