@@ -18,6 +18,11 @@ if exists('g:vscode')
   set ve=onemore
   " HACK: Disable default marks in vscode-neovim
   nnoremap m <Nop>
+  " HACK: Disable default folds in vscode-neovim
+  nnoremap z <Nop>
+  vnoremap z <Nop>
+  " HACK: Map V to $V to fix the weired cursor position in vscode-neovim
+  nnoremap V $V
   " HACK: Disable default keymaps for formation
   vnoremap = <Nop>
   vnoremap == <Nop>
