@@ -27,6 +27,9 @@ if exists('g:vscode')
   vnoremap = <Nop>
   vnoremap == <Nop>
 else
+  set nu
+  set autoindent
+  set smarttab
   set nowrap
   colorscheme torte
   vnoremap <leader>y "+y
