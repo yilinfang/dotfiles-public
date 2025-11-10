@@ -7,8 +7,8 @@ nnoremap <leader>/ :noh<CR>
 
 " HACK: Disable <C-u> and <C-d> scrolling since they are buggy in vscode-neovim
 "  to keep muscle memory consistent between vscode-neovim and standalone neovim
-"nnoremap <C-u> <Nop>
-"nnoremap <C-d> <Nop>
+" nnoremap <C-u> <Nop>
+" nnoremap <C-d> <Nop>
 vnoremap <C-u> <Nop>
 vnoremap <C-d> <Nop>
 
@@ -16,9 +16,9 @@ if exists('g:vscode')
   set shadafile=NONE
   " https://github.com/vscode-neovim/vscode-neovim/issues/602#issuecomment-1839802239
   set ve=onemore
-  " HACK: Disable default marks in vscode-neovim
+  " HACK: Disable default marks in vscode-neovim since they are unusable
   nnoremap m <Nop>
-  " HACK: Disable default folds in vscode-neovim
+  " HACK: Disable default folds in vscode-neovim since they are very buggy
   nnoremap z <Nop>
   vnoremap z <Nop>
   " HACK: Map V to $V to fix the weired cursor position in vscode-neovim
