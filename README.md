@@ -54,9 +54,8 @@ rm -rf ~/.config/chezmoi
 rm -rf ~/.local/share/chezmoi
 rm -rf ~/.chezmoi/dotfiles
 # Download dotfiles via git
-git clone https://github.com/yilinfang/dotfiles.git ~/.chezmoi/dotfiles
+git clone https://github.com/yilinfang/dotfiles-public.git ~/.chezmoi/dotfiles
 # Install dotfiles
 cd ~/.chezmoi/dotfiles
 make install
-
 ```
