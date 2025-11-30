@@ -37,6 +37,17 @@ EOF
 
 # --- Main Logic ---
 
+backup() {
+	local file="$1"
+	if [ -f "$file" ]; then
+		local timestamp
+		timestamp=$(date +"%Y%m%d_%H%M%S")
+		local backup_file="${file}.backup_${timestamp}"
+		echo "Setup: Backing up existing file ${file} to ${backup_file}..."
+		cp "$file" "$backup_file"
+	fi
+}
+
 add_config() {
 	local config_file="$1"
 	local snippet="$2"
@@ -46,6 +57,7 @@ add_config() {
 	if grep -qF -- "$marker_line" "$config_file"; then
 		echo "Setup: Configuration already exists in ${config_file}."
 	else
+		backup "$config_file"
 		echo "Setup: Adding shell configuration to ${config_file}..."
 		printf "\n%s\n" "$snippet" >>"$config_file"
 	fi
