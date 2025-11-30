@@ -1,13 +1,22 @@
 #!/usr/bin/env bash
 
+# Function to backup existing git config
+backup() {
+	if [ -f "$HOME/.gitconfig" ]; then
+		timestamp=$(date +"%Y%m%d_%H%M%S")
+		mv "$HOME/.gitconfig" "$HOME/.gitconfig.backup_$timestamp"
+		echo "Existing .gitconfig backed up to .gitconfig.backup_$timestamp"
+	fi
+}
+
 # Function to compare versions
 version_ge() {
 	# Returns 0 if $1 >= $2
 	[ "$(printf '%s\n' "$2" "$1" | sort -V | head -n1)" = "$2" ]
 }
 
-# Get Git version
-GIT_VERSION=$(git --version | awk '{print $3}')
+# Backup existing config
+backup
 
 # User information
 git config --global user.name "Yilin Fang"
@@ -39,6 +48,9 @@ git config --global core.pager delta
 git config --global interactive.diffFilter "delta --color-only"
 git config --global delta.navigate true
 git config --global delta.dark true
+
+# Get Git version
+GIT_VERSION=$(git --version | awk '{print $3}')
 
 # Merge conflict style
 if version_ge "$GIT_VERSION" "2.35.0"; then
