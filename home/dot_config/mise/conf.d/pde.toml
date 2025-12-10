@@ -18,5 +18,4 @@ zoxide = "latest"
 
 [settings]
 disable_backends = ["asdf"]
-pipx.uvx = false
 python.compile = false
