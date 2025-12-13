@@ -17,7 +17,7 @@ fi
 # --- Configuration ---
 NCURSES_VERSION="6.5"
 LIBEVENT_VERSION="2.1.12-stable"
-TMUX_VERSION="3.5a"
+TMUX_VERSION="3.6a"
 
 # --- Script Start ---
 
