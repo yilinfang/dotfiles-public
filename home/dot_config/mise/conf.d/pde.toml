@@ -1,5 +1,6 @@
 [tools]
 age = "latest"
+"aqua:zyedidia/micro" = "latest"
 bat = "latest"
 chezmoi = "latest"
 delta = "latest"
