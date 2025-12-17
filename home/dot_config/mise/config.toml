@@ -2,7 +2,6 @@
 gh = "latest"
 jq = "latest"
 "npm:@bitwarden/cli" = "latest"
-"npm:@openai/codex" = "latest"
 "npm:prettier" = "latest"
 "pipx:ruff" = "latest"
 shfmt = "latest"
