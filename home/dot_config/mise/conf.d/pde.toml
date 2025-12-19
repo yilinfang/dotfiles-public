@@ -1,12 +1,13 @@
 [tools]
 age = "latest"
-"aqua:zyedidia/micro" = "latest"
 bat = "latest"
 chezmoi = "latest"
 delta = "latest"
 difftastic = { version = "latest", exe = "difft" }
 fd = "latest"
 fzf = "latest"
+"github:gokcehan/lf" = "latest"
+"github:zyedidia/micro" = "latest"
 lazygit = "latest"
 neovim = "latest"
 node = "lts"
@@ -14,7 +15,6 @@ node = "lts"
 pipx = "latest"
 python = "latest"
 ripgrep = "latest"
-"ubi:gokcehan/lf" = "latest"
 zoxide = "latest"
 
 [settings]
