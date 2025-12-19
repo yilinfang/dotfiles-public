@@ -81,7 +81,7 @@ if vim.g.vscode then
   --   vscode.action('editor.unfoldRecursively')
   -- end, opts)
   map('n', 'za', function() vscode.action('editor.toggleFold') end, opts)
-  map('v', 'za', function() vscode.action('editor.toggleFold') end, opts)
+  -- map('v', 'za', function() vscode.action('editor.toggleFold') end, opts)
 
   -- HACK: Toggle git changes
   -- map('v', '<leader>g', function()
