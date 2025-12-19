@@ -60,14 +60,13 @@ else
 	echo "Warning: zdiff3 conflict style is not supported in Git versions older than 2.35.0. Using diff3 instead."
 fi
 
-# NOTE: Disabled for now
-# # Merge tool
-# git config --global merge.tool nvim
+# Merge tool
+git config --global merge.tool nvim
 
-# # Mergetool
-# git config --global mergetool.prompt false
-# git config --global mergetool.keepBackup false
+# Mergetool
+git config --global mergetool.prompt false
+git config --global mergetool.keepBackup false
 
-# # Mergetool nvim
-# git config --global mergetool.nvim.cmd 'nvim -d "$LOCAL" "$MERGED" "$REMOTE"'
-# git config --global mergetool.nvim.trustExitCode false
+# Mergetool nvim
+git config --global mergetool.nvim.cmd 'nvim -d "$LOCAL" "$MERGED" "$REMOTE"'
+git config --global mergetool.nvim.trustExitCode false
