@@ -4,4 +4,4 @@ set smartcase
 set autoindent
 set smarttab
 set nowrap
-colorscheme torte
+colorscheme unokai
