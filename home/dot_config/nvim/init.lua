@@ -11,6 +11,8 @@ if exists('g:vscode')
   set ve=onemore
   " HACK: Disable default marks in vscode-neovim since they are unusable
   nnoremap m <Nop>
+  nnoremap ' <Nop>
+  nnoremap ` <Nop>
   " HACK: Disable default folds in vscode-neovim since they are very buggy
   nnoremap z <Nop>
   vnoremap z <Nop>
