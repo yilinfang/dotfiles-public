@@ -1,4 +1,6 @@
 vim.cmd([[
+
+
 " HACK: Don't scroll half-page up/down with Ctrl-u/Ctrl-d, use number+j/k instead
 nnoremap <C-u> <Nop>
 nnoremap <C-d> <Nop>
@@ -34,8 +36,8 @@ else
     autocmd!
     autocmd VimResized * wincmd =
   augroup END
-
 endif
+
 
 ]])
 
@@ -78,9 +80,8 @@ if vim.g.vscode then
   -- map('n', 'zO', function()
   --   vscode.action('editor.unfoldRecursively')
   -- end, opts)
-  map('n', 'za', function()
-    vscode.action('editor.toggleFold')
-  end, opts)
+  map('n', 'za', function() vscode.action('editor.toggleFold') end, opts)
+  map('v', 'za', function() vscode.action('editor.toggleFold') end, opts)
 
   -- HACK: Toggle git changes
   -- map('v', '<leader>g', function()
