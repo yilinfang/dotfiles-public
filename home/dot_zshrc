@@ -35,7 +35,7 @@ zstyle ':omz:update' frequency 7 # NOTE: Update every 7 days
 # DISABLE_MAGIC_FUNCTIONS="true"
 
 # Uncomment the following line to disable colors in ls.
-DISABLE_LS_COLORS="true" # NOTE: Use eza instead
+# DISABLE_LS_COLORS="true"
 
 # Uncomment the following line to disable auto-setting terminal title.
 # DISABLE_AUTO_TITLE="true"
@@ -67,24 +67,24 @@ ZSH_CUSTOM="$HOME/.zsh" # NOTE: Set custom folder to ~/.zsh
 
 # HACK: Install some plugins if not already installed
 {
-    CUSTOM_PLUGINS_DIR="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins"
-    download_zsh_plugin() {
-        local plugin_name="$1"
-        local repo_url="$2"
-        local plugin_dir="$CUSTOM_PLUGINS_DIR/$plugin_name"
+	CUSTOM_PLUGINS_DIR="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins"
+	download_zsh_plugin() {
+		local plugin_name="$1"
+		local repo_url="$2"
+		local plugin_dir="$CUSTOM_PLUGINS_DIR/$plugin_name"
 
-        if [ ! -d "$plugin_dir" ]; then
-            echo "Installing $plugin_name plugin..."
-            if git clone --depth=1 "$repo_url" "$plugin_dir"; then
-                echo "$plugin_name installed successfully"
-            else
-                echo "Failed to install $plugin_name"
-                return 1
-            fi
-        fi
-    }
-    download_zsh_plugin "zsh-autosuggestions" "https://github.com/zsh-users/zsh-autosuggestions"
-    download_zsh_plugin "zsh-syntax-highlighting" "https://github.com/zsh-users/zsh-syntax-highlighting.git"
+		if [ ! -d "$plugin_dir" ]; then
+			echo "Installing $plugin_name plugin..."
+			if git clone --depth=1 "$repo_url" "$plugin_dir"; then
+				echo "$plugin_name installed successfully"
+			else
+				echo "Failed to install $plugin_name"
+				return 1
+			fi
+		fi
+	}
+	download_zsh_plugin "zsh-autosuggestions" "https://github.com/zsh-users/zsh-autosuggestions"
+	download_zsh_plugin "zsh-syntax-highlighting" "https://github.com/zsh-users/zsh-syntax-highlighting.git"
 }
 
 # Which plugins would you like to load?
@@ -93,12 +93,12 @@ ZSH_CUSTOM="$HOME/.zsh" # NOTE: Set custom folder to ~/.zsh
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-    extract
-    ssh
-    universalarchive
-    # External plugins
-    zsh-autosuggestions
-    zsh-syntax-highlighting
+	extract
+	ssh
+	universalarchive
+	# External plugins
+	zsh-autosuggestions
+	zsh-syntax-highlighting
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -110,18 +110,18 @@ export PATH=$HOME/.local/bin:$PATH
 
 # Set XDG_CONFIG_HOME to "$HOME/.config" if not already set
 if [ -z "$XDG_CONFIG_HOME" ]; then
-    export XDG_CONFIG_HOME="$HOME/.config"
+	export XDG_CONFIG_HOME="$HOME/.config"
 fi
 
-# Replace ls with eza
+# 'bls' a better 'ls' using 'eza' if available
 if command -v eza >/dev/null 2>&1; then
-    alias ls='eza --color=always --icons=always --group-directories-first'
-    alias la='ls -a'
-    alias ll='ls -l --total-size'
-    alias lla='ll -a'
-    alias lt='ls -l --tree --level=2 --total-size --git'
-    alias lta='lt -a'
-    alias l='lla'
+	alias bls='eza --color=always --icons=always --group-directories-first'
+	alias la='bls -a'
+	alias ll='bls -l'
+	alias lla='ll -a'
+	alias lt='bls -l --tree --level=2 --git'
+	alias lta='lt -a'
+	alias l='lla'
 fi
 
 # nvim-test
@@ -130,42 +130,42 @@ alias nvim-test='NVIM_APPNAME=nvim-test nvim'
 # Function: Update external plugins_and_themes managed by Oh My Zsh
 # Helper function to update Oh My Zsh plugins and themes
 omz_update_plugins_and_themes() {
-    # Update custom plugins
-    if [ -d "$ZSH_CUSTOM/plugins" ]; then
-        echo "Checking for custom plugins..."
-        for plugin in "$ZSH_CUSTOM/plugins/"*; do
-            if [ -d "$plugin/.git" ]; then
-                echo "Updating $(basename "$plugin")..."
-                git -C "$plugin" pull --rebase
-                echo "$(basename "$plugin") update complete!"
-            fi
-        done
-    fi
+	# Update custom plugins
+	if [ -d "$ZSH_CUSTOM/plugins" ]; then
+		echo "Checking for custom plugins..."
+		for plugin in "$ZSH_CUSTOM/plugins/"*; do
+			if [ -d "$plugin/.git" ]; then
+				echo "Updating $(basename "$plugin")..."
+				git -C "$plugin" pull --rebase
+				echo "$(basename "$plugin") update complete!"
+			fi
+		done
+	fi
 
-    # Update custom themes
-    if [ -d "$ZSH_CUSTOM/themes" ]; then
-        echo "Checking for custom themes..."
-        for theme in "$ZSH_CUSTOM/themes/"*; do
-            if [ -d "$theme/.git" ]; then
-                echo "Updating $(basename "$theme")..."
-                git -C "$theme" pull --rebase
-                echo "$(basename "$theme") update complete!"
-            fi
-        done
-    fi
+	# Update custom themes
+	if [ -d "$ZSH_CUSTOM/themes" ]; then
+		echo "Checking for custom themes..."
+		for theme in "$ZSH_CUSTOM/themes/"*; do
+			if [ -d "$theme/.git" ]; then
+				echo "Updating $(basename "$theme")..."
+				git -C "$theme" pull --rebase
+				echo "$(basename "$theme") update complete!"
+			fi
+		done
+	fi
 }
 
 # Function: update_terminal_info
 # Helper function to set terminal information in a remote server
 update_terminal_info() {
-    # Check if a server argument is provided
-    if [[ -z "$1" ]]; then
-        echo "Usage: update_terminal_info <server>"
-        return 1
-    fi
+	# Check if a server argument is provided
+	if [[ -z "$1" ]]; then
+		echo "Usage: update_terminal_info <server>"
+		return 1
+	fi
 
-    # Run the command with the provided server argument
-    infocmp -x | ssh "$1" -- tic -x -
+	# Run the command with the provided server argument
+	infocmp -x | ssh "$1" -- tic -x -
 }
 
 # Zsh-syntax-highlighting
@@ -173,11 +173,6 @@ update_terminal_info() {
 typeset -A ZSH_HIGHLIGHT_STYLES
 ZSH_HIGHLIGHT_STYLES[comment]='fg=8'
 
-# Initalize starship if installed
-if command -v starship &>/dev/null; then
-    eval "$(starship init zsh)"
-fi
-
 if [ -f "$HOME/.chezmoi/dotfiles/scripts/init/init.zsh" ]; then
-    source "$HOME/.chezmoi/dotfiles/scripts/init/init.zsh"
+	source "$HOME/.chezmoi/dotfiles/scripts/init/init.zsh"
 fi

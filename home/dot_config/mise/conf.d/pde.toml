@@ -6,15 +6,15 @@ delta = "latest"
 difftastic = { version = "latest", exe = "difft" }
 fd = "latest"
 fzf = "latest"
-"github:gokcehan/lf" = "latest"
-# "github:zyedidia/micro" = "latest"
+"github:yilinfang/fw" = "latest"
 lazygit = "latest"
 neovim = "latest"
 node = "lts"
 "npm:czg" = "latest"
-# pipx = "latest"
 python = "latest"
 ripgrep = "latest"
+starship = "latest"
+yazi = "latest"
 zoxide = "latest"
 
 [settings]

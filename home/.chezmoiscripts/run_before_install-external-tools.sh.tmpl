@@ -2,6 +2,9 @@
 # This script is used to install some useful tools to ~/.local/bin/
 # This script will be run when 'chezmoi apply' is executed
 
+# NOTE: Disable this script currently because there is no tool needed to be installed yet.
+exit 0
+
 set -euo pipefail
 
 TARGET_DIR="$HOME/{{- .toolsInstallPath -}}"

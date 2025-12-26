@@ -13,13 +13,6 @@ if command -v mise &>/dev/null; then
 	# export MISE_PYTHON_COMPILE=false  # Always download pre-compiled python binaries
 fi
 
-# If micro is installed, set it as the default editor
-if command -v micro &>/dev/null; then
-	export EDITOR=micro
-	export VISUAL=micro
-	alias nano='micro'
-fi
-
 # If nvim is installed, set it as the default editor
 if command -v nvim &>/dev/null; then
 	export EDITOR=nvim
@@ -49,17 +42,14 @@ if command -v lazygit &>/dev/null; then
 	alias lg='lazygit'
 fi
 
-# Create wrapper for lf
-if command -v lf &>/dev/null; then
-	function lf() {
-		local last_dir
-		last_dir=$(
-			LF_OLD_PWD="$PWD" \
-				command lf -print-last-dir "$@"
-		)
-		if [ -n "$last_dir" ] && [ -d "$last_dir" ]; then
-			builtin cd -- "$last_dir" || return
-		fi
+# Use y for yazi wrapper
+if command -v yazi &>/dev/null; then
+	function y() {
+		local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+		yazi "$@" --cwd-file="$tmp"
+		IFS= read -r -d '' cwd <"$tmp"
+		[ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
+		rm -f -- "$tmp"
 	}
 fi
 
@@ -85,4 +75,9 @@ fi
 # Initialize zoxide if installed
 if command -v zoxide &>/dev/null; then
 	eval "$(zoxide init bash)"
+fi
+
+# Initialize starship if installed
+if command -v starship &>/dev/null; then
+	eval "$(starship init bash)"
 fi

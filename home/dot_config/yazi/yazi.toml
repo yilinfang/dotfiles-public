@@ -1,0 +1,32 @@
+"$schema" = "https://yazi-rs.github.io/schemas/yazi.json"
+
+[mgr]
+show_hidden = true
+
+[plugin]
+# Disable some preloaders
+prepend_preloaders = [{ name = "*", run = "noop" }]
+# Disable some previewers
+prepend_previewers = [
+  { name = "*/", run = "folder" },
+  # Code
+  { mime = "text/*", run = "code" },
+  # Fallback
+  { name = "*", run = "file" },
+]
+
+[opener]
+# Create a dummpy opener that does nothing
+dummy = [
+  { run = ':', for = "unix", desc = "Dummy Opener" },
+  # NOTE: Windows version has not been tested, use it at your own risk!
+  { run = "cmd /c exit 0", for = "windows", desc = "Dummy Opener" },
+]
+
+[open]
+# HACK: Prevent accidental opening files
+prepend_rules = [
+  { name = "*/", use = "dummy" },
+  { mime = "text/*", use = "edit" },
+  { name = "*", use = "dummy" },
+]

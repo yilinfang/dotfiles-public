@@ -7,12 +7,6 @@
 **/tmp/
 **/tmp/**
 
-# Micro
-.config/micro/backups/
-.config/micro/backups/**
-.config/micro/buffers/
-.config/micro/buffers/**
-
 # MacOS
 **/.DS_Store
 
@@ -23,7 +17,6 @@
 .config/kitty/
 .config/kitty/**
 .config/mise/config.toml
-.config/starship.toml
 .gitconfig
 .zprofile
 .zshrc

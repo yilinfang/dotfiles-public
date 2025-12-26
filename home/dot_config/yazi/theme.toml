@@ -1,0 +1,14 @@
+"$schema" = "https://yazi-rs.github.io/schemas/theme.json"
+
+# HACK: Fix colors for mode indicators
+# Use black instead of white for better contrast
+[mode]
+# Normal mode
+normal_main = { fg = "black", bg = "blue", bold = true }
+normal_alt = { fg = "blue", bg = "black" }
+# Select mode
+select_main = { fg = "black", bg = "red", bold = true }
+select_alt = { fg = "red", bg = "black" }
+# Unset mode
+unset_main = { fg = "black", bg = "red", bold = true }
+unset_alt = { fg = "red", bg = "black" }
