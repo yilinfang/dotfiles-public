@@ -72,12 +72,12 @@ if command -v fzf &>/dev/null; then
 	fi
 fi
 
-# Initialize zoxide if installed
-if command -v zoxide &>/dev/null; then
-	eval "$(zoxide init bash)"
-fi
-
 # Initialize starship if installed
 if command -v starship &>/dev/null; then
 	eval "$(starship init bash)"
+fi
+
+# Initialize zoxide if installed
+if command -v zoxide &>/dev/null; then
+	eval "$(zoxide init bash)"
 fi
