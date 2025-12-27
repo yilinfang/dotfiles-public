@@ -1,3 +1,7 @@
+" Use space as leader key
+let g:mapleader = "\<Space>"
+nnoremap <SPACE> <Nop>
+
 set nocompatible
 filetype on
 filetype plugin on
@@ -17,6 +21,19 @@ set noshowmatch
 colorscheme unokai
 set list
 set listchars=tab:▸\ ,trail:·,nbsp:␣
+" Enable termguicolors if terminal supports it
+if has("termguicolors")
+  set termguicolors
+endif
+" Check if the unokai colorscheme file exists in the runtime path
+if !empty(globpath(&rtp, "colors/unokai.vim"))
+  colorscheme unokai
+else
+  " Fallback torte
+  colorscheme torte
+endif
+nnoremap <leader>y <cmd>%y+<cr>
+vnoremap <leader>y "+y
 " Resize splits if window got resized
 augroup resize_splits
   autocmd!
