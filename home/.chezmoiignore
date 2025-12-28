@@ -18,6 +18,7 @@
 .config/kitty/**
 .config/mise/config.toml
 .gitconfig
+.gvimrc
 .zprofile
 .zshrc
 {{ end }}
