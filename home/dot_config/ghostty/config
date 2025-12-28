@@ -5,8 +5,7 @@ font-size = 14
 adjust-underline-position = 4
 
 # Theme
-# theme = "iTerm2 Tango Dark"
-theme = "monokai-patched"
+theme = "iTerm2 Tango Dark"
 
 # Window
 window-width = 90
