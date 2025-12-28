@@ -2,6 +2,7 @@ if vim.g.vscode then
   -- Configurations for vscode-neovim
   vim.cmd([[
     set shadafile=NONE
+    nnoremap <leader>/ :noh<CR>
     " https://github.com/vscode-neovim/vscode-neovim/issues/602#issuecomment-1839802239
     set ve=onemore
     " HACK: Disable default marks in vscode-neovim since they are unusable
