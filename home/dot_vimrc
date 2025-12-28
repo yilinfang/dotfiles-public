@@ -1,7 +1,5 @@
 " Use space as leader key
 let g:mapleader = "\<Space>"
-nnoremap <SPACE> <Nop>
-
 set nocompatible
 filetype on
 filetype plugin on
@@ -18,10 +16,21 @@ set smarttab
 set nowrap
 set showcmd
 set noshowmatch
+if has("termguicolors") " Enable termguicolors if terminal supports it
+  set termguicolors
+endif
 vnoremap <leader>y "+y
+if has("nvim")
+  nnoremap <leader>y <cmd>%y+<cr>
+endif
 " Resize splits if window got resized
 augroup resize_splits
   autocmd!
   autocmd VimResized * wincmd =
 augroup END
-
+" Neovim specific configurations
+if has("nvim")
+  colorscheme unokai
+  set list
+  set listchars=tab:▸\ ,trail:·,nbsp:␣
+endif
