@@ -16,10 +16,11 @@ if vim.g.vscode then
     " HACK: Disable default keymaps for formation
     vnoremap = <Nop>
     vnoremap == <Nop>
-    ]])
+  ]])
   local vscode = require("vscode")
   local map = vim.keymap.set
   local opts = { noremap = true, silent = true }
+  -- Fix folding in vscode-neovim
   map("n", "za", function()
     vscode.action("editor.toggleFold")
   end, opts)
