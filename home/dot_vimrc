@@ -19,10 +19,8 @@ set noshowmatch
 if has("termguicolors") " Enable termguicolors if terminal supports it
   set termguicolors
 endif
+colorscheme torte
 vnoremap <leader>y "+y
-if has("nvim")
-  nnoremap <leader>y <cmd>%y+<cr>
-endif
 " Resize splits if window got resized
 augroup resize_splits
   autocmd!
@@ -30,7 +28,7 @@ augroup resize_splits
 augroup END
 " Neovim specific configurations
 if has("nvim")
-  colorscheme unokai
   set list
   set listchars=tab:▸\ ,trail:·,nbsp:␣
+  nnoremap <leader>y <cmd>%y+<cr>
 endif
