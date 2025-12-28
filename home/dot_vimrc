@@ -20,6 +20,7 @@ if has("termguicolors") " Enable termguicolors if terminal supports it
   set termguicolors
 endif
 colorscheme torte
+nnoremap <leader>/ :noh<CR>
 vnoremap <leader>y "+y
 " Resize splits if window got resized
 augroup resize_splits
@@ -30,5 +31,5 @@ augroup END
 if has("nvim")
   set list
   set listchars=tab:▸\ ,trail:·,nbsp:␣
-  nnoremap <leader>y <cmd>%y+<cr>
+  nnoremap <leader>y :%y+<CR>
 endif
