@@ -16,9 +16,9 @@ if vim.g.vscode then
     " HACK: Disable default keymaps for formation
     vnoremap = <Nop>
     vnoremap == <Nop>
-    " HACK: Disable default <C-i> and <C-o> in vscode-neovim they are buggy now
-    nnoremap <C-i> <Nop>
-    nnoremap <C-o> <Nop>
+    " " HACK: Disable default <C-i> and <C-o> in vscode-neovim they are buggy now
+    " nnoremap <C-i> <Nop>
+    " nnoremap <C-o> <Nop>
   ]])
   local vscode = require("vscode")
   local map = vim.keymap.set
@@ -27,13 +27,13 @@ if vim.g.vscode then
   map("n", "za", function()
     vscode.action("editor.toggleFold")
   end, opts)
-  -- Fix <C-i> and <C-o> in vscode-neovim
-  map("n", "<C-i>", function()
-    vscode.action("workbench.action.navigateForward")
-  end, opts)
-  map("n", "<C-o>", function()
-    vscode.action("workbench.action.navigateBack")
-  end, opts)
+  -- -- Fix <C-i> and <C-o> in vscode-neovim
+  -- map("n", "<C-i>", function()
+  --   vscode.action("workbench.action.navigateForward")
+  -- end, opts)
+  -- map("n", "<C-o>", function()
+  --   vscode.action("workbench.action.navigateBack")
+  -- end, opts)
 else
   -- Load ~/.vimrc for regular Neovim
   vim.cmd([[ source $HOME/.vimrc ]])
