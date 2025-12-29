@@ -1,5 +1,12 @@
 " Use space as leader key
 let g:mapleader = "\<Space>"
+nnoremap <leader>/ :noh<CR>
+
+if exists('g:vscode')
+  "Do not execute rest of init.vim, do not apply any configs
+  finish
+end
+
 set nocompatible
 filetype on
 filetype plugin on
@@ -19,7 +26,6 @@ set noshowmatch
 if has("termguicolors") " Enable termguicolors if terminal supports it
   set termguicolors
 endif
-nnoremap <leader>/ :noh<CR>
 vnoremap <leader>y "+y
 " Resize splits if window got resized
 augroup resize_splits
