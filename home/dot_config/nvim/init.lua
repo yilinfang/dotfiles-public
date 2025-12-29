@@ -20,43 +20,30 @@ if vim.g.vscode then
     vnoremap == <Nop>
     " " HACK: Disable default <C-i> and <C-o> in vscode-neovim they are buggy now
     " nnoremap <C-i> <Nop>
+    " vnoremap <C-i> <Nop>
     " nnoremap <C-o> <Nop>
+    " vnoremap <C-o> <Nop>
+    " HACK: Restore default <C-i> and <C-o> behavior in vscode-neovim
+    nnoremap <C-o> <C-o>
+    vnoremap <C-o> <C-o>
+    nnoremap <C-i> <C-i>
+    vnoremap <C-i> <C-i>
   ]])
   local vscode = require("vscode")
   local map = vim.keymap.set
   local opts = { noremap = true, silent = true }
   -- Fix folding in vscode-neovim
   map("n", "za", function()
-    vscode.action("editor.toggleFold")
+    vscode.call("editor.toggleFold")
   end, opts)
-  -- Fix <C-i> and <C-o> in vscode-neovim
-  -- Source: https://github.com/vscode-neovim/vscode-neovim/issues/1946#issuecomment-2097941988
-  map("n", "<C-i>", function()
-    vscode.action("workbench.action.navigateForward", {
-      callback = function()
-        vim.defer_fn(function()
-          vscode.action("cancelSelection", {
-            callback = function()
-              vim.api.nvim_input("<ESC><ESC>")
-            end,
-          })
-        end, 100)
-      end,
-    })
-  end, opts)
-  map("n", "<C-o>", function()
-    vscode.action("workbench.action.navigateBack", {
-      callback = function()
-        vim.defer_fn(function()
-          vscode.action("cancelSelection", {
-            callback = function()
-              vim.api.nvim_input("<ESC><ESC>")
-            end,
-          })
-        end, 100)
-      end,
-    })
-  end, opts)
+  -- -- Fix <C-i> and <C-o> in vscode-neovim
+  -- -- Source: https://github.com/vscode-neovim/vscode-neovim/issues/1946#issuecomment-2097941988
+  -- map({ "n", "v" }, "<C-i>", function()
+  --   vscode.action("workbench.action.navigateForward")
+  -- end, opts)
+  -- map({ "n", "v" }, "<C-o>", function()
+  --   vscode.action("workbench.action.navigateBack")
+  -- end, opts)
 else
   -- Load ~/.vimrc for regular Neovim
   vim.cmd([[ source $HOME/.vimrc ]])
