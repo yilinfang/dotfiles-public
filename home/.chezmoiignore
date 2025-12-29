@@ -19,6 +19,7 @@
 .config/mise/config.toml
 .gitconfig
 .gvimrc
+.vscodevimrc
 .zprofile
 .zshrc
 {{ end }}
