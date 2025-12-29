@@ -1,8 +1,9 @@
+-- Load ~/.vimrc for regular Neovim
+vim.cmd([[ source $HOME/.vimrc ]])
+-- Configurations for vscode-neovim
 if vim.g.vscode then
-  -- Configurations for vscode-neovim
   vim.cmd([[
     set shadafile=NONE
-    nnoremap <leader>/ :noh<CR>
     " https://github.com/vscode-neovim/vscode-neovim/issues/602#issuecomment-1839802239
     set ve=onemore
     " HACK: Disable default marks in vscode-neovim since they are unusable
@@ -28,13 +29,34 @@ if vim.g.vscode then
   map("n", "za", function()
     vscode.action("editor.toggleFold")
   end, opts)
-  -- -- Fix <C-i> and <C-o> in vscode-neovim
-  -- map("n", "<C-i>", function()
-  --   vscode.action("workbench.action.navigateForward")
-  -- end, opts)
-  -- map("n", "<C-o>", function()
-  --   vscode.action("workbench.action.navigateBack")
-  -- end, opts)
+  -- Fix <C-i> and <C-o> in vscode-neovim
+  -- Source: https://github.com/vscode-neovim/vscode-neovim/issues/1946#issuecomment-2097941988
+  map("n", "<C-i>", function()
+    vscode.action("workbench.action.navigateForward", {
+      callback = function()
+        vim.defer_fn(function()
+          vscode.action("cancelSelection", {
+            callback = function()
+              vim.api.nvim_input("<ESC><ESC>")
+            end,
+          })
+        end, 100)
+      end,
+    })
+  end, opts)
+  map("n", "<C-o>", function()
+    vscode.action("workbench.action.navigateBack", {
+      callback = function()
+        vim.defer_fn(function()
+          vscode.action("cancelSelection", {
+            callback = function()
+              vim.api.nvim_input("<ESC><ESC>")
+            end,
+          })
+        end, 100)
+      end,
+    })
+  end, opts)
 else
   -- Load ~/.vimrc for regular Neovim
   vim.cmd([[ source $HOME/.vimrc ]])
