@@ -20,6 +20,13 @@ if command -v nvim &>/dev/null; then
 	alias vim='nvim'
 fi
 
+# If micro is installed, set it as the default editor
+if command -v micro &>/dev/null; then
+	export EDITOR=micro
+	export VISUAL=micro
+	alias nano='micro'
+fi
+
 # If rg is installed
 if command -v rg &>/dev/null; then
 	export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"

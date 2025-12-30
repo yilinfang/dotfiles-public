@@ -7,6 +7,7 @@ difftastic = { version = "latest", exe = "difft" }
 fd = "latest"
 fzf = "latest"
 "github:yilinfang/fw" = "latest"
+"github:zyedidia/micro" = "latest"
 lazygit = "latest"
 neovim = "latest"
 node = "lts"
