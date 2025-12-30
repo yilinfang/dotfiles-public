@@ -5,8 +5,8 @@ font-size = 14
 adjust-underline-position = 4
 
 # Theme
-# theme = "iTerm2 Tango Dark"
-theme = Ayu
+theme = "iTerm2 Tango Dark"
+# theme = Ayu
 
 # Window
 window-width = 90
