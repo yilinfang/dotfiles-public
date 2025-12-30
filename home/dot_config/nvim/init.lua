@@ -1,6 +1,8 @@
 -- Load ~/.vimrc for regular Neovim
 vim.cmd([[ source $HOME/.vimrc ]])
 -- Configurations for vscode-neovim
+-- It is highly recommended to add following keybindings to your VSCode keybindings.json:
+-- https://gist.github.com/yilinfang/f104c4a2903b9ddde5d523909c5485da
 if vim.g.vscode then
   vim.cmd([[
     set mouse=
@@ -15,18 +17,17 @@ if vim.g.vscode then
     map(mode, key, "<Nop>", opts)
   end
   -- Disable default marks in vscode-neovim since they are unusable
-  disable_keymap({"n","v"}, "m")
-  disable_keymap({"n","v"}, "'")
-  disable_keymap({"n","v"}, "`")
+  disable_keymap({ "n", "v" }, "m")
+  disable_keymap({ "n", "v" }, "'")
+  disable_keymap({ "n", "v" }, "`")
   -- Map V to $V to fix the weired cursor position in vscode-neovim
   map("n", "V", "$V", opts)
   -- Disable default keymaps for formation
-  disable_keymap({"n", "v"}, "=")
-  disable_keymap({"n", "v"}, "==")
-  -- Disable default <C-i> and <C-o> in vscode-neovim they are buggy now
-  -- Use the built-in Ctrl- and Ctrl_ instead
-  disable_keymap({"n", "v"}, "<C-i>")
-  disable_keymap({"n", "v"}, "<C-o>")
+  disable_keymap({ "n", "v" }, "=")
+  disable_keymap({ "n", "v" }, "==")
+  -- Disable default <C-i> and <C-o> in vscode-neovim's normal mode since they are buggy now
+  disable_keymap({ "n" }, "<C-i>")
+  disable_keymap({ "n" }, "<C-o>")
   -- Fix folding in vscode-neovim
   -- Disable default folding keymaps
   local folding_keys = {
