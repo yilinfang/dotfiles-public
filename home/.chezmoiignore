@@ -7,6 +7,12 @@
 **/tmp/
 **/tmp/**
 
+# Micro
+**/.config/micro/backups/
+**/.config/micro/backups/**
+**/.config/micro/buffers/
+**/.config/micro/buffers/**
+
 # MacOS
 **/.DS_Store
 
