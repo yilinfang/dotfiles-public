@@ -26,6 +26,7 @@ set noshowmatch
 if has("termguicolors") " Enable termguicolors if terminal supports it
   set termguicolors
 endif
+colorscheme torte
 vnoremap <leader>y "+y
 " Resize splits if window got resized
 augroup resize_splits
