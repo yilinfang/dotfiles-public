@@ -1,7 +1,6 @@
 " Use space as leader key
 let g:mapleader = "\<Space>"
 nnoremap <leader>/ :noh<CR>
-
 if exists('g:vscode')
   "Do not execute rest of init.vim, do not apply any configs
   finish
@@ -36,6 +35,6 @@ augroup END
 " Neovim specific configurations
 if has("nvim")
   set list
-  set listchars=tab:▸\ ,trail:·,nbsp:␣
+  " set listchars=tab:▸\ ,trail:·,nbsp:␣
   nnoremap <leader>y :%y+<CR>
 endif
