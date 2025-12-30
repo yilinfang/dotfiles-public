@@ -1,0 +1,26 @@
+# Theme Edge for Ghostty
+# Colors from: https://github.com/sainnhe/edge
+## name: edge
+
+palette = 0=#202023
+palette = 1=#ec7279
+palette = 2=#a0c980
+palette = 3=#deb974
+palette = 4=#6cb6eb
+palette = 5=#d38aea
+palette = 6=#5dbbc1
+palette = 7=#c5cdd9
+palette = 8=#758094
+palette = 9=#ec7279
+palette = 10=#a0c980
+palette = 11=#deb974
+palette = 12=#6cb6eb
+palette = 13=#d38aea
+palette = 14=#5dbbc1
+palette = 15=#c5cdd9
+background = #2c2e34
+foreground = #c5cdd9
+cursor-color = #c5cdd9
+cursor-text = #2c2e34
+selection-background = #3b3e48
+selection-foreground = #c5cdd9
