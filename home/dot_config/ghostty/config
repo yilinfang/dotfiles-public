@@ -7,7 +7,8 @@ adjust-underline-position = 4
 # Theme
 # theme = "iTerm2 Tango Dark"
 # theme = Ayu
-theme = "Adwaita Dark"
+# theme = "Adwaita Dark"
+theme = "gogh-monokai-dark"
 
 # Window
 window-width = 90
