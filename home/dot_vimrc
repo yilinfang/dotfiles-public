@@ -22,10 +22,6 @@ set smarttab
 set nowrap
 set showcmd
 set noshowmatch
-if has("termguicolors") " Enable termguicolors if terminal supports it
-  set termguicolors
-endif
-colorscheme torte
 vnoremap <leader>y "+y
 " Resize splits if window got resized
 augroup resize_splits
@@ -34,6 +30,10 @@ augroup resize_splits
 augroup END
 " Neovim specific configurations
 if has("nvim")
+  if has("termguicolors") " Enable termguicolors if terminal supports it
+    set termguicolors
+  endif
+  colorscheme unokai
   set list
   " set listchars=tab:▸\ ,trail:·,nbsp:␣
   nnoremap <leader>y :%y+<CR>
