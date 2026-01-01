@@ -15,7 +15,7 @@ if [[ "$(uname)" == "Darwin" ]]; then
 fi
 
 # --- Configuration ---
-NCURSES_VERSION="6.5"
+NCURSES_VERSION="6.6"
 LIBEVENT_VERSION="2.1.12-stable"
 TMUX_VERSION="3.6a"
 
