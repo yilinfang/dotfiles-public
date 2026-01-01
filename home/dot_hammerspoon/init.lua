@@ -75,6 +75,7 @@ hs.hotkey.bind(mods, "return", function()
 	if frontApp:name() == "Finder" then
 		notifyAndLaunchApp("OpenInTerminal-Lite")
 	else
-		notifyAndLaunchApp("Ghostty")
+		-- notifyAndLaunchApp("Ghostty")
+		notifyAndLaunchApp("kitty")
 	end
 end)
