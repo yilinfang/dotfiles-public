@@ -35,6 +35,6 @@ if has("nvim")
   endif
   colorscheme unokai
   set list
-  " set listchars=tab:▸\ ,trail:·,nbsp:␣
+   set listchars=tab:▸\ ,trail:·,nbsp:␣
   nnoremap <leader>y :%y+<CR>
 endif
