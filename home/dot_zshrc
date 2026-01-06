@@ -176,3 +176,8 @@ ZSH_HIGHLIGHT_STYLES[comment]='fg=8'
 if [ -f "$HOME/.chezmoi/dotfiles/scripts/init/init.zsh" ]; then
 	source "$HOME/.chezmoi/dotfiles/scripts/init/init.zsh"
 fi
+
+# Antigravity
+if [ -d "$HOME/.antigravity/antigravity/bin" ]; then
+	export PATH="$HOME/.antigravity/antigravity/bin:$PATH"
+fi
