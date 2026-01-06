@@ -2,3 +2,8 @@
 nnoremap m <Nop>
 nnoremap ' <Nop>
 nnoremap ` <Nop>
+" Map j/k to gj/gk to deal with fold better
+nnoremap j gj
+vnoremap j gj
+nnoremap k gk
+vnoremap k gk
