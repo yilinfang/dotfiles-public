@@ -16,20 +16,21 @@ set smarttab
 set nowrap
 set showcmd
 set noshowmatch
-set list
-set listchars=tab:▸\ ,trail:·,nbsp:␣
-" Enable termguicolors if terminal supports it
-if has("termguicolors")
-  set termguicolors
-endif
-if has("nvim") || (v:version >= 900)
-  colorscheme unokai
-endif
 nnoremap <leader>/ :noh<CR>
-vnoremap <leader>y "+y
-nnoremap <leader>y :%y+<CR>
 " Resize splits if window got resized
 augroup resize_splits
   autocmd!
   autocmd VimResized * wincmd =
 augroup END
+" Neovim or Vim 9.0+
+if has("nvim") || (v:version >= 900)
+  " Enable termguicolors if terminal supports it
+  if has("termguicolors")
+    set termguicolors
+  endif
+  set list
+  set listchars=tab:▸\ ,trail:·,nbsp:␣
+  colorscheme unokai
+  vnoremap <leader>y "+y
+  nnoremap <leader>y :%y+<CR>
+endif
