@@ -1,5 +1,3 @@
--- Load ~/.vimrc for regular Neovim
-vim.cmd([[ source $HOME/.vimrc ]])
 -- Configurations for vscode-neovim
 -- It is highly recommended to add following keybindings to your VSCode keybindings.json:
 -- https://gist.github.com/yilinfang/f104c4a2903b9ddde5d523909c5485da
@@ -62,4 +60,7 @@ if vim.g.vscode then
   map("n", "za", function()
     vscode.call("editor.toggleFold")
   end, opts)
+else
+  -- Load $HOME/.vimrc for regular Neovim
+  vim.cmd([[ source $HOME/.vimrc ]])
 end

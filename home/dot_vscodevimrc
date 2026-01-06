@@ -2,5 +2,3 @@
 nnoremap m <Nop>
 nnoremap ' <Nop>
 nnoremap ` <Nop>
-" Map V to $V to fix the weired cursor postion
-nnoremap V $V
