@@ -28,7 +28,7 @@ chezmoi cd
 bash scripts/pde/setup-shell.sh
 ```
 
-### Install via mise (recommended)
+### Install via mise
 
 ```bash
 # Install mise if you don't have it
@@ -45,7 +45,7 @@ mise exec chezmoi -- chezmoi cd
 bash scripts/pde/setup-shell.sh
 ```
 
-### Install via make
+### Install via make (recommended)
 
 ```bash
 # Remove existing chezmoi config
