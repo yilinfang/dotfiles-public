@@ -14,6 +14,7 @@ node = "lts"
 python = "latest"
 ripgrep = "latest"
 starship = "latest"
+tmux = "latest"
 yazi = "latest"
 zoxide = "latest"
 
