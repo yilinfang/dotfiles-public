@@ -8,3 +8,6 @@ shfmt = "latest"
 stylua = "latest"
 taplo = "latest"
 uv = "latest"
+
+[settings]
+python.compile = false
