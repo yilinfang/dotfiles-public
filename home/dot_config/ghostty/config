@@ -1,15 +1,12 @@
 # Font
 font-family = ""
-font-family = "JetBrains Mono"
+font-family = "Cascadia Code"
 font-family = "Symbols Nerd Font Mono"
 font-size = 14
 adjust-underline-position = 4
 
 # Theme
-# theme = "iTerm2 Tango Dark"
-# theme = Ayu
-# theme = "Adwaita Dark"
-theme = "gogh-monokai-dark-patched"
+theme = "iTerm2 Tango Dark"
 
 # Window
 window-width = 90
