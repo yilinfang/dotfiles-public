@@ -6,7 +6,6 @@ delta = "latest"
 difftastic = { version = "latest", exe = "difft" }
 fd = "latest"
 fzf = "latest"
-"github:yilinfang/fw" = "latest"
 lazygit = "latest"
 neovim = "latest"
 node = "lts"
