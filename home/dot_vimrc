@@ -24,7 +24,7 @@ augroup resize_splits
   autocmd VimResized * wincmd =
 augroup END
 " Neovim or Vim 9.0+
-if has("nvim") || (v:version >= 900)
+if has("nvim") || has('vim9script')
   " Enable termguicolors if terminal supports it
   if has("termguicolors")
     set termguicolors
