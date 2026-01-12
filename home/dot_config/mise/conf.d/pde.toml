@@ -13,7 +13,7 @@ node = "lts"
 python = "latest"
 ripgrep = "latest"
 starship = "latest"
-tmux = "latest"
+# tmux = "latest"
 yazi = "latest"
 zoxide = "latest"
 
