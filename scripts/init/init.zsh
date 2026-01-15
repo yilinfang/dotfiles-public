@@ -49,6 +49,11 @@ if command -v lazygit &>/dev/null; then
 	alias lg='lazygit'
 fi
 
+# Use zj for zellij
+if command -v zellij &>/dev/null; then
+	alias zj='zellij'
+fi
+
 # Use y for yazi wrapper
 if command -v yazi &>/dev/null; then
 	function y() {
