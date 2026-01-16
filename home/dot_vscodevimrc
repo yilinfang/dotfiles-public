@@ -7,3 +7,6 @@ nnoremap j gj
 vnoremap j gj
 nnoremap k gk
 vnoremap k gk
+" Mak K to gh
+nnoremap <S-k> gh
+vnoremap <S-k> gh
