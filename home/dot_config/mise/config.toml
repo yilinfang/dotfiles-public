@@ -1,11 +1,7 @@
 [tools]
 gh = "latest"
-jq = "latest"
 "npm:@bitwarden/cli" = "latest"
-"npm:prettier" = "latest"
 stylua = "latest"
-taplo = "latest"
-uv = "latest"
 
 [settings]
 python.compile = false
