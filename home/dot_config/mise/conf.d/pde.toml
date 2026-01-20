@@ -6,6 +6,7 @@ delta = "latest"
 difftastic = { version = "latest", exe = "difft" }
 fd = "latest"
 fzf = "latest"
+"github:micro-editor/micro" = "latest"
 jq = "latest"
 lazygit = "latest"
 neovim = "latest"
