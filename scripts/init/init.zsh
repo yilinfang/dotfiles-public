@@ -1,3 +1,5 @@
+#!/usr/bin/env zsh
+
 # init.zsh
 # This script initializes the Zsh shell environment
 

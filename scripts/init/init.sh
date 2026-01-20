@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # init.sh
 # This script initializes the Bash shell environment
 
