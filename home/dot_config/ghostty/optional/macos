@@ -1,0 +1,12 @@
+# MacOS Specific Configuraions
+
+# Font
+font-family = ""
+font-family = "Cascadia Code"
+font-family = "Symbols Nerd Font Mono"
+font-size = 14
+adjust-underline-position = 4
+
+# Misc
+macos-option-as-alt = true
+quit-after-last-window-closed = true

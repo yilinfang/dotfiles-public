@@ -1,9 +1,8 @@
-# Font
-font-family = ""
-font-family = "Cascadia Code"
-font-family = "Symbols Nerd Font Mono"
-font-size = 14
-adjust-underline-position = 4
+# MacOS
+config-file = ?optional/macos
+
+# Linux
+config-file = ?optional/linux
 
 # Theme
 theme = "gogh-monokai-dark-patched"
@@ -23,7 +22,3 @@ keybind = alt+b=esc:b
 # Misc
 copy-on-select = clipboard
 shell-integration-features = ssh-env,ssh-terminfo
-
-# MacOS
-macos-option-as-alt = true
-quit-after-last-window-closed = true

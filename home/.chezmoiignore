@@ -20,8 +20,16 @@
 .hammerspoon/**
 {{ end }}
 
+# Linux
+{{ if ne .chezmoi.os "linux" }}
+.config/ghostty/optional/linux
+{{ end }}
+
 # MacOS
 **/.DS_Store
+{{ if ne .chezmoi.os "darwin" }}
+.config/ghostty/optional/macos
+{{ end }}
 
 {{ if .work }}
 # Ignored in work environment(PDE)
