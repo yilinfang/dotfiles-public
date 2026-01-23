@@ -5,7 +5,8 @@ config-file = ?optional/macos
 config-file = ?optional/linux
 
 # Theme
-theme = "gogh-monokai-dark-patched"
+# theme = "gogh-monokai-dark-patched"
+theme = "iTerm2 Tango Dark"
 
 # Window
 window-width = 90
