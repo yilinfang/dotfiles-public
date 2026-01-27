@@ -2,7 +2,7 @@
 
 # Font
 font-family = ""
-font-family = "Cascadia Code"
+font-family = "JetBrains Mono NL"
 font-family = "Symbols Nerd Font Mono"
 font-size = 14
 adjust-underline-position = 4
