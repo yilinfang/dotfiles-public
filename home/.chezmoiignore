@@ -6,6 +6,7 @@
 **/.git/**
 **/tmp/
 **/tmp/**
+**/.DS_Store
 
 # Micro
 **/.config/micro/backups/
@@ -13,6 +14,7 @@
 **/.config/micro/buffers/
 **/.config/micro/buffers/**
 
+# MacOS
 {{ if ne .chezmoi.os "darwin" }}
 .config/karabiner/
 .config/karabiner/**
@@ -25,8 +27,6 @@
 .config/ghostty/optional/linux
 {{ end }}
 
-# MacOS
-**/.DS_Store
 {{ if ne .chezmoi.os "darwin" }}
 .config/ghostty/optional/macos
 {{ end }}
