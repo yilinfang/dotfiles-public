@@ -26,7 +26,7 @@ fi
 if command -v micro &>/dev/null; then
 	export EDITOR=micro
 	export VISUAL=micro
-	alias nano='micro'
+	alias edit='micro'
 fi
 
 # If rg is installed
