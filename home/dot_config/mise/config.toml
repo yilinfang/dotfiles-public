@@ -1,6 +1,7 @@
 [tools]
 gh = "latest"
 "npm:@bitwarden/cli" = "latest"
+"npm:@openai/codex" = "latest"
 
 [settings]
 python.compile = false
