@@ -18,6 +18,7 @@ local appShortcuts = {
 	-- { "A", "Antinote" },
 	-- { "M", "Monica" },
 	-- { "N", "Obsidian" },
+	{ "N", "UpNote" },
 	-- { "G", "ChatGPT" },
 	{ "S", "Spotify" },
 }
@@ -25,11 +26,11 @@ local appShortcuts = {
 -- General Shortcuts for Links
 local linkShortcuts = {
 	-- Key, Description, URL
-	{ "N", "Notion", "https://www.notion.so/" },
+	-- { "N", "Notion", "https://www.notion.so/" },
 	-- { "M", "Monica", "https://monica.im/" },
 	-- { "D", "DeepSeek", "https://chat.deepseek.com/" },
-	{ "G", "Gemini", "https://gemini.google.com/" },
-	-- { "G", "ChatGPT", "https://chatgpt.com/" },
+	-- { "G", "Gemini", "https://gemini.google.com/" },
+	{ "G", "ChatGPT", "https://chatgpt.com/" },
 }
 
 -- Function to display notification and open an application
