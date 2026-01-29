@@ -2,9 +2,11 @@
 
 # Font
 font-family = ""
-font-family = "JetBrains Mono NL"
+font-family = "JetBrians Maple Mono"
+font-family = "JetBrains Mono"
 font-family = "Symbols Nerd Font Mono"
 font-size = 14
+font-feature = "-calt, -liga, -dlig"
 adjust-underline-position = 4
 
 # Misc
