@@ -1,5 +1,5 @@
 {
   "Alt-s": "Save,Quit",
   "CtrlUnderscore": "JumpLine",
-  "Alt-d": "DeleteLine"
+  "Alt-x": "DeleteLine"
 }
