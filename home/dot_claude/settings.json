@@ -1,5 +1,4 @@
 {
-  "autoUpdatesChannel": "stable",
   "permissions": {
     "deny": [
       "Read(./.env)",
