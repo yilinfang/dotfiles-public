@@ -18,6 +18,8 @@ set nowrap
 set showcmd
 set noshowmatch
 nnoremap <leader>/ :noh<CR>
+vnoremap <leader>y "+y
+nnoremap <leader>y :%y+<CR>
 " Resize splits if window got resized
 augroup resize_splits
   autocmd!
@@ -32,6 +34,4 @@ if has("nvim") || has('vim9script')
   "colorscheme unokai
   set list
   set listchars=tab:▸\ ,trail:·,nbsp:␣
-  vnoremap <leader>y "+y
-  nnoremap <leader>y :%y+<CR>
 endif

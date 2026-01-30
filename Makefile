@@ -26,6 +26,7 @@ install: ensure_mise
 	$(CHEZMOI) init --apply -S $(CHEZMOI_DOTFILES_PATH)
 	$(MISE_BIN) install
 	$(MISE_BIN) upgrade
+	bash scripts/pde/setup-git.sh
 
 pde_install: ensure_mise
 	@echo "Installing PDE-specific dotfiles..."
