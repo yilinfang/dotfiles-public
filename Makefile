@@ -5,7 +5,7 @@ CHEZMOI := $(MISE_BIN) exec chezmoi age -- chezmoi
 CHEZMOI_DOTFILES_PATH := $(HOME)/.chezmoi/dotfiles
 
 
-.PHONY: ensure_mise install pde_install
+.PHONY: ensure_mise install pde_install claude
 
 ensure_mise:
 	@if [ ! -f $(MISE_BIN) ]; then \
@@ -35,3 +35,12 @@ pde_install: ensure_mise
 	$(MISE_BIN) upgrade
 	bash scripts/pde/setup-shell.sh
 	bash scripts/pde/setup-git.sh
+
+claude:
+	@if command -v claude >/dev/null 2>&1; then \
+		echo "Updating Claude Code..."; \
+		claude update; \
+	else \
+		echo "Installing Claude Code..."; \
+		curl -fsSL https://claude.ai/install.sh | bash; \
+	fi

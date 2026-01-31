@@ -8,6 +8,20 @@ if [[ ":$PATH:" != *":$HOME/.local/bin:"* ]]; then
 	export PATH="$HOME/.local/bin:$PATH"
 fi
 
+# Create a wrapper for claude
+if command -v claude &>/dev/null; then
+	SECRET_ENV_FILE="$HOME/.secrets/claude_code_with_minimax.env"
+	if [ -f "$SECRET_ENV_FILE" ]; then
+		function claude() {
+			# Set environment variables from secret environment file
+			set -a
+			source "$SECRET_ENV_FILE"
+			set +a
+			command claude "$@"
+		}
+	fi
+fi
+
 # If mise is installed, activate it
 if command -v mise &>/dev/null; then
 	eval "$(mise activate bash)"

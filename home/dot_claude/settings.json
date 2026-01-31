@@ -3,10 +3,11 @@
     "deny": [
       "Read(./.env)",
       "Read(./.env.*)",
+      "Read(./.secret)",
+      "Read(./.secrets/**)",
       "Read(./secrets/**)",
       "Read(./config/credentials.json)",
       "Read(./build)"
-    ],
-    "defaultMode": "plan"
+    ]
   }
 }
