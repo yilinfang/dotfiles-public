@@ -29,12 +29,12 @@ if command -v mise &>/dev/null; then
 	# export MISE_PYTHON_COMPILE=false  # Always download pre-compiled python binaries
 fi
 
-# If micro is installed, set it as the default editor
-if command -v micro &>/dev/null; then
-	export EDITOR=micro
-	export VISUAL=micro
-	# alias e='micro'
-fi
+# # If micro is installed, set it as the default editor
+# if command -v micro &>/dev/null; then
+# 	export EDITOR=micro
+# 	export VISUAL=micro
+# 	alias e='micro'
+# fi
 
 # If nvim is installed, set it as the default editor
 if command -v nvim &>/dev/null; then
