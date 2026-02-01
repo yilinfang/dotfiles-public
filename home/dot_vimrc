@@ -20,6 +20,11 @@ set noshowmatch
 nnoremap <leader>/ :noh<CR>
 vnoremap <leader>y "+y
 nnoremap <leader>y :%y+<CR>
+" Disable macro record/play and dot repeat
+nnoremap q <Nop>
+nnoremap Q <Nop>
+nnoremap @ <Nop>
+nnoremap . <Nop>
 " Resize splits if window got resized
 augroup resize_splits
   autocmd!

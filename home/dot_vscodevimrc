@@ -10,3 +10,8 @@ vnoremap k gk
 " Mak K to gh
 nnoremap <S-k> gh
 vnoremap <S-k> gh
+" Disable macro record/play and dot repeat
+nnoremap q <Nop>
+nnoremap Q <Nop>
+nnoremap @ <Nop>
+nnoremap . <Nop>
