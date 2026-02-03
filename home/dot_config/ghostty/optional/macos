@@ -7,7 +7,7 @@ font-family = "JetBrains Mono"
 font-family = "Symbols Nerd Font Mono"
 font-size = 14
 font-feature = "-calt, -liga, -dlig"
-adjust-underline-position = 4
+adjust-underline-position = 2
 
 # Misc
 macos-option-as-alt = true
