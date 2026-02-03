@@ -38,6 +38,12 @@ symbol = " "
 [git_commit]
 tag_symbol = '  '
 
+[git_status]
+# HACK: The initial symbols overlap with brackets
+ahead = "↑"
+behind = "↓"
+diverged = "↕"
+
 [hostname]
 ssh_symbol = " "
 
