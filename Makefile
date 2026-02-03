@@ -49,3 +49,10 @@ claude:
 		mkdir -p $(HOME)/.claude; \
 		cp assets/claude/settings.json $(HOME)/.claude/settings.json; \
 	fi
+
+opencode:
+	@if [ ! -f $(HOME)/.config/opencode/opencode.jsonc ]; then \
+		echo "Copying OpenCode opencode.jsonc..."; \
+		mkdir -p $(HOME)/.config/opencode; \
+		cp assets/opencode/opencode.jsonc $(HOME)/.config/opencode/opencode.jsonc; \
+	fi

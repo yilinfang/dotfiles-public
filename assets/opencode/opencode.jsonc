@@ -1,0 +1,10 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "share": "disabled",
+  "telemetry": false,
+  "autoupdate": false,
+  "experimental": {
+    "openTelemetry": false,
+  },
+  "theme": "system",
+}
