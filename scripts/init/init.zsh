@@ -12,13 +12,13 @@ fi
 if command -v claude &>/dev/null; then
 	SECRET_ENV_FILE="$HOME/.secrets/claude_code_with_minimax.env"
 	if [ -f "$SECRET_ENV_FILE" ]; then
-		function mclaude() {
+		function mclaude() (
 			# Set environment variables from secret environment file
 			set -a
 			source "$SECRET_ENV_FILE"
 			set +a
 			command claude "$@"
-		}
+		)
 	fi
 fi
 
