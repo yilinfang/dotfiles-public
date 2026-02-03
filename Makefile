@@ -44,3 +44,8 @@ claude:
 		echo "Installing Claude Code..."; \
 		curl -fsSL https://claude.ai/install.sh | bash; \
 	fi
+	@if [ ! -f $(HOME)/.claude/settings.json ]; then \
+		echo "Copying Claude settings.json..."; \
+		mkdir -p $(HOME)/.claude; \
+		cp assets/claude/settings.json $(HOME)/.claude/settings.json; \
+	fi
