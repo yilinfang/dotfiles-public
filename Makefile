@@ -21,14 +21,14 @@ ensure_mise:
 		touch "$(MISE_DEFAULT_CONFIG_PATH)"; \
 	fi
 
-install: ensure_mise
+install: ensure_mise claude opencode
 	@echo "Installing dotfiles..."
 	$(CHEZMOI) init --apply -S $(CHEZMOI_DOTFILES_PATH)
 	$(MISE_BIN) install
 	$(MISE_BIN) upgrade
 	bash scripts/pde/setup-git.sh
 
-pde_install: ensure_mise
+pde_install: ensure_mise claude opencode
 	@echo "Installing PDE-specific dotfiles..."
 	IS_PDE=true $(CHEZMOI) init --apply -S $(CHEZMOI_DOTFILES_PATH)
 	$(MISE_BIN) install
@@ -44,15 +44,11 @@ claude:
 		echo "Installing Claude Code..."; \
 		curl -fsSL https://claude.ai/install.sh | bash; \
 	fi
-	@if [ ! -f $(HOME)/.claude/settings.json ]; then \
-		echo "Copying Claude settings.json..."; \
-		mkdir -p $(HOME)/.claude; \
-		cp assets/claude/settings.json $(HOME)/.claude/settings.json; \
-	fi
+	@mkdir -p $(HOME)/.claude; \
+	echo "Copying Claude settings.json..."; \
+	cp -i assets/claude/settings.json $(HOME)/.claude/settings.json
 
 opencode:
-	@if [ ! -f $(HOME)/.config/opencode/opencode.jsonc ]; then \
-		echo "Copying OpenCode opencode.jsonc..."; \
-		mkdir -p $(HOME)/.config/opencode; \
-		cp assets/opencode/opencode.jsonc $(HOME)/.config/opencode/opencode.jsonc; \
-	fi
+	@mkdir -p $(HOME)/.config/opencode; \
+	echo "Copying OpenCode opencode.jsonc..."; \
+	cp -i assets/opencode/opencode.jsonc $(HOME)/.config/opencode/opencode.jsonc
