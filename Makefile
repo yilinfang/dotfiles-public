@@ -46,9 +46,9 @@ claude:
 	fi
 	@mkdir -p $(HOME)/.claude; \
 	echo "Copying Claude settings.json..."; \
-	cp -i assets/claude/settings.json $(HOME)/.claude/settings.json
+	cp -i assets/claude/settings.json $(HOME)/.claude/settings.json || true
 
 opencode:
 	@mkdir -p $(HOME)/.config/opencode; \
 	echo "Copying OpenCode opencode.jsonc..."; \
-	cp -i assets/opencode/opencode.jsonc $(HOME)/.config/opencode/opencode.jsonc
+	cp -i assets/opencode/opencode.jsonc $(HOME)/.config/opencode/opencode.jsonc || true
