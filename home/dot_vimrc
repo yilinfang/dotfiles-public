@@ -17,6 +17,8 @@ set smarttab
 set nowrap
 set showcmd
 set noshowmatch
+set list
+set listchars=tab:▸\ ,trail:·,nbsp:␣
 nnoremap <leader>/ :noh<CR>
 vnoremap <leader>y "+y
 nnoremap <leader>y :%y+<CR>
@@ -37,6 +39,4 @@ if has("nvim") || has('vim9script')
     set termguicolors
   endif
   colorscheme wildcharm
-  set list
-  set listchars=tab:▸\ ,trail:·,nbsp:␣
 endif
