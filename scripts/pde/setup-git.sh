@@ -43,30 +43,30 @@ git config --global interactive.diffFilter "delta --color-only"
 git config --global delta.navigate true
 git config --global delta.dark true
 
-# Get Git version
-GIT_VERSION=$(git --version | awk '{print $3}')
-
-# Function to compare versions
-version_ge() {
-	# Returns 0 if $1 >= $2
-	[ "$(printf '%s\n' "$2" "$1" | sort -V | head -n1)" = "$2" ]
-}
-
-# Merge conflict style
-if version_ge "$GIT_VERSION" "2.35.0"; then
-	git config --global merge.conflictStyle zdiff3
-else
-	git config --global merge.conflictStyle diff3
-	echo "Warning: zdiff3 conflict style is not supported in Git versions older than 2.35.0. Using diff3 instead."
-fi
-
-# Merge tool
-git config --global merge.tool nvim
-
-# Mergetool
-git config --global mergetool.prompt false
-git config --global mergetool.keepBackup false
-
-# Mergetool nvim
-git config --global mergetool.nvim.cmd 'nvim -d "$LOCAL" "$MERGED" "$REMOTE"'
-git config --global mergetool.nvim.trustExitCode false
+# # Get Git version
+# GIT_VERSION=$(git --version | awk '{print $3}')
+# 
+# # Function to compare versions
+# version_ge() {
+# 	# Returns 0 if $1 >= $2
+# 	[ "$(printf '%s\n' "$2" "$1" | sort -V | head -n1)" = "$2" ]
+# }
+# 
+# # Merge conflict style
+# if version_ge "$GIT_VERSION" "2.35.0"; then
+# 	git config --global merge.conflictStyle zdiff3
+# else
+# 	git config --global merge.conflictStyle diff3
+# 	echo "Warning: zdiff3 conflict style is not supported in Git versions older than 2.35.0. Using diff3 instead."
+# fi
+# 
+# # Merge tool
+# git config --global merge.tool nvim
+# 
+# # Mergetool
+# git config --global mergetool.prompt false
+# git config --global mergetool.keepBackup false
+# 
+# # Mergetool nvim
+# git config --global mergetool.nvim.cmd 'nvim -d "$LOCAL" "$MERGED" "$REMOTE"'
+# git config --global mergetool.nvim.trustExitCode false
