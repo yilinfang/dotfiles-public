@@ -20,8 +20,6 @@ set noshowmatch
 set list
 set listchars=tab:▸\ ,trail:·,nbsp:␣
 nnoremap <leader>/ :noh<CR>
-vnoremap <leader>y "+y
-nnoremap <leader>y :%y+<CR>
 " Disable macro record/play and dot repeat
 nnoremap q <Nop>
 nnoremap Q <Nop>
@@ -32,11 +30,13 @@ augroup resize_splits
   autocmd!
   autocmd VimResized * wincmd =
 augroup END
-" Neovim or Vim 9.0+
-if has("nvim") || has('vim9script')
-  " Enable termguicolors if terminal supports it
-  if has("termguicolors")
-    set termguicolors
-  endif
+" Enable termguicolors if terminal supports it
+if has("termguicolors")
+  set termguicolors
+endif
+" Enable wildcharm with torte as a backup
+if !empty(globpath(&runtimepath, "colors/wildcharm.vim"))
   colorscheme wildcharm
+else
+  colorscheme torte
 endif
