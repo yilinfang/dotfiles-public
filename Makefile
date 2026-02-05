@@ -61,6 +61,13 @@ claude:
 	fi
 
 opencode:
+	@if command -v opencode >/dev/null 2>&1; then \
+		echo "Updating OpenCode..."; \
+		opencode upgrade; \
+	else \
+		echo "Installing OpenCode..."; \
+		curl -fsSL https://opencode.ai/install | bash; \
+	fi
 	@mkdir -p $(HOME)/.config/opencode; \
 	if [ ! -f "$(HOME)/.config/opencode/opencode.jsonc" ]; then \
 		echo "Installing OpenCode opencode.jsonc..."; \
