@@ -10,8 +10,9 @@ fi
 
 # Create wrappers for claude
 if command -v claude &>/dev/null; then
+	alias cld='claude' # Use cld for claude
 	if [ -f "$HOME/.secrets/claude_code_minimax.env" ]; then
-		function mclaude() (
+		function mcld() (
 			set -a
 			source "$HOME/.secrets/claude_code_minimax.env"
 			set +a
@@ -19,7 +20,7 @@ if command -v claude &>/dev/null; then
 		)
 	fi
 	if [ -f "$HOME/.secrets/claude_code_glm_nanogpt.env" ]; then
-		function gclaude() (
+		function gcld() (
 			set -a
 			source "$HOME/.secrets/claude_code_glm_nanogpt.env"
 			set +a
