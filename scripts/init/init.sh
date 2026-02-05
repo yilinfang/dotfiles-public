@@ -65,6 +65,11 @@ if command -v lazygit &>/dev/null; then
 	alias lg='lazygit'
 fi
 
+# Use oc for opencode
+if command -v opencode &>/dev/null; then
+	alias oc='opencode'
+fi
+
 # # Use zj for zellij
 # if command -v zellij &>/dev/null; then
 # 	alias zj='zellij'
