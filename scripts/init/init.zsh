@@ -8,14 +8,20 @@ if [[ ":$PATH:" != *":$HOME/.local/bin:"* ]]; then
 	export PATH="$HOME/.local/bin:$PATH"
 fi
 
-# Create a wrapper for claude
+# Create wrappers for claude
 if command -v claude &>/dev/null; then
-	SECRET_ENV_FILE="$HOME/.secrets/claude_code_with_minimax.env"
-	if [ -f "$SECRET_ENV_FILE" ]; then
+	if [ -f "$HOME/.secrets/claude_code_minimax.env" ]; then
 		function mclaude() (
-			# Set environment variables from secret environment file
 			set -a
-			source "$SECRET_ENV_FILE"
+			source "$HOME/.secrets/claude_code_minimax.env"
+			set +a
+			command claude "$@"
+		)
+	fi
+	if [ -f "$HOME/.secrets/claude_code_glm_nanogpt.env" ]; then
+		function gclaude() (
+			set -a
+			source "$HOME/.secrets/claude_code_glm_nanogpt.env"
 			set +a
 			command claude "$@"
 		)
