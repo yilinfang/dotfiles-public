@@ -27,6 +27,14 @@ if command -v claude &>/dev/null; then
 			command claude "$@"
 		)
 	fi
+	if [ -f "$HOME/.secrets/claude_code_kimi_nanogpt.env" ]; then
+		function kcld() (
+			set -a
+			source "$HOME/.secrets/claude_code_kimi_nanogpt.env"
+			set +a
+			command claude "$@"
+		)
+	fi
 fi
 
 # If mise is installed, activate it
