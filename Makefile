@@ -45,10 +45,34 @@ claude:
 		curl -fsSL https://claude.ai/install.sh | bash; \
 	fi
 	@mkdir -p $(HOME)/.claude; \
-	echo "Copying Claude settings.json..."; \
-	cp -i assets/claude/settings.json $(HOME)/.claude/settings.json || true
+	if [ ! -f "$(HOME)/.claude/settings.json" ]; then \
+		echo "Installing Claude settings.json..."; \
+		cp assets/claude/settings.json "$(HOME)/.claude/settings.json"; \
+	else \
+		echo "Merging Claude settings.json with existing file..."; \
+		if command -v nvim >/dev/null 2>&1; then \
+			MERGE_TOOL="nvim -d"; \
+		elif command -v vimdiff >/dev/null 2>&1; then \
+			MERGE_TOOL="vimdiff"; \
+		else \
+			MERGE_TOOL="diff -u"; \
+		fi; \
+		$$MERGE_TOOL "$(HOME)/.claude/settings.json" assets/claude/settings.json || true; \
+	fi
 
 opencode:
 	@mkdir -p $(HOME)/.config/opencode; \
-	echo "Copying OpenCode opencode.jsonc..."; \
-	cp -i assets/opencode/opencode.jsonc $(HOME)/.config/opencode/opencode.jsonc || true
+	if [ ! -f "$(HOME)/.config/opencode/opencode.jsonc" ]; then \
+		echo "Installing OpenCode opencode.jsonc..."; \
+		cp assets/opencode/opencode.jsonc "$(HOME)/.config/opencode/opencode.jsonc"; \
+	else \
+		echo "Merging OpenCode opencode.jsonc with existing file..."; \
+		if command -v nvim >/dev/null 2>&1; then \
+			MERGE_TOOL="nvim -d"; \
+		elif command -v vimdiff >/dev/null 2>&1; then \
+			MERGE_TOOL="vimdiff"; \
+		else \
+			MERGE_TOOL="diff -u"; \
+		fi; \
+		$$MERGE_TOOL "$(HOME)/.config/opencode/opencode.jsonc" assets/opencode/opencode.jsonc || true; \
+	fi
