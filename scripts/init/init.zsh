@@ -10,27 +10,14 @@ fi
 
 # Create wrappers for claude
 if command -v claude &>/dev/null; then
-	alias cld='claude' # Use cld for claude
-	if [ -f "$HOME/.secrets/claude_code_minimax.env" ]; then
-		function mcld() (
+	# Use cld for claude
+	alias cld='claude'
+	# Use ccld for claude with custom provider
+	CUSTOM_PROVIDER_ENV_FILE="$HOME/.secrets/claude_code_custom_provider.env"
+	if [ -f "$CUSTOM_PROVIDER_ENV_FILE" ]; then
+		function ccld() (
 			set -a
-			source "$HOME/.secrets/claude_code_minimax.env"
-			set +a
-			command claude "$@"
-		)
-	fi
-	if [ -f "$HOME/.secrets/claude_code_glm_nanogpt.env" ]; then
-		function gcld() (
-			set -a
-			source "$HOME/.secrets/claude_code_glm_nanogpt.env"
-			set +a
-			command claude "$@"
-		)
-	fi
-	if [ -f "$HOME/.secrets/claude_code_kimi_nanogpt.env" ]; then
-		function kcld() (
-			set -a
-			source "$HOME/.secrets/claude_code_kimi_nanogpt.env"
+			source "$CUSTOM_PROVIDER_ENV_FILE"
 			set +a
 			command claude "$@"
 		)
