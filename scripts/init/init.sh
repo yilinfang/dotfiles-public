@@ -8,6 +8,11 @@ if [[ ":$PATH:" != *":$HOME/.local/bin:"* ]]; then
 	export PATH="$HOME/.local/bin:$PATH"
 fi
 
+# Add opencode to PATH if not already present
+if [[ ":$PATH:" != *":$HOME/.opencode/bin:"* ]]; then
+	export PATH="$HOME/.opencode/bin:$PATH"
+fi
+
 # Create wrappers for claude
 if command -v claude &>/dev/null; then
 	# Use cld for claude
