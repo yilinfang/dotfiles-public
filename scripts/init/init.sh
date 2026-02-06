@@ -15,10 +15,11 @@ fi
 
 # Create wrappers for claude
 if command -v claude &>/dev/null; then
+	# MiniMax Provider
 	SECRETS_MINIMAX_ENV="$HOME/.secrets/claude_code_with_minimax.env"
 	if [ -f "$SECRETS_MINIMAX_ENV" ]; then
 		# Claude Code with MiniMax M2.1
-		function mcld() (
+		function cldm() (
 			set -a
 			source "$SECRETS_MINIMAX_ENV"
 			set +a
@@ -30,10 +31,11 @@ if command -v claude &>/dev/null; then
 			command claude "$@"
 		)
 	fi
+	# NanoGPT Provider
 	SECRETS_NANOGPT_ENV="$HOME/.secrets/claude_code_with_nanogpt.env"
 	if [ -f "$SECRETS_NANOGPT_ENV" ]; then
-		# Claude Code with GLM
-		function gcld() (
+		# Claude Code with GLM 4.7
+		function cldg() (
 			set -a
 			source "$SECRETS_NANOGPT_ENV"
 			set +a
