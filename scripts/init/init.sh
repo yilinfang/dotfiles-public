@@ -15,15 +15,32 @@ fi
 
 # Create wrappers for claude
 if command -v claude &>/dev/null; then
-	# Use cld for claude
-	alias cld='claude'
-	# Use ccld for claude with custom provider
-	CUSTOM_PROVIDER_ENV_FILE="$HOME/.secrets/claude_code_custom_provider.env"
-	if [ -f "$CUSTOM_PROVIDER_ENV_FILE" ]; then
-		function ccld() (
+	SECRETS_MINIMAX_ENV="$HOME/.secrets/claude_code_with_minimax.env"
+	if [ -f "$SECRETS_MINIMAX_ENV" ]; then
+		# Claude Code with MiniMax M2.1
+		function mcld() (
 			set -a
-			source "$CUSTOM_PROVIDER_ENV_FILE"
+			source "$SECRETS_MINIMAX_ENV"
 			set +a
+			export CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC="1"
+			export ANTHROPIC_DEFAULT_SONNET_MODEL="MiniMax-M2.1"
+			export ANTHROPIC_DEFAULT_OPUS_MODEL="MiniMax-M2.1"
+			export ANTHROPIC_DEFAULT_HAIKU_MODEL="MiniMax-M2.1"
+			export CLAUDE_CODE_SUBAGENT_MODEL="MiniMax-M2.1"
+			command claude "$@"
+		)
+	fi
+	SECRETS_NANOGPT_ENV="$HOME/.secrets/claude_code_with_nanogpt.env"
+	if [ -f "$SECRETS_NANOGPT_ENV" ]; then
+		# Claude Code with GLM
+		function gcld() (
+			set -a
+			source "$SECRETS_NANOGPT_ENV"
+			set +a
+			export ANTHROPIC_DEFAULT_SONNET_MODEL="zai-org/glm-4.7:thinking"
+			export ANTHROPIC_DEFAULT_OPUS_MODEL="zai-org/glm-4.7:thinking"
+			export ANTHROPIC_DEFAULT_HAIKU_MODEL="zai-org/GLM-4.5-Air"
+			export CLAUDE_CODE_SUBAGENT_MODEL="zai-org/GLM-4.5-Air"
 			command claude "$@"
 		)
 	fi
