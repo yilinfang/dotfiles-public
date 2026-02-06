@@ -1,0 +1,91 @@
+{
+    "profiles": [
+        {
+            "complex_modifications": {
+                "rules": [
+                    {
+                        "description": "Caps Lock + Right Shift -> Caps Lock, Caps Lock -> LeftCommand+Control+Shift+Option",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "caps_lock",
+                                    "modifiers": {
+                                        "mandatory": ["right_shift"],
+                                        "optional": ["caps_lock"]
+                                    }
+                                },
+                                "to": [{ "key_code": "caps_lock" }],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "key_code": "caps_lock",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "left_shift",
+                                        "modifiers": ["left_command", "left_control", "left_option"]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Hyper + [ to Page Up, Hyper + ] to Page Down, Hyper + ; to Home, Hyper + ' to End",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "open_bracket",
+                                    "modifiers": {
+                                        "mandatory": ["left_command", "left_control", "left_option", "left_shift"],
+                                        "optional": ["any"]
+                                    }
+                                },
+                                "to": [{ "key_code": "page_up" }],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "key_code": "close_bracket",
+                                    "modifiers": {
+                                        "mandatory": ["left_command", "left_control", "left_option", "left_shift"],
+                                        "optional": ["any"]
+                                    }
+                                },
+                                "to": [{ "key_code": "page_down" }],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "key_code": "semicolon",
+                                    "modifiers": {
+                                        "mandatory": ["left_command", "left_control", "left_option", "left_shift"],
+                                        "optional": ["any"]
+                                    }
+                                },
+                                "to": [{ "key_code": "home" }],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "key_code": "quote",
+                                    "modifiers": {
+                                        "mandatory": ["left_command", "left_control", "left_option", "left_shift"],
+                                        "optional": ["any"]
+                                    }
+                                },
+                                "to": [{ "key_code": "end" }],
+                                "type": "basic"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "name": "Default profile",
+            "selected": true,
+            "virtual_hid_keyboard": { "keyboard_type_v2": "ansi" }
+        }
+    ]
+}
