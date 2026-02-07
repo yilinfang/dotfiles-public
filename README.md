@@ -59,3 +59,13 @@ git clone https://github.com/yilinfang/dotfiles-public.git ~/.chezmoi/dotfiles
 cd ~/.chezmoi/dotfiles
 make install
 ```
+
+### Quick install (minimal dotfiles)
+
+Install only essential config files (.vimrc, .tmux.conf) directly to your home directory.
+
+```bash
+bash <(curl -fsSL https://raw.githubusercontent.com/yilinfang/dotfiles-public/refs/heads/main/scripts/install_quick.sh)
+```
+
+_NOTE: Existing files will be backed up with a `.backup_YYYYMMDD_HHMMSS` suffix._
