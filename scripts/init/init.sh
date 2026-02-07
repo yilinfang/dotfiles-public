@@ -13,6 +13,11 @@ if [[ ":$PATH:" != *":$HOME/.opencode/bin:"* ]]; then
 	export PATH="$HOME/.opencode/bin:$PATH"
 fi
 
+# Use oc for opencode
+if command -v opencode &>/dev/null; then
+	alias oc='opencode'
+fi
+
 # Create wrappers for claude
 if command -v claude &>/dev/null; then
 	# MiniMax Provider
@@ -89,11 +94,6 @@ fi
 # Use lg for lazygit
 if command -v lazygit &>/dev/null; then
 	alias lg='lazygit'
-fi
-
-# Use oc for opencode
-if command -v opencode &>/dev/null; then
-	alias oc='opencode'
 fi
 
 # # Use zj for zellij
