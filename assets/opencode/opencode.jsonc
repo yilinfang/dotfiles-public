@@ -3,7 +3,7 @@
   "share": "disabled",
   "autoupdate": false,
   "experimental": {
-    "openTelemetry": false
+    "openTelemetry": false,
   },
-  "theme": "system"
+  "theme": "system",
 }
