@@ -69,8 +69,8 @@ fi
 
 # If nvim is installed, set it as the default editor
 if command -v nvim &>/dev/null; then
-	# export EDITOR=nvim
-	# export VISUAL=nvim
+	export EDITOR=nvim
+	export VISUAL=nvim
 	alias vim='nvim'
 fi
 
