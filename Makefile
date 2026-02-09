@@ -21,14 +21,14 @@ ensure_mise:
 		touch "$(MISE_DEFAULT_CONFIG_PATH)"; \
 	fi
 
-install: ensure_mise claude opencode
+install: ensure_mise claude
 	@echo "Installing dotfiles..."
 	$(CHEZMOI) init --apply -S $(CHEZMOI_DOTFILES_PATH)
 	$(MISE_BIN) install
 	$(MISE_BIN) upgrade
 	bash scripts/pde/setup-git.sh
 
-pde_install: ensure_mise claude opencode
+pde_install: ensure_mise claude
 	@echo "Installing PDE-specific dotfiles..."
 	IS_PDE=true $(CHEZMOI) init --apply -S $(CHEZMOI_DOTFILES_PATH)
 	$(MISE_BIN) install
@@ -60,26 +60,26 @@ claude:
 		$$MERGE_TOOL "$(HOME)/.claude/settings.json" assets/claude/settings.json || true; \
 	fi
 
-opencode:
-	@if command -v opencode >/dev/null 2>&1; then \
-		echo "Updating OpenCode..."; \
-		opencode upgrade; \
-	else \
-		echo "Installing OpenCode..."; \
-		curl -fsSL https://opencode.ai/install | bash; \
-	fi
-	@mkdir -p $(HOME)/.config/opencode; \
-	if [ ! -f "$(HOME)/.config/opencode/opencode.jsonc" ]; then \
-		echo "Installing OpenCode opencode.jsonc..."; \
-		cp assets/opencode/opencode.jsonc "$(HOME)/.config/opencode/opencode.jsonc"; \
-	else \
-		echo "Merging OpenCode opencode.jsonc with existing file..."; \
-		if command -v nvim >/dev/null 2>&1; then \
-			MERGE_TOOL="nvim -d"; \
-		elif command -v vimdiff >/dev/null 2>&1; then \
-			MERGE_TOOL="vimdiff"; \
-		else \
-			MERGE_TOOL="diff -u"; \
-		fi; \
-		$$MERGE_TOOL "$(HOME)/.config/opencode/opencode.jsonc" assets/opencode/opencode.jsonc || true; \
-	fi
+# opencode:
+# 	@if command -v opencode >/dev/null 2>&1; then \
+# 		echo "Updating OpenCode..."; \
+# 		opencode upgrade; \
+# 	else \
+# 		echo "Installing OpenCode..."; \
+# 		curl -fsSL https://opencode.ai/install | bash; \
+# 	fi
+# 	@mkdir -p $(HOME)/.config/opencode; \
+# 	if [ ! -f "$(HOME)/.config/opencode/opencode.jsonc" ]; then \
+# 		echo "Installing OpenCode opencode.jsonc..."; \
+# 		cp assets/opencode/opencode.jsonc "$(HOME)/.config/opencode/opencode.jsonc"; \
+# 	else \
+# 		echo "Merging OpenCode opencode.jsonc with existing file..."; \
+# 		if command -v nvim >/dev/null 2>&1; then \
+# 			MERGE_TOOL="nvim -d"; \
+# 		elif command -v vimdiff >/dev/null 2>&1; then \
+# 			MERGE_TOOL="vimdiff"; \
+# 		else \
+# 			MERGE_TOOL="diff -u"; \
+# 		fi; \
+# 		$$MERGE_TOOL "$(HOME)/.config/opencode/opencode.jsonc" assets/opencode/opencode.jsonc || true; \
+# 	fi
