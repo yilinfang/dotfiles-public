@@ -38,6 +38,17 @@ if command -v claude &>/dev/null; then
 			command claude "$@"
 		)
 	fi
+	# Z.ai Provider
+	SECRETS_ZAI_ENV="$HOME/.secrets/claude_code_with_zai.env"
+	if [ -f "$SECRETS_ZAI_ENV" ]; then
+		# Claude Code with GLM models
+		function cldg() (
+			set -a
+			source "$SECRETS_ZAI_ENV"
+			set +a
+			command claude "$@"
+		)
+	fi
 	# # NanoGPT Provider
 	# SECRETS_NANOGPT_ENV="$HOME/.secrets/claude_code_with_nanogpt.env"
 	# if [ -f "$SECRETS_NANOGPT_ENV" ]; then
