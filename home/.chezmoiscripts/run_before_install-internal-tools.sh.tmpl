@@ -20,10 +20,3 @@ cat >"$TARGET_DIR/chezmoi_test-template" <<"EOF"
 {{ template "chezmoi_test-template.tmpl" . }}
 EOF
 chmod +x "$TARGET_DIR/chezmoi_test-template"
-
-# {{ if .work }}
-# cat >"$TARGET_DIR/codex-secure" <<"EOF"
-# {{ template "codex-secure.tmpl" . }}
-# EOF
-# chmod +x "$TARGET_DIR/codex-secure"
-# {{ end }}
