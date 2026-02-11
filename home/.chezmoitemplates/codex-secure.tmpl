@@ -106,7 +106,10 @@ validate_ram_home() {
 
 # Handle --cleanup
 if [[ "$CLEANUP" == true ]]; then
-	[[ "$RAM_HOME" == /dev/shm/* ]] || { echo "Error: refusing to rm outside /dev/shm"; exit 1; }
+	[[ "$RAM_HOME" == /dev/shm/* ]] || {
+		echo "Error: refusing to rm outside /dev/shm"
+		exit 1
+	}
 	if [[ -e "$RAM_HOME" ]]; then
 		if rm -rf -- "$RAM_HOME"; then
 			if [[ -e "$RAM_HOME" ]]; then
@@ -156,7 +159,10 @@ if [[ -f "${RAM_HOME}/auth.json" ]] && jq -e . "${RAM_HOME}/auth.json" >/dev/nul
 	shopt -u dotglob nullglob
 else
 	# Fresh setup
-	[[ "$RAM_HOME" == /dev/shm/* ]] || { echo "Error: refusing to rm outside /dev/shm"; exit 1; }
+	[[ "$RAM_HOME" == /dev/shm/* ]] || {
+		echo "Error: refusing to rm outside /dev/shm"
+		exit 1
+	}
 	rm -rf "$RAM_HOME" 2>/dev/null || true
 	mkdir -p "$RAM_HOME"
 	chmod 700 "$RAM_HOME"
