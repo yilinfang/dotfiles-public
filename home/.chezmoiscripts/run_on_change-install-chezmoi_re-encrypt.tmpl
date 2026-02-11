@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+# This script is used to install the chezmoi_re-encrypt tool to ~/.local/bin/
+# This script will be run when its content changes.
+
+set -euo pipefail
+
+TARGET_DIR="$HOME/{{- .toolsInstallPath -}}"
+cat >"$TARGET_DIR/chezmoi_re-encrypt" <<"EOF"
+
+
+#!/usr/bin/env bash
+# This script is used to re-encrypt the encrypted files managed by chezmoi.
+
+set -euo pipefail
+
+for encrypted_file in $(chezmoi managed --include encrypted --path-style absolute); do
+	# optionally, add --force to avoid prompts
+	chezmoi forget --force "$encrypted_file"
+
+	# strip the .asc extension
+	decrypted_file="${encrypted_file%.asc}"
+
+	chezmoi add --encrypt "$decrypted_file"
+done
+
+
+EOF
+if command -v shfmt &>/dev/null; then
+	shfmt -w "$TARGET_DIR/chezmoi_re-encrypt"
+fi
+chmod +x "$TARGET_DIR/chezmoi_re-encrypt"

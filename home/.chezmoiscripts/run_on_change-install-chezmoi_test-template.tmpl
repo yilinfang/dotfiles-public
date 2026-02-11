@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+# This script is used to install the chezmoi_test-template tool to ~/.local/bin/
+# This script will be run when its content changes.
+
+set -euo pipefail
+
+TARGET_DIR="$HOME/{{- .toolsInstallPath -}}"
+cat >"$TARGET_DIR/chezmoi_test-template" <<"EOF"
+
+
+#!/usr/bin/env bash
+# Test chezmoi template
+# Usage: chezmoi_test-template <template-file>
+
+if [ $# -eq 0 ]; then
+	echo "Usage: $0 <template-file>" >&2
+	exit 1
+fi
+
+if [ ! -f "$1" ]; then
+	echo "Error: File '$1' not found" >&2
+	exit 1
+fi
+
+exec cat "$1" | chezmoi execute-template
+
+
+EOF
+if command -v shfmt &>/dev/null; then
+	shfmt -w "$TARGET_DIR/chezmoi_test-template"
+fi
+chmod +x "$TARGET_DIR/chezmoi_test-template"

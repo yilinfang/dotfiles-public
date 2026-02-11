@@ -1,0 +1,67 @@
+#!/usr/bin/env bash
+# This script is used to install the chezmoi_renew-keys tool to ~/.local/bin/
+# This script will be run when its content changes.
+
+set -euo pipefail
+
+TARGET_DIR="$HOME/{{- .toolsInstallPath -}}"
+cat >"$TARGET_DIR/chezmoi_renew-keys" <<"EOF"
+
+
+#!/usr/bin/env bash
+# This script is used to renew the keys used by Age.
+
+set -euo pipefail
+
+# Check if age-keygen is available
+if ! command -v age-keygen &>/dev/null; then
+	echo "age-keygen could not be found. Please install Age."
+	exit 1
+fi
+
+# Define key file paths
+KEY="$HOME/{{- .keyPath  -}}"
+KEY_PUB="$HOME/{{- .pubKeyPath -}}"
+
+# Function to generate a new key pair and print one-liner command
+generate_key_pair() {
+	local key_file="$1"
+	local pub_file="$2"
+	local key_type="$3"
+
+	# Create directory if it doesn't exist
+	mkdir -p "$(dirname "$key_file")"
+	mkdir -p "$(dirname "$pub_file")"
+
+	# Delete existing key files if they exist
+	if [[ -f "$key_file" ]]; then
+		echo "Deleting existing key file: $key_file"
+		rm -f "$key_file"
+	fi
+	if [[ -f "$pub_file" ]]; then
+		echo "Deleting existing public key file: $pub_file"
+		rm -f "$pub_file"
+	fi
+
+	# Generate the keys
+	echo "Generating new $key_type key pair..."
+	# Generate keys
+	age-keygen -o "$key_file"
+	chmod 600 "$key_file"
+	age-keygen -y "$key_file" >"$pub_file"
+	chmod 644 "$pub_file"
+
+	# Encrypt the private key file
+	age -p -a "$key_file" >"$key_file.age"
+	chmod 600 "$key_file.age"
+}
+
+# Generate new key pairs
+generate_key_pair "$KEY" "$KEY_PUB" "shared"
+
+
+EOF
+if command -v shfmt &>/dev/null; then
+    shfmt -w "$TARGET_DIR/chezmoi_renew-keys"
+fi
+chmod +x "$TARGET_DIR/chezmoi_renew-keys"
