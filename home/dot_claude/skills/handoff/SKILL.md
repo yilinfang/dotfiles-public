@@ -1,58 +1,122 @@
 ---
 name: handoff
-description: Create a detailed, self-contained implementation plan for another AI model to follow. The plan assumes zero prior context and spells out every change explicitly.
+description: Create a token-efficient, self-contained implementation plan for another AI model (Haiku-level) to execute in a separate session. The plan is the only communication channel.
 ---
 
 # Handoff: Implementation Plan for Another Model
 
-You are creating a **detailed, self-contained implementation plan** that another AI model will follow to complete a task. That model has **zero context** about the current codebase, conversation history, or any prior decisions. It may be less capable than you, so you must be extremely explicit.
+You are creating an **implementation plan** for a Haiku-level model in a **separate session**. The implementer:
+- Has **zero conversation context** (can't see your exploration or this chat)
+- Works in the **same codebase** (same filesystem)
+- Has the **same tools** (Read, Glob, Grep, Edit, Write, Bash)
+- Only sees `PLAN.md` — this is your **only communication channel**
+
+**Key insight for token efficiency**: Don't paste code Haiku can read itself. Use file references and guide Haiku to load the right context.
 
 ## Instructions
 
-1. **Thoroughly explore the codebase first.** Read all relevant files, understand the architecture, conventions, and patterns before writing anything. Use Glob, Grep, and Read tools extensively.
+1. **Targeted exploration**: Focus on critical files only. Use Grep/Glob efficiently. Read what's necessary to understand scope and patterns.
 
-2. **Write the plan to a file** at the project root called `PLAN.md`. If a `PLAN.md` already exists, read it first and ask whether to overwrite or append.
+2. **Write the plan** at the project root as `PLAN.md`. If it exists, read it first and ask whether to overwrite or append.
 
-3. **The plan must include ALL of the following sections:**
+3. **Plan structure** (use exactly these sections):
 
-### Section: Context
-- What the project is (language, framework, purpose)
-- Relevant architecture and conventions observed in the codebase
-- Key dependencies and their versions if relevant
+### 1. Overview
+One concise paragraph covering:
+- What needs to be done and why
+- Tech stack/framework (if relevant)
+- High-level approach in 1-2 sentences
 
-### Section: Task Description
-- Exactly what needs to be accomplished, in plain language
-- Why this change is needed (if known)
-- Expected end-user behavior after the change
+### 2. Context Loading (Read These First)
+Guide Haiku to load necessary context before starting:
+```
+Read: path/to/important_file.py
+Why: Understand the existing authentication pattern used throughout the project
 
-### Section: Files Involved
-- Every file that needs to be created, modified, or deleted
-- For each file: its full path, its current purpose, and what changes are needed
-- List files in the order they should be modified
+Read: path/to/config.ts:15-40
+Why: See how database connections are configured (you'll follow this pattern)
 
-### Section: Step-by-Step Implementation
-- Numbered steps, each one a single atomic action
-- For modifications: include the **exact code to find** (old) and the **exact code to replace it with** (new), with enough surrounding context to be unambiguous
-- For new files: include the **complete file contents**
-- For deletions: state the file path and confirm it is safe to delete
-- Include exact terminal commands where needed (install dependencies, run migrations, etc.)
-- Never say "similar to X" or "follow the pattern" — always spell it out completely
+Grep: "class.*Repository" in src/**/*.py
+Why: Find all repository classes to understand the naming convention
+```
 
-### Section: Verification
-- Exact commands to run to verify the implementation works (tests, build, lint, etc.)
-- Expected output or behavior for each verification step
-- Manual testing steps if applicable
+This section saves tokens by not pasting code — Haiku loads it directly.
 
-### Section: Pitfalls & Notes
-- Common mistakes the implementer might make
-- Edge cases to watch out for
-- Things that look like they should change but must NOT be changed
+### 3. Files to Modify
+List in order of modification:
+```
+CREATE: path/to/new_file.py - Purpose/role
+MODIFY: path/to/existing.ts - What aspect changes
+DELETE: path/to/old_file.js - Why safe to delete
+```
 
-## Rules
+### 4. Implementation Steps
+Numbered, atomic steps in execution order. Use **Edit tool format** for efficiency:
 
-- **No ambiguity.** If something could be interpreted two ways, pick one and state it explicitly.
-- **No assumptions.** Do not assume the implementer knows anything about this project.
-- **No shortcuts.** Write out every code change in full. Never use "..." or "etc." in code blocks.
-- **Preserve existing style.** Match the codebase's indentation, naming conventions, and patterns exactly.
-- **Be surgical.** Only include changes that are necessary for the task. Do not refactor, clean up, or "improve" unrelated code.
-- **Use the user's language.** Write the plan in the same natural language the user used to describe the task.
+**For modifications:**
+```
+Step N: Edit path/to/file.py
+old_string: |
+  [exact code to find - minimum unique snippet]
+new_string: |
+  [exact replacement code - preserve indentation/style]
+```
+
+**For new files:**
+```
+Step N: Write path/to/file.py
+[complete file contents - cannot reference what doesn't exist]
+```
+
+**For bash commands:**
+```
+Step N: Bash
+$ npm install package-name
+(Include expected output only if it affects subsequent steps)
+```
+
+**For deletions:**
+```
+Step N: Delete path/to/file.py
+Reason: [why this is safe - e.g., "replaced by new auth system"]
+```
+
+### 5. Verification
+Exact commands and expected outcomes:
+```
+$ pytest tests/test_feature.py
+Expected: All tests pass, 5 passed in 0.5s
+
+$ npm run build
+Expected: Build succeeds with no errors
+```
+
+### 6. Critical Notes
+- **Don't touch**: Files/patterns that should NOT be modified
+- **Edge cases**: Specific scenarios to handle carefully
+- **Style**: Project conventions (indentation, naming, imports order)
+
+## Optimization Rules
+
+**What to INCLUDE in the plan:**
+- **Context Haiku can't infer**: Why this change is needed, the high-level approach, design decisions
+- **New code**: Full contents of new files (they don't exist yet to read)
+- **Exact edits**: old_string/new_string for modifications
+- **Guidance**: Which files to read first, what patterns to look for
+- **Critical warnings**: What NOT to change, edge cases, project conventions
+
+**What to REFERENCE (not paste):**
+- **Existing code**: Point to `file.py:20-35` and tell Haiku to read it
+- **Patterns to follow**: "Read UserRepository.py to see the pattern, then apply to ProductRepository"
+- **Context code**: Don't paste surrounding code — old_string just needs enough to be unique
+
+**Format rules:**
+- **Edit tool format**: Use old_string/new_string, not "change this to that"
+- **Minimal matchers**: old_string should be the smallest unique snippet, not entire functions
+- **Surgical changes**: Only modify what's necessary
+- **Same language**: Write plan in same language as user's request
+
+**Token savings:**
+- Context Loading section: ~500-1000 tokens saved vs pasting code
+- Edit format vs full file: ~50-90% reduction per change
+- Reference vs paste: ~70-80% reduction in plan size
