@@ -58,7 +58,7 @@ while [[ "${1:-}" == --* ]]; do
 done
 
 # ---- tool checks ----
-for tool in codex age jq ln rm mkdir mktemp chmod uname basename; do
+for tool in codex age jq ln rm mkdir mktemp chmod uname basename readlink; do
 	if ! command -v "$tool" >/dev/null 2>&1; then
 		echo "Error: required tool not found: $tool"
 		exit 1
@@ -102,7 +102,18 @@ if [[ -f "${RAM_HOME}/auth.json" ]] && jq -e . "${RAM_HOME}/auth.json" >/dev/nul
 		if [[ "$base" == "auth.json" || "$base" == "auth.json.age" ]]; then
 			continue
 		fi
-		ln -sf -- "$path" "${RAM_HOME}/${base}"
+		# Resolve symlinks to their real target to avoid broken chains
+		if [[ -L "$path" ]]; then
+			real_target="$(readlink -f "$path" 2>/dev/null || true)"
+			if [[ -n "$real_target" ]]; then
+				ln -sf -- "$real_target" "${RAM_HOME}/${base}"
+			else
+				# Dangling symlink — link to the symlink itself
+				ln -sf -- "$path" "${RAM_HOME}/${base}"
+			fi
+		else
+			ln -sf -- "$path" "${RAM_HOME}/${base}"
+		fi
 	done
 	shopt -u dotglob nullglob
 else
@@ -119,7 +130,18 @@ else
 		if [[ "$base" == "auth.json" || "$base" == "auth.json.age" ]]; then
 			continue
 		fi
-		ln -s -- "$path" "${RAM_HOME}/${base}"
+		# Resolve symlinks to their real target to avoid broken chains
+		if [[ -L "$path" ]]; then
+			real_target="$(readlink -f "$path" 2>/dev/null || true)"
+			if [[ -n "$real_target" ]]; then
+				ln -s -- "$real_target" "${RAM_HOME}/${base}"
+			else
+				# Dangling symlink — link to the symlink itself
+				ln -s -- "$path" "${RAM_HOME}/${base}"
+			fi
+		else
+			ln -s -- "$path" "${RAM_HOME}/${base}"
+		fi
 	done
 	shopt -u dotglob nullglob
 
