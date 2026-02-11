@@ -6,4 +6,31 @@
     "openTelemetry": false,
   },
   "theme": "system",
+  "provider": {
+    "nanogpt-sub": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "NanoGPT Subscription",
+      "options": {
+        "baseURL": "https://nano-gpt.com/api/v1",
+      },
+      "models": {
+        "moonshotai/kimi-k2.5": {
+          "name": "Kimi K2.5",
+          "limit": { "context": 256000, "output": 65500 },
+        },
+        "moonshotai/kimi-k2.5:thinking": {
+          "name": "Kimi K2.5 Thinking",
+          "limit": { "context": 256000, "output": 65500 },
+        },
+        "zai-org/glm-5": {
+          "name": "GLM 5",
+          "limit": { "context": 200000, "output": 128000 },
+        },
+        "zai-org/glm-5:thinking": {
+          "name": "GLM 5 Thinking",
+          "limit": { "context": 200000, "output": 128000 },
+        },
+      },
+    },
+  },
 }
