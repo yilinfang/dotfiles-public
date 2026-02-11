@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
-# This script is used to install internal tools for chezmoi to ~/.local/bin
+# This script is used to install some useful tools to ~/.local/bin
 # This script will be run when 'chezmoi apply' is executed
-
-exit 0 # NOTE: Disable this script for now
 
 set -euo pipefail
 
@@ -22,3 +20,10 @@ cat >"$TARGET_DIR/chezmoi_test-template" <<"EOF"
 {{ template "chezmoi_test-template.tmpl" . }}
 EOF
 chmod +x "$TARGET_DIR/chezmoi_test-template"
+
+{{ if .work }}
+cat >"$TARGET_DIR/codex-secure" <<"EOF"
+{{ template "codex-secure.tmpl" . }}
+EOF
+chmod +x "$TARGET_DIR/codex-secure"
+{{ end }}

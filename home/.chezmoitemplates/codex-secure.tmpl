@@ -1,0 +1,110 @@
+#!/usr/bin/env bash
+# codex-secure
+#
+# Linux only (requires /dev/shm tmpfs).
+# Keeps your existing ~/.codex directory (config, caches, etc.).
+# Creates a temporary CODEX_HOME in RAM (/dev/shm), symlinks everything except auth.json/auth.json.age,
+# decrypts auth.json into RAM, validates it, runs codex, then removes plaintext auth.json.
+
+set -euo pipefail
+
+# ---- OS check ----
+if [[ "$(uname -s)" != "Linux" ]]; then
+	echo "Error: codex-secure only supports Linux (requires /dev/shm)."
+	exit 1
+fi
+
+if [[ "${1:-}" == "-h" || "${1:-}" == "--help" ]]; then
+	echo "Usage: $0 [--auth-enc PATH] [--real-codex-home PATH] -- <codex args...>"
+	exit 0
+fi
+
+AUTH_ENC="${HOME}/.codex/auth.json.age"
+REAL_CODEX_HOME="${HOME}/.codex"
+
+while [[ "${1:-}" == --* ]]; do
+	case "$1" in
+	--auth-enc)
+		AUTH_ENC="${2:-}"
+		shift 2
+		;;
+	--real-codex-home)
+		REAL_CODEX_HOME="${2:-}"
+		shift 2
+		;;
+	--)
+		shift
+		break
+		;;
+	*)
+		echo "Unknown option: $1"
+		exit 2
+		;;
+	esac
+done
+
+# ---- tool checks ----
+for tool in codex age jq ln rm mkdir mktemp chmod uname basename; do
+	if ! command -v "$tool" >/dev/null 2>&1; then
+		echo "Error: required tool not found: $tool"
+		exit 1
+	fi
+done
+
+if [[ ! -d "$REAL_CODEX_HOME" ]]; then
+	echo "Error: real Codex home not found: $REAL_CODEX_HOME"
+	exit 1
+fi
+
+if [[ ! -f "$AUTH_ENC" ]]; then
+	echo "Error: encrypted auth file not found: $AUTH_ENC"
+	exit 1
+fi
+
+if [[ ! -d /dev/shm || ! -w /dev/shm ]]; then
+	echo "Error: /dev/shm is not available or not writable on this host."
+	echo "Tip: if this is a cluster, ask for tmpfs access or use a trusted machine."
+	exit 1
+fi
+
+umask 077
+
+RAM_HOME="$(mktemp -d /dev/shm/codex-home.XXXXXX)"
+cleanup() {
+	rm -rf "$RAM_HOME" 2>/dev/null || true
+}
+trap cleanup EXIT INT TERM
+
+chmod 700 "$RAM_HOME"
+
+# Symlink everything from REAL_CODEX_HOME into RAM_HOME, except auth files
+shopt -s dotglob nullglob
+for path in "${REAL_CODEX_HOME}"/*; do
+	base="$(basename "$path")"
+	if [[ "$base" == "auth.json" || "$base" == "auth.json.age" ]]; then
+		continue
+	fi
+	ln -s "$path" "${RAM_HOME}/${base}"
+done
+shopt -u dotglob nullglob
+
+# Decrypt plaintext auth.json into RAM, using a temp file then atomic move
+tmp_auth="${RAM_HOME}/.auth.json.tmp"
+if ! age -d -o "$tmp_auth" "$AUTH_ENC"; then
+	echo "Error: failed to decrypt $AUTH_ENC"
+	exit 1
+fi
+chmod 600 "$tmp_auth"
+
+# Optional but recommended: validate JSON structure
+if ! jq -e . "$tmp_auth" >/dev/null 2>&1; then
+	echo "Error: decrypted auth.json is not valid JSON"
+	exit 1
+fi
+
+mv -f "$tmp_auth" "${RAM_HOME}/auth.json"
+
+# Run codex using RAM CODEX_HOME
+export CODEX_HOME="$RAM_HOME"
+codex "$@"
+exit $?
