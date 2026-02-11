@@ -13,8 +13,6 @@ You are creating an **implementation plan** for a smaller-capability model in a 
 
 Example mapping: a high-capability planner model writes the plan; a smaller-capability implementer model executes it (e.g., Opus -> Haiku).
 
-**Key insight for token efficiency**: Don't paste code the implementer can read itself. Use file references and guide it to load the right context.
-
 ## Instructions
 
 1. **Targeted exploration**: Focus on critical files only. Use Grep/Glob efficiently. Read what's necessary to understand scope and patterns.
@@ -98,27 +96,9 @@ Expected: Build succeeds with no errors
 - **Edge cases**: Specific scenarios to handle carefully
 - **Style**: Project conventions (indentation, naming, imports order)
 
-## Optimization Rules
+## Rules
 
-**What to INCLUDE in the plan:**
-- **Context the implementer can't infer**: Why this change is needed, the high-level approach, design decisions
-- **New code**: Full contents of new files (they don't exist yet to read)
-- **Exact edits**: old_string/new_string for modifications
-- **Guidance**: Which files to read first, what patterns to look for
-- **Critical warnings**: What NOT to change, edge cases, project conventions
-
-**What to REFERENCE (not paste):**
-- **Existing code**: Point to `file.py:20-35` and tell the implementer to read it
-- **Patterns to follow**: "Read UserRepository.py to see the pattern, then apply to ProductRepository"
-- **Context code**: Don't paste surrounding code — old_string just needs enough to be unique
-
-**Format rules:**
-- **Edit tool format**: Use old_string/new_string, not "change this to that"
-- **Minimal matchers**: old_string should be the smallest unique snippet, not entire functions
-- **Surgical changes**: Only modify what's necessary
-- **Same language**: Write plan in same language as user's request
-
-**Token savings:**
-- Context Loading section: ~500-1000 tokens saved vs pasting code
-- Edit format vs full file: ~50-90% reduction per change
-- Reference vs paste: ~70-80% reduction in plan size
+- **Reference, don't paste**: Point to existing code via file paths — the implementer can read it. Only include full contents for new files that don't exist yet.
+- **Minimal matchers**: old_string should be the smallest unique snippet, not entire functions.
+- **Include what can't be inferred**: Design decisions, the "why" behind the change, and context the implementer wouldn't know from reading code alone.
+- **Same language**: Write the plan in the same language as the user's request.
