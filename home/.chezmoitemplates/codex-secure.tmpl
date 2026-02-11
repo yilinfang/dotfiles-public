@@ -31,7 +31,7 @@ while [[ "${1:-}" == --* ]]; do
 			echo "Error: --auth-enc requires a path argument"
 			exit 2
 		fi
-		AUTH_ENC="${2:-}"
+		AUTH_ENC="$2"
 		shift 2
 		;;
 	--real-codex-home)
@@ -39,7 +39,7 @@ while [[ "${1:-}" == --* ]]; do
 			echo "Error: --real-codex-home requires a path argument"
 			exit 2
 		fi
-		REAL_CODEX_HOME="${2:-}"
+		REAL_CODEX_HOME="$2"
 		shift 2
 		;;
 	--cleanup)
@@ -87,6 +87,7 @@ RAM_HOME="/dev/shm/codex-home-$(id -u)"
 
 # Handle --cleanup
 if [[ "$CLEANUP" == true ]]; then
+	[[ "$RAM_HOME" == /dev/shm/* ]] || { echo "Error: refusing to rm outside /dev/shm"; exit 1; }
 	rm -rf "$RAM_HOME" 2>/dev/null || true
 	echo "Cleaned up $RAM_HOME"
 	exit 0
@@ -101,11 +102,12 @@ if [[ -f "${RAM_HOME}/auth.json" ]] && jq -e . "${RAM_HOME}/auth.json" >/dev/nul
 		if [[ "$base" == "auth.json" || "$base" == "auth.json.age" ]]; then
 			continue
 		fi
-		ln -sf "$path" "${RAM_HOME}/${base}"
+		ln -sf -- "$path" "${RAM_HOME}/${base}"
 	done
 	shopt -u dotglob nullglob
 else
 	# Fresh setup
+	[[ "$RAM_HOME" == /dev/shm/* ]] || { echo "Error: refusing to rm outside /dev/shm"; exit 1; }
 	rm -rf "$RAM_HOME" 2>/dev/null || true
 	mkdir -p "$RAM_HOME"
 	chmod 700 "$RAM_HOME"
@@ -117,7 +119,7 @@ else
 		if [[ "$base" == "auth.json" || "$base" == "auth.json.age" ]]; then
 			continue
 		fi
-		ln -s "$path" "${RAM_HOME}/${base}"
+		ln -s -- "$path" "${RAM_HOME}/${base}"
 	done
 	shopt -u dotglob nullglob
 
@@ -127,7 +129,7 @@ else
 		rm -f "$tmp_auth" 2>/dev/null || true
 	}
 	trap cleanup_tmp_auth EXIT
-	if ! age -d -o "$tmp_auth" "$AUTH_ENC"; then
+	if ! age -d -o "$tmp_auth" -- "$AUTH_ENC"; then
 		echo "Error: failed to decrypt $AUTH_ENC"
 		exit 1
 	fi
@@ -145,4 +147,3 @@ fi
 # Run codex using RAM CODEX_HOME
 export CODEX_HOME="$RAM_HOME"
 codex "$@"
-exit $?
