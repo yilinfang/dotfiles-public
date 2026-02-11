@@ -88,8 +88,20 @@ RAM_HOME="/dev/shm/codex-home-$(id -u)"
 # Handle --cleanup
 if [[ "$CLEANUP" == true ]]; then
 	[[ "$RAM_HOME" == /dev/shm/* ]] || { echo "Error: refusing to rm outside /dev/shm"; exit 1; }
-	rm -rf "$RAM_HOME" 2>/dev/null || true
-	echo "Cleaned up $RAM_HOME"
+	if [[ -e "$RAM_HOME" ]]; then
+		if rm -rf -- "$RAM_HOME"; then
+			if [[ -e "$RAM_HOME" ]]; then
+				echo "Error: cleanup incomplete for $RAM_HOME"
+				exit 1
+			fi
+			echo "Cleaned up $RAM_HOME"
+		else
+			echo "Error: failed to clean up $RAM_HOME"
+			exit 1
+		fi
+	else
+		echo "Nothing to clean: $RAM_HOME"
+	fi
 	exit 0
 fi
 
@@ -145,8 +157,8 @@ else
 	done
 	shopt -u dotglob nullglob
 
-	# Decrypt plaintext auth.json into RAM, using a temp file then atomic move
-	tmp_auth="${RAM_HOME}/.auth.json.tmp"
+	# Decrypt plaintext auth.json into RAM, using a unique temp file then atomic move
+	tmp_auth="$(mktemp "${RAM_HOME}/.auth.json.tmp.XXXXXX")"
 	cleanup_tmp_auth() {
 		rm -f "$tmp_auth" 2>/dev/null || true
 	}
