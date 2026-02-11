@@ -93,10 +93,7 @@ if [[ -f "${RAM_HOME}/auth.json" ]] && jq -e . "${RAM_HOME}/auth.json" >/dev/nul
 		if [[ "$base" == "auth.json" || "$base" == "auth.json.age" ]]; then
 			continue
 		fi
-		# Update symlink only if missing or stale
-		if [[ ! -e "${RAM_HOME}/${base}" ]]; then
-			ln -s "$path" "${RAM_HOME}/${base}"
-		fi
+		ln -sf "$path" "${RAM_HOME}/${base}"
 	done
 	shopt -u dotglob nullglob
 else
