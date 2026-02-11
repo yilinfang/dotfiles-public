@@ -3,8 +3,9 @@
 #
 # Linux only (requires /dev/shm tmpfs).
 # Keeps your existing ~/.codex directory (config, caches, etc.).
-# Creates a temporary CODEX_HOME in RAM (/dev/shm), symlinks everything except auth.json/auth.json.age,
-# decrypts auth.json into RAM, validates it, runs codex, then removes plaintext auth.json.
+# Creates a CODEX_HOME in RAM (/dev/shm), symlinks everything except auth.json/auth.json.age,
+# decrypts auth.json into RAM, validates it, and runs codex.
+# The decrypted session is cached across invocations (cleared on reboot or --cleanup).
 
 set -euo pipefail
 
@@ -15,12 +16,13 @@ if [[ "$(uname -s)" != "Linux" ]]; then
 fi
 
 if [[ "${1:-}" == "-h" || "${1:-}" == "--help" ]]; then
-	echo "Usage: $0 [--auth-enc PATH] [--real-codex-home PATH] -- <codex args...>"
+	echo "Usage: $0 [--auth-enc PATH] [--real-codex-home PATH] [--cleanup] -- <codex args...>"
 	exit 0
 fi
 
 AUTH_ENC="${HOME}/.codex/auth.json.age"
 REAL_CODEX_HOME="${HOME}/.codex"
+CLEANUP=false
 
 while [[ "${1:-}" == --* ]]; do
 	case "$1" in
@@ -31,6 +33,10 @@ while [[ "${1:-}" == --* ]]; do
 	--real-codex-home)
 		REAL_CODEX_HOME="${2:-}"
 		shift 2
+		;;
+	--cleanup)
+		CLEANUP=true
+		shift
 		;;
 	--)
 		shift
@@ -69,40 +75,63 @@ fi
 
 umask 077
 
-RAM_HOME="$(mktemp -d /dev/shm/codex-home.XXXXXX)"
-cleanup() {
+RAM_HOME="/dev/shm/codex-home-$(id -u)"
+
+# Handle --cleanup
+if [[ "$CLEANUP" == true ]]; then
 	rm -rf "$RAM_HOME" 2>/dev/null || true
-}
-trap cleanup EXIT INT TERM
+	echo "Cleaned up $RAM_HOME"
+	exit 0
+fi
 
-chmod 700 "$RAM_HOME"
+# Reuse existing session if auth.json is present and valid
+if [[ -f "${RAM_HOME}/auth.json" ]] && jq -e . "${RAM_HOME}/auth.json" >/dev/null 2>&1; then
+	# Refresh symlinks in case REAL_CODEX_HOME contents changed
+	shopt -s dotglob nullglob
+	for path in "${REAL_CODEX_HOME}"/*; do
+		base="$(basename "$path")"
+		if [[ "$base" == "auth.json" || "$base" == "auth.json.age" ]]; then
+			continue
+		fi
+		# Update symlink only if missing or stale
+		if [[ ! -e "${RAM_HOME}/${base}" ]]; then
+			ln -s "$path" "${RAM_HOME}/${base}"
+		fi
+	done
+	shopt -u dotglob nullglob
+else
+	# Fresh setup
+	rm -rf "$RAM_HOME" 2>/dev/null || true
+	mkdir -p "$RAM_HOME"
+	chmod 700 "$RAM_HOME"
 
-# Symlink everything from REAL_CODEX_HOME into RAM_HOME, except auth files
-shopt -s dotglob nullglob
-for path in "${REAL_CODEX_HOME}"/*; do
-	base="$(basename "$path")"
-	if [[ "$base" == "auth.json" || "$base" == "auth.json.age" ]]; then
-		continue
+	# Symlink everything from REAL_CODEX_HOME into RAM_HOME, except auth files
+	shopt -s dotglob nullglob
+	for path in "${REAL_CODEX_HOME}"/*; do
+		base="$(basename "$path")"
+		if [[ "$base" == "auth.json" || "$base" == "auth.json.age" ]]; then
+			continue
+		fi
+		ln -s "$path" "${RAM_HOME}/${base}"
+	done
+	shopt -u dotglob nullglob
+
+	# Decrypt plaintext auth.json into RAM, using a temp file then atomic move
+	tmp_auth="${RAM_HOME}/.auth.json.tmp"
+	if ! age -d -o "$tmp_auth" "$AUTH_ENC"; then
+		echo "Error: failed to decrypt $AUTH_ENC"
+		exit 1
 	fi
-	ln -s "$path" "${RAM_HOME}/${base}"
-done
-shopt -u dotglob nullglob
+	chmod 600 "$tmp_auth"
 
-# Decrypt plaintext auth.json into RAM, using a temp file then atomic move
-tmp_auth="${RAM_HOME}/.auth.json.tmp"
-if ! age -d -o "$tmp_auth" "$AUTH_ENC"; then
-	echo "Error: failed to decrypt $AUTH_ENC"
-	exit 1
+	# Validate JSON structure
+	if ! jq -e . "$tmp_auth" >/dev/null 2>&1; then
+		echo "Error: decrypted auth.json is not valid JSON"
+		exit 1
+	fi
+
+	mv -f "$tmp_auth" "${RAM_HOME}/auth.json"
 fi
-chmod 600 "$tmp_auth"
-
-# Optional but recommended: validate JSON structure
-if ! jq -e . "$tmp_auth" >/dev/null 2>&1; then
-	echo "Error: decrypted auth.json is not valid JSON"
-	exit 1
-fi
-
-mv -f "$tmp_auth" "${RAM_HOME}/auth.json"
 
 # Run codex using RAM CODEX_HOME
 export CODEX_HOME="$RAM_HOME"
