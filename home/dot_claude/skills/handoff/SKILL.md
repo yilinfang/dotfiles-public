@@ -1,17 +1,19 @@
 ---
 name: handoff
-description: Create a token-efficient, self-contained implementation plan for another AI model (Haiku-level) to execute in a separate session. The plan is the only communication channel.
+description: Create a token-efficient, self-contained implementation plan for another AI model (smaller-capability) to execute in a separate session. The plan is the only communication channel.
 ---
 
 # Handoff: Implementation Plan for Another Model
 
-You are creating an **implementation plan** for a Haiku-level model in a **separate session**. The implementer:
+You are creating an **implementation plan** for a smaller-capability model in a **separate session**. The implementer:
 - Has **zero conversation context** (can't see your exploration or this chat)
 - Works in the **same codebase** (same filesystem)
 - Has the **same tools** (Read, Glob, Grep, Edit, Write, Bash)
 - Only sees `PLAN.md` — this is your **only communication channel**
 
-**Key insight for token efficiency**: Don't paste code Haiku can read itself. Use file references and guide Haiku to load the right context.
+Example mapping: a high-capability planner model writes the plan; a smaller-capability implementer model executes it (e.g., Opus -> Haiku).
+
+**Key insight for token efficiency**: Don't paste code the implementer can read itself. Use file references and guide it to load the right context.
 
 ## Instructions
 
@@ -28,7 +30,7 @@ One concise paragraph covering:
 - High-level approach in 1-2 sentences
 
 ### 2. Context Loading (Read These First)
-Guide Haiku to load necessary context before starting:
+Guide the implementer to load necessary context before starting:
 ```
 Read: path/to/important_file.py
 Why: Understand the existing authentication pattern used throughout the project
@@ -40,7 +42,7 @@ Grep: "class.*Repository" in src/**/*.py
 Why: Find all repository classes to understand the naming convention
 ```
 
-This section saves tokens by not pasting code — Haiku loads it directly.
+This section saves tokens by not pasting code — the implementer loads it directly.
 
 ### 3. Files to Modify
 List in order of modification:
@@ -99,14 +101,14 @@ Expected: Build succeeds with no errors
 ## Optimization Rules
 
 **What to INCLUDE in the plan:**
-- **Context Haiku can't infer**: Why this change is needed, the high-level approach, design decisions
+- **Context the implementer can't infer**: Why this change is needed, the high-level approach, design decisions
 - **New code**: Full contents of new files (they don't exist yet to read)
 - **Exact edits**: old_string/new_string for modifications
 - **Guidance**: Which files to read first, what patterns to look for
 - **Critical warnings**: What NOT to change, edge cases, project conventions
 
 **What to REFERENCE (not paste):**
-- **Existing code**: Point to `file.py:20-35` and tell Haiku to read it
+- **Existing code**: Point to `file.py:20-35` and tell the implementer to read it
 - **Patterns to follow**: "Read UserRepository.py to see the pattern, then apply to ProductRepository"
 - **Context code**: Don't paste surrounding code — old_string just needs enough to be unique
 
