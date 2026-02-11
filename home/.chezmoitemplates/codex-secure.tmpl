@@ -85,6 +85,25 @@ umask 077
 
 RAM_HOME="/dev/shm/codex-home-$(id -u)"
 
+validate_ram_home() {
+	if [[ -L "$RAM_HOME" ]]; then
+		echo "Error: RAM home must not be a symlink: $RAM_HOME"
+		return 1
+	fi
+	if [[ ! -d "$RAM_HOME" ]]; then
+		echo "Error: RAM home exists but is not a directory: $RAM_HOME"
+		return 1
+	fi
+	if [[ ! -O "$RAM_HOME" ]]; then
+		echo "Error: RAM home is not owned by the current user: $RAM_HOME"
+		return 1
+	fi
+	if ! chmod 700 "$RAM_HOME"; then
+		echo "Error: failed to set secure permissions on RAM home: $RAM_HOME"
+		return 1
+	fi
+}
+
 # Handle --cleanup
 if [[ "$CLEANUP" == true ]]; then
 	[[ "$RAM_HOME" == /dev/shm/* ]] || { echo "Error: refusing to rm outside /dev/shm"; exit 1; }
@@ -103,6 +122,13 @@ if [[ "$CLEANUP" == true ]]; then
 		echo "Nothing to clean: $RAM_HOME"
 	fi
 	exit 0
+fi
+
+if [[ -e "$RAM_HOME" ]]; then
+	if ! validate_ram_home; then
+		echo "Tip: run with --cleanup after fixing ownership/perms."
+		exit 1
+	fi
 fi
 
 # Reuse existing session if auth.json is present and valid
@@ -134,6 +160,7 @@ else
 	rm -rf "$RAM_HOME" 2>/dev/null || true
 	mkdir -p "$RAM_HOME"
 	chmod 700 "$RAM_HOME"
+	validate_ram_home || exit 1
 
 	# Symlink everything from REAL_CODEX_HOME into RAM_HOME, except auth files
 	shopt -s dotglob nullglob
