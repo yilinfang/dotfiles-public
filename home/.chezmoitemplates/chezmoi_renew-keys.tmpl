@@ -44,6 +44,10 @@ generate_key_pair() {
 	# Encrypt the private key file
 	age -p -a "$key_file" >"$key_file.age"
 	chmod 600 "$key_file.age"
+
+	# Store the checksum of the encrypted key for future comparison
+	sha256sum "$key_file.age" | awk '{print $1}' >"$key_file.age.checksum"
+	chmod 644 "$key_file.age.checksum"
 }
 
 # Generate new key pairs

@@ -19,11 +19,20 @@ if [[ ! -f "$ENCRYPTED_KEY_PATH" ]]; then
 	exit 1
 fi
 
-# Skip decryption if the decrypted key is newer than the encrypted key
-if [[ "$KEY_PATH" -nt "$ENCRYPTED_KEY_PATH" ]]; then
-	exit 0
+# Skip decryption if the encrypted key file hasn't changed AND decrypted key exists
+CHECKSUM_FILE="$ENCRYPTED_KEY_PATH.checksum"
+CURRENT_CHECKSUM=$(sha256sum "$ENCRYPTED_KEY_PATH" | awk '{print $1}')
+
+if [[ -f "$KEY_PATH" ]] && [[ -f "$CHECKSUM_FILE" ]]; then
+	STORED_CHECKSUM=$(cat "$CHECKSUM_FILE")
+	if [[ "$CURRENT_CHECKSUM" == "$STORED_CHECKSUM" ]]; then
+		exit 0
+	fi
 fi
 
 # Decrypt the private key
 age -d -o "$KEY_PATH" "$ENCRYPTED_KEY_PATH"
 chmod 600 "$KEY_PATH"
+
+# Store the checksum for next run
+echo "$CURRENT_CHECKSUM" >"$CHECKSUM_FILE"
