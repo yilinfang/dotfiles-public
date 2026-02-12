@@ -19,6 +19,11 @@ if [[ ! -f "$ENCRYPTED_KEY_PATH" ]]; then
 	exit 1
 fi
 
+# Skip decryption if the decrypted key is newer than the encrypted key
+if [[ "$KEY_PATH" -nt "$ENCRYPTED_KEY_PATH" ]]; then
+	exit 0
+fi
+
 # Decrypt the private key
 age -d -o "$KEY_PATH" "$ENCRYPTED_KEY_PATH"
 chmod 600 "$KEY_PATH"
