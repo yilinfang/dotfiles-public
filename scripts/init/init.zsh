@@ -25,16 +25,17 @@ if command -v claude &>/dev/null; then
 	# MiniMax Provider
 	SECRETS_MINIMAX_ENV="$HOME/.secrets/claude_code_with_minimax.env"
 	if [ -f "$SECRETS_MINIMAX_ENV" ]; then
-		# Claude Code with MiniMax M2.1
+		# Claude Code with MiniMax
 		function cldm() (
 			set -a
 			source "$SECRETS_MINIMAX_ENV"
 			set +a
 			export CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC="1"
+			export API_TIMEOUT_MS="3000000"
+			export ANTHROPIC_SMALL_FAST_MODEL="MiniMax-M2.5"
 			export ANTHROPIC_DEFAULT_SONNET_MODEL="MiniMax-M2.5"
 			export ANTHROPIC_DEFAULT_OPUS_MODEL="MiniMax-M2.5"
 			export ANTHROPIC_DEFAULT_HAIKU_MODEL="MiniMax-M2.5"
-			export CLAUDE_CODE_SUBAGENT_MODEL="MiniMax-M2.5"
 			command claude "$@"
 		)
 	fi
