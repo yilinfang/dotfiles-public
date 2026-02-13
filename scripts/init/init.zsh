@@ -31,10 +31,10 @@ if command -v claude &>/dev/null; then
 			source "$SECRETS_MINIMAX_ENV"
 			set +a
 			export CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC="1"
-			export ANTHROPIC_DEFAULT_SONNET_MODEL="MiniMax-M2.1"
-			export ANTHROPIC_DEFAULT_OPUS_MODEL="MiniMax-M2.1"
-			export ANTHROPIC_DEFAULT_HAIKU_MODEL="MiniMax-M2.1"
-			export CLAUDE_CODE_SUBAGENT_MODEL="MiniMax-M2.1"
+			export ANTHROPIC_DEFAULT_SONNET_MODEL="MiniMax-M2.5"
+			export ANTHROPIC_DEFAULT_OPUS_MODEL="MiniMax-M2.5"
+			export ANTHROPIC_DEFAULT_HAIKU_MODEL="MiniMax-M2.5"
+			export CLAUDE_CODE_SUBAGENT_MODEL="MiniMax-M2.5"
 			command claude "$@"
 		)
 	fi
