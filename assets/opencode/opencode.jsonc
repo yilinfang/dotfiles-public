@@ -30,6 +30,10 @@
           "name": "GLM 5 Thinking",
           "limit": { "context": 200000, "output": 128000 },
         },
+        "minimax/minimax-m2.5": {
+          "name": "MiniMax M2.5",
+          "limit": { "context": 200000, "output": 128000 },
+        },
       },
     },
   },
