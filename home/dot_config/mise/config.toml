@@ -2,7 +2,6 @@
 bun = "latest"
 gh = "latest"
 "npm:@bitwarden/cli" = "latest"
-"npm:@syntheticlab/synbad" = "latest"
 
 [settings]
 python.compile = false
