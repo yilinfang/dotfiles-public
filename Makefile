@@ -21,14 +21,14 @@ ensure_mise:
 		touch "$(MISE_DEFAULT_CONFIG_PATH)"; \
 	fi
 
-install: ensure_mise claude opencode
+install: ensure_mise
 	@echo "Installing dotfiles..."
 	$(CHEZMOI) init --apply -S $(CHEZMOI_DOTFILES_PATH)
 	$(MISE_BIN) install
 	$(MISE_BIN) upgrade
 	bash scripts/pde/setup-git.sh
 
-pde_install: ensure_mise claude opencode
+pde_install: ensure_mise
 	@echo "Installing PDE-specific dotfiles..."
 	IS_PDE=true $(CHEZMOI) init --apply -S $(CHEZMOI_DOTFILES_PATH)
 	$(MISE_BIN) install
