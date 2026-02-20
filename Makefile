@@ -5,7 +5,7 @@ CHEZMOI := $(MISE_BIN) exec chezmoi age -- chezmoi
 CHEZMOI_DOTFILES_PATH := $(HOME)/.chezmoi/dotfiles
 
 
-.PHONY: ensure_mise install pde_install claude opencode
+.PHONY: ensure_mise install pde_install claude opencode codex
 
 ensure_mise:
 	@if [ ! -f $(MISE_BIN) ]; then \
