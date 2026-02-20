@@ -168,25 +168,6 @@ update_terminal_info() {
 	infocmp -x | ssh "$1" -- tic -x -
 }
 
-# Function: copy_codex_auth
-# Helper function to copy authentication credential of codex to a remote server
-copy_codex_auth() {
-	if [ -z "$1" ]; then
-		echo "Usage: copy_codex_auth user@host"
-		return 1
-	fi
-
-	local remote="$1"
-	local local_file="$HOME/.codex/auth.json"
-
-	if [ ! -f "$local_file" ]; then
-		echo "Error: $local_file not found"
-		return 1
-	fi
-
-	ssh "$remote" 'mkdir -p "$HOME/.codex" && cat > "$HOME/.codex/auth.json" && chmod 600 "$HOME/.codex/auth.json"' <"$local_file"
-}
-
 # Zsh-syntax-highlighting
 # Tweak colors for zsh-syntax-highlighting
 typeset -A ZSH_HIGHLIGHT_STYLES

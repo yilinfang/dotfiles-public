@@ -83,3 +83,8 @@ opencode:
 		fi; \
 		$$MERGE_TOOL "$(HOME)/.config/opencode/opencode.jsonc" assets/opencode/opencode.jsonc || true; \
 	fi
+
+codex:
+	echo "Installing Codex auth.json..."; 
+	age -d -o "$(HOME)/.codex/auth.json" "assets/codex/auth.json.age"
+	chmod 600 "$(HOME)/.codex/auth.json"
