@@ -178,6 +178,11 @@ if [ -d "$HOME/.antigravity/antigravity/bin" ]; then
 	export PATH="$HOME/.antigravity/antigravity/bin:$PATH"
 fi
 
+# Windsurf
+if [ -d "$HOME/.codeium/windsurf/bin" ]; then
+	export PATH="$HOME/.codeium/windsurf/bin:$PATH"
+fi
+
 if [ -f "$HOME/.chezmoi/dotfiles/scripts/init/init.zsh" ]; then
 	source "$HOME/.chezmoi/dotfiles/scripts/init/init.zsh"
 fi
