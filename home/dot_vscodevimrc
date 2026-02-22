@@ -1,3 +1,6 @@
+" Use space as leader key
+let g:mapleader = "\<Space>"
+nnoremap <leader>/ :noh<CR>
 " Disable marks
 nnoremap m <Nop>
 nnoremap ' <Nop>
