@@ -22,34 +22,34 @@ fi
 if command -v claude &>/dev/null; then
 	# Use cld for claude
 	alias cld='claude'
-	# MiniMax Provider
-	SECRETS_MINIMAX_ENV="$HOME/.secrets/claude_code_with_minimax.env"
-	if [ -f "$SECRETS_MINIMAX_ENV" ]; then
-		# Claude Code with MiniMax
-		function cldm() (
-			set -a
-			source "$SECRETS_MINIMAX_ENV"
-			set +a
-			export CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC="1"
-			export API_TIMEOUT_MS="3000000"
-			export ANTHROPIC_SMALL_FAST_MODEL="MiniMax-M2.5"
-			export ANTHROPIC_DEFAULT_SONNET_MODEL="MiniMax-M2.5"
-			export ANTHROPIC_DEFAULT_OPUS_MODEL="MiniMax-M2.5"
-			export ANTHROPIC_DEFAULT_HAIKU_MODEL="MiniMax-M2.5"
-			command claude "$@"
-		)
-	fi
-	# Z.ai Provider
-	SECRETS_ZAI_ENV="$HOME/.secrets/claude_code_with_zai.env"
-	if [ -f "$SECRETS_ZAI_ENV" ]; then
-		# Claude Code with GLM models
-		function cldg() (
-			set -a
-			source "$SECRETS_ZAI_ENV"
-			set +a
-			command claude "$@"
-		)
-	fi
+	# # MiniMax Provider
+	# SECRETS_MINIMAX_ENV="$HOME/.secrets/claude_code_with_minimax.env"
+	# if [ -f "$SECRETS_MINIMAX_ENV" ]; then
+	# 	# Claude Code with MiniMax
+	# 	function cldm() (
+	# 		set -a
+	# 		source "$SECRETS_MINIMAX_ENV"
+	# 		set +a
+	# 		export CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC="1"
+	# 		export API_TIMEOUT_MS="3000000"
+	# 		export ANTHROPIC_SMALL_FAST_MODEL="MiniMax-M2.5"
+	# 		export ANTHROPIC_DEFAULT_SONNET_MODEL="MiniMax-M2.5"
+	# 		export ANTHROPIC_DEFAULT_OPUS_MODEL="MiniMax-M2.5"
+	# 		export ANTHROPIC_DEFAULT_HAIKU_MODEL="MiniMax-M2.5"
+	# 		command claude "$@"
+	# 	)
+	# fi
+	# # Z.ai Provider
+	# SECRETS_ZAI_ENV="$HOME/.secrets/claude_code_with_zai.env"
+	# if [ -f "$SECRETS_ZAI_ENV" ]; then
+	# 	# Claude Code with GLM models
+	# 	function cldg() (
+	# 		set -a
+	# 		source "$SECRETS_ZAI_ENV"
+	# 		set +a
+	# 		command claude "$@"
+	# 	)
+	# fi
 	# # NanoGPT Provider
 	# SECRETS_NANOGPT_ENV="$HOME/.secrets/claude_code_with_nanogpt.env"
 	# if [ -f "$SECRETS_NANOGPT_ENV" ]; then
