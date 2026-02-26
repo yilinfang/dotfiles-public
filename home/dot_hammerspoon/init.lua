@@ -9,8 +9,8 @@ local appShortcuts = {
 	{ "P", "Bitwarden" },
 	{ "W", "WeChat" },
 	-- { "C", "Visual Studio Code" },
-	-- { "C", "Cursor" },
-	{ "C", "Antigravity" },
+	{ "C", "Cursor" },
+	-- { "C", "Antigravity" },
 	-- { "F", "Firefox" },
 	-- { "F", "LibreWolf" },
 	{ "T", "TickTick" },
@@ -29,8 +29,8 @@ local linkShortcuts = {
 	-- { "N", "Notion", "https://www.notion.so/" },
 	-- { "M", "Monica", "https://monica.im/" },
 	-- { "D", "DeepSeek", "https://chat.deepseek.com/" },
-	-- { "G", "ChatGPT", "https://chatgpt.com/" },
-	{ "G", "Gemini", "https://gemini.google.com/" },
+	-- { "G", "Gemini", "https://gemini.google.com/" },
+	{ "G", "ChatGPT", "https://chatgpt.com/" },
 }
 
 -- Function to display notification and open an application
