@@ -99,9 +99,30 @@ codex:
 		echo "Codex already installed"; \
 	fi
 	@mkdir -p "$(HOME)/.codex"
-	@echo "Installing Codex auth.json..."
-	age -d -o "$(HOME)/.codex/auth.json" "assets/codex/auth.json.age" && \
-		chmod 600 "$(HOME)/.codex/auth.json"
+	@if [ -f "$(HOME)/.codex/auth.json" ]; then \
+		echo "Codex auth.json already exists."; \
+		read -r -p "Overwrite Codex auth.json from encrypted asset? [y/N] " resp; \
+		case "$$resp" in \
+			[yY][eE][sS]|[yY]) \
+				echo "Overwriting Codex auth.json..."; \
+				age -d -o "$(HOME)/.codex/auth.json" "assets/codex/auth.json.age" && chmod 600 "$(HOME)/.codex/auth.json"; \
+				;; \
+			*) \
+				echo "Skipping Codex auth.json installation."; \
+				;; \
+		esac; \
+	else \
+		read -r -p "Install Codex auth.json from encrypted asset? [y/N] " resp; \
+		case "$$resp" in \
+			[yY][eE][sS]|[yY]) \
+				echo "Installing Codex auth.json..."; \
+				age -d -o "$(HOME)/.codex/auth.json" "assets/codex/auth.json.age" && chmod 600 "$(HOME)/.codex/auth.json"; \
+				;; \
+			*) \
+				echo "Skipping Codex auth.json installation."; \
+				;; \
+		esac; \
+	fi
 
 antigravity:
 	@echo "Installing antigravity awesome skills..."
