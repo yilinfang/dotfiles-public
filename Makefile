@@ -5,7 +5,7 @@ CHEZMOI := $(MISE_BIN) exec chezmoi age -- chezmoi
 CHEZMOI_DOTFILES_PATH := $(HOME)/.chezmoi/dotfiles
 
 
-.PHONY: ensure_mise install pde_install claude opencode codex
+.PHONY: ensure_mise install pde_install claude opencode codex antigravity
 
 ensure_mise:
 	@if [ ! -f $(MISE_BIN) ]; then \
@@ -88,3 +88,8 @@ codex:
 	echo "Installing Codex auth.json..."; 
 	age -d -o "$(HOME)/.codex/auth.json" "assets/codex/auth.json.age"
 	chmod 600 "$(HOME)/.codex/auth.json"
+
+antigravity:
+	echo "Installing antigravity awesome skills..."
+	npx -y antigravity-awesome-skills@latest
+	test -d ~/.gemini/antigravity/skills && echo "Skills installed in ~/.gemini/antigravity/skills"
