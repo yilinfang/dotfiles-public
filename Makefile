@@ -1,8 +1,22 @@
 MISE_BIN := $(HOME)/.local/bin/mise
 MISE_DEFAULT_CONFIG_PATH := $(HOME)/.config/mise/config.toml
 MISE_INSTALL_CMD := curl https://mise.run | sh
+# Uses mise to provide chezmoi and age binaries
 CHEZMOI := $(MISE_BIN) exec chezmoi age -- chezmoi
 CHEZMOI_DOTFILES_PATH := $(HOME)/.chezmoi/dotfiles
+
+# Merge or diff two files using the best available tool
+# Usage: $(call merge_files,existing,new)
+define merge_files
+	if command -v nvim >/dev/null 2>&1; then \
+		MERGE_TOOL="nvim -d"; \
+	elif command -v vimdiff >/dev/null 2>&1; then \
+		MERGE_TOOL="vimdiff"; \
+	else \
+		MERGE_TOOL="diff -u"; \
+	fi; \
+	$$MERGE_TOOL $(1) $(2) || true
+endef
 
 
 .PHONY: ensure_mise install pde_install claude opencode codex antigravity
@@ -50,14 +64,7 @@ claude:
 		cp assets/claude/settings.json "$(HOME)/.claude/settings.json"; \
 	else \
 		echo "Merging Claude settings.json with existing file..."; \
-		if command -v nvim >/dev/null 2>&1; then \
-			MERGE_TOOL="nvim -d"; \
-		elif command -v vimdiff >/dev/null 2>&1; then \
-			MERGE_TOOL="vimdiff"; \
-		else \
-			MERGE_TOOL="diff -u"; \
-		fi; \
-		$$MERGE_TOOL "$(HOME)/.claude/settings.json" assets/claude/settings.json || true; \
+		$(call merge_files,"$(HOME)/.claude/settings.json",assets/claude/settings.json); \
 	fi
 
 opencode:
@@ -74,22 +81,16 @@ opencode:
 		cp assets/opencode/opencode.jsonc "$(HOME)/.config/opencode/opencode.jsonc"; \
 	else \
 		echo "Merging OpenCode opencode.jsonc with existing file..."; \
-		if command -v nvim >/dev/null 2>&1; then \
-			MERGE_TOOL="nvim -d"; \
-		elif command -v vimdiff >/dev/null 2>&1; then \
-			MERGE_TOOL="vimdiff"; \
-		else \
-			MERGE_TOOL="diff -u"; \
-		fi; \
-		$$MERGE_TOOL "$(HOME)/.config/opencode/opencode.jsonc" assets/opencode/opencode.jsonc || true; \
+		$(call merge_files,"$(HOME)/.config/opencode/opencode.jsonc",assets/opencode/opencode.jsonc); \
 	fi
 
 codex:
-	echo "Installing Codex auth.json..."; 
-	age -d -o "$(HOME)/.codex/auth.json" "assets/codex/auth.json.age"
-	chmod 600 "$(HOME)/.codex/auth.json"
+	@echo "Installing Codex auth.json..."
+	age -d -o "$(HOME)/.codex/auth.json" "assets/codex/auth.json.age" && \
+		chmod 600 "$(HOME)/.codex/auth.json"
 
 antigravity:
-	echo "Installing antigravity awesome skills..."
+	@echo "Installing antigravity awesome skills..."
 	npx -y antigravity-awesome-skills@latest
-	test -d ~/.gemini/antigravity/skills && echo "Skills installed in ~/.gemini/antigravity/skills"
+	@test -d ~/.gemini/antigravity/skills || { echo "Error: skills directory not found"; exit 1; }
+	@echo "Skills installed in ~/.gemini/antigravity/skills"
