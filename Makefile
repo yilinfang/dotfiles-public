@@ -85,6 +85,20 @@ opencode:
 	fi
 
 codex:
+	@if ! command -v codex >/dev/null 2>&1; then \
+		echo "Installing Codex..."; \
+		if command -v mise >/dev/null 2>&1; then \
+			mise use -g npm:@openai/codex; \
+		elif command -v npm >/dev/null 2>&1; then \
+			npm install -g @openai/codex; \
+		else \
+			echo "Error: neither mise nor npm is available. Please install one of them to install Codex." >&2; \
+			exit 1; \
+		fi; \
+	else \
+		echo "Codex already installed"; \
+	fi
+	@mkdir -p "$(HOME)/.codex"
 	@echo "Installing Codex auth.json..."
 	age -d -o "$(HOME)/.codex/auth.json" "assets/codex/auth.json.age" && \
 		chmod 600 "$(HOME)/.codex/auth.json"
