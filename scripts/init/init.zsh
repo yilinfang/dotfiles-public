@@ -18,6 +18,11 @@ if command -v opencode &>/dev/null; then
 	alias oc='opencode'
 fi
 
+# Use cdx for codex
+if command -v codex &>/dev/null; then
+	alias cdx='codex'
+fi
+
 # Create wrappers for claude
 if command -v claude &>/dev/null; then
 	# Use cld for claude
