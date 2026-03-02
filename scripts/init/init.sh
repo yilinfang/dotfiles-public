@@ -18,11 +18,6 @@ if command -v opencode &>/dev/null; then
 	alias oc='opencode'
 fi
 
-# Use cdx for codex
-if command -v codex &>/dev/null; then
-	alias cdx='codex'
-fi
-
 # Create wrappers for claude
 if command -v claude &>/dev/null; then
 	# Use cld for claude
@@ -108,6 +103,11 @@ fi
 # If bat or delta is installed, set BAT_THEME
 if command -v bat &>/dev/null || command -v delta &>/dev/null; then
 	export BAT_THEME="ansi"
+fi
+
+# Use cdx for codex
+if command -v codex &>/dev/null; then
+	alias cdx='codex'
 fi
 
 # Use lg for lazygit
