@@ -1,6 +1,6 @@
 [tools]
 age = "latest"
-"aqua:micro-editor/micro" = "latest"
+# "aqua:micro-editor/micro" = "latest"
 bat = "latest"
 chezmoi = "latest"
 delta = "latest"
