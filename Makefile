@@ -18,7 +18,6 @@ define merge_files
 	$$MERGE_TOOL $(1) $(2) || true
 endef
 
-
 .PHONY: ensure_mise install pde_install claude opencode codex antigravity
 
 ensure_mise:
@@ -104,23 +103,23 @@ codex:
 		read -r -p "Overwrite Codex auth.json from encrypted asset? [y/N] " resp; \
 		case "$$resp" in \
 			[yY][eE][sS]|[yY]) \
-				echo "Overwriting Codex auth.json..."; \
-				age -d -o "$(HOME)/.codex/auth.json" "assets/codex/auth.json.age" && chmod 600 "$(HOME)/.codex/auth.json"; \
-				;; \
+			echo "Overwriting Codex auth.json..."; \
+			age -d -o "$(HOME)/.codex/auth.json" "assets/codex/auth.json.age" && chmod 600 "$(HOME)/.codex/auth.json"; \
+			;; \
 			*) \
-				echo "Skipping Codex auth.json installation."; \
-				;; \
+			echo "Skipping Codex auth.json installation."; \
+			;; \
 		esac; \
 	else \
 		read -r -p "Install Codex auth.json from encrypted asset? [y/N] " resp; \
 		case "$$resp" in \
 			[yY][eE][sS]|[yY]) \
-				echo "Installing Codex auth.json..."; \
-				age -d -o "$(HOME)/.codex/auth.json" "assets/codex/auth.json.age" && chmod 600 "$(HOME)/.codex/auth.json"; \
-				;; \
+			echo "Installing Codex auth.json..."; \
+			age -d -o "$(HOME)/.codex/auth.json" "assets/codex/auth.json.age" && chmod 600 "$(HOME)/.codex/auth.json"; \
+			;; \
 			*) \
-				echo "Skipping Codex auth.json installation."; \
-				;; \
+			echo "Skipping Codex auth.json installation."; \
+			;; \
 		esac; \
 	fi
 
