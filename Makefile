@@ -124,8 +124,9 @@ codex:
 		esac; \
 	fi
 
-antigravity:
-	@echo "Installing antigravity awesome skills..."
-	npx -y antigravity-awesome-skills@latest
-	@test -d ~/.gemini/antigravity/skills || { echo "Error: skills directory not found"; exit 1; }
-	@echo "Skills installed in ~/.gemini/antigravity/skills"
+aws:
+	@echo "Installing Antigravity Awesome Skills..."
+	@FLAGS="--antigravity"; \
+	command -v claude >/dev/null 2>&1 && FLAGS="$$FLAGS --claude"; \
+	command -v codex >/dev/null 2>&1 && FLAGS="$$FLAGS --codex"; \
+	npx -y antigravity-awesome-skills@latest $$FLAGS
