@@ -5,7 +5,8 @@ local mods = { "cmd", "alt", "shift", "ctrl" } -- Change this line to modify all
 local appShortcuts = {
 	-- Key, Application
 	{ "E", "Finder" },
-	{ "B", "Google Chrome" },
+	-- { "B", "Google Chrome" },
+	{ "B", "Brave Browser" },
 	{ "P", "Bitwarden" },
 	{ "W", "WeChat" },
 	-- { "C", "Visual Studio Code" },
