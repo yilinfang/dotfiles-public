@@ -100,10 +100,10 @@ if command -v bat &>/dev/null; then
 	alias bcat='bat --color=always --paging=never --style=plain'
 fi
 
-# If bat or delta is installed, set BAT_THEME
-if command -v bat &>/dev/null || command -v delta &>/dev/null; then
-	export BAT_THEME="ansi"
-fi
+# # If bat or delta is installed, set BAT_THEME
+# if command -v bat &>/dev/null || command -v delta &>/dev/null; then
+# 	export BAT_THEME="ansi"
+# fi
 
 # Use cdx for codex
 if command -v codex &>/dev/null; then
