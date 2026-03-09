@@ -20,6 +20,8 @@ endef
 
 .PHONY: ensure_mise install pde_install claude opencode codex antigravity
 
+.IGNORE: install pde_install
+
 ensure_mise:
 	@if [ ! -f $(MISE_BIN) ]; then \
 		echo "Installing mise..."; \
