@@ -18,7 +18,7 @@ define merge_files
 	$$MERGE_TOOL $(1) $(2) || true
 endef
 
-.PHONY: ensure_mise install pde_install claude opencode codex antigravity
+.PHONY: ensure_mise install pde_install claude opencode codex vscode antigravity
 
 .IGNORE: install pde_install
 
@@ -124,6 +124,10 @@ codex:
 			;; \
 		esac; \
 	fi
+
+vscode:
+	@echo "Installing VSCode extensions from unpublished sources..."
+	@bash scripts/install-vscode-extensions.sh
 
 aws:
 	@echo "Installing Antigravity Awesome Skills..."
