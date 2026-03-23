@@ -19,6 +19,8 @@ set noshowmatch
 set list
 set listchars=tab:▸\ ,trail:·,nbsp:␣
 set laststatus=2
+nnoremap ]b gt
+nnoremap [b gT
 nnoremap <leader>/ :noh<CR>
 nnoremap <leader>r :r!<CR>
 vnoremap <leader>y "+y<CR>
