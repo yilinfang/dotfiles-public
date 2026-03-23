@@ -18,6 +18,69 @@ check_code_cli() {
 	fi
 }
 
+# Resolve a github:owner/repo specifier to the latest release .vsix download URL
+resolve_github_latest() {
+	local spec="${1#github:}" # strip "github:" prefix
+	local api_url="https://api.github.com/repos/${spec}/releases/latest"
+
+	echo -e "${YELLOW}Fetching latest GitHub release for ${spec}...${NC}" >&2
+
+	local response
+	if ! response=$(curl -fsSL \
+		-H "Accept: application/vnd.github+json" \
+		-H "X-GitHub-Api-Version: 2022-11-28" \
+		"${api_url}" 2>/dev/null); then
+		echo -e "${RED}Error: Failed to fetch release info from GitHub for ${spec}${NC}" >&2
+		return 1
+	fi
+
+	# Extract the first .vsix asset download URL
+	local download_url
+	download_url=$(echo "$response" | grep -o '"browser_download_url"[[:space:]]*:[[:space:]]*"[^"]*\.vsix"' | head -1 | cut -d'"' -f4)
+
+	if [[ -z "$download_url" ]]; then
+		echo -e "${RED}Error: No .vsix asset found in latest release for ${spec}${NC}" >&2
+		return 1
+	fi
+
+	echo "$download_url"
+}
+
+# Resolve an openvsx:publisher/name specifier to the latest .vsix download URL
+resolve_openvsx_latest() {
+	local spec="${1#openvsx:}" # strip "openvsx:" prefix
+	# Accept both "publisher/name" and "publisher.name"
+	local publisher name
+	if [[ "$spec" == */* ]]; then
+		publisher="${spec%%/*}"
+		name="${spec#*/}"
+	else
+		publisher="${spec%%.*}"
+		name="${spec#*.}"
+	fi
+
+	local api_url="https://open-vsx.org/api/${publisher}/${name}"
+
+	echo -e "${YELLOW}Fetching latest OpenVSX release for ${publisher}.${name}...${NC}" >&2
+
+	local response
+	if ! response=$(curl -fsSL "${api_url}" 2>/dev/null); then
+		echo -e "${RED}Error: Failed to fetch extension info from OpenVSX for ${publisher}.${name}${NC}" >&2
+		return 1
+	fi
+
+	# Extract download URL from files.download field
+	local download_url
+	download_url=$(echo "$response" | grep -o '"download"[[:space:]]*:[[:space:]]*"[^"]*"' | head -1 | cut -d'"' -f4)
+
+	if [[ -z "$download_url" ]]; then
+		echo -e "${RED}Error: Could not find download URL in OpenVSX response for ${publisher}.${name}${NC}" >&2
+		return 1
+	fi
+
+	echo "$download_url"
+}
+
 # Get extension ID from .vsix file
 get_extension_id() {
 	local vsix_file="$1"
@@ -44,14 +107,14 @@ get_extension_id() {
 # Check if extension is already installed
 is_extension_installed() {
 	local ext_id="$1"
-	code --list-extensions | grep -q "^${ext_id}$"
+	code --list-extensions | grep -qi "^${ext_id}$"
 }
 
-# Download and install a single extension
-install_extension() {
+# Download and install a single extension from a direct URL
+install_from_url() {
 	local url="$1"
 	local temp_dir=$(mktemp -d)
-	local filename=$(basename "$url")
+	local filename=$(basename "${url%%\?*}") # strip query string for filename
 	local download_file="$temp_dir/$filename"
 
 	echo -e "${YELLOW}Downloading: $filename${NC}"
@@ -119,6 +182,24 @@ install_extension() {
 	rm -rf "$temp_dir"
 }
 
+# Resolve specifier to a download URL and install
+install_extension() {
+	local entry="$1"
+	local url=""
+
+	if [[ "$entry" == github:* ]]; then
+		url=$(resolve_github_latest "$entry") || return 1
+		echo -e "${GREEN}Resolved URL: $url${NC}"
+	elif [[ "$entry" == openvsx:* ]]; then
+		url=$(resolve_openvsx_latest "$entry") || return 1
+		echo -e "${GREEN}Resolved URL: $url${NC}"
+	else
+		url="$entry"
+	fi
+
+	install_from_url "$url"
+}
+
 # Main execution
 main() {
 	local plugins_file="${1:-assets/vscode/plugins.txt}"
@@ -137,22 +218,22 @@ main() {
 
 	echo -e "${GREEN}Reading extension list from: $plugins_file${NC}"
 
-	# Process each URL in the plugins file
+	# Process each entry in the plugins file
 	local count=0
-	while IFS= read -r url || [[ -n "$url" ]]; do
+	while IFS= read -r entry || [[ -n "$entry" ]]; do
 		# Skip empty lines and comments
-		[[ -z "$url" || "$url" =~ ^[[:space:]]*# ]] && continue
+		[[ -z "$entry" || "$entry" =~ ^[[:space:]]*# ]] && continue
 
 		# Trim whitespace
-		url=$(echo "$url" | tr -d '[:space:]')
+		entry=$(echo "$entry" | tr -d '[:space:]')
 
-		[[ -z "$url" ]] && continue
+		[[ -z "$entry" ]] && continue
 
 		((count++))
 		echo ""
-		echo -e "${GREEN}[$count] Processing: $url${NC}"
+		echo -e "${GREEN}[$count] Processing: $entry${NC}"
 
-		install_extension "$url" || echo -e "${RED}Failed to install extension from $url${NC}"
+		install_extension "$entry" || echo -e "${RED}Failed to install extension from $entry${NC}"
 	done <"$plugins_file"
 
 	echo ""
