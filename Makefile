@@ -127,7 +127,7 @@ codex:
 
 vscode:
 	@echo "Installing VSCode extensions from unpublished sources..."
-	@bash scripts/install-vscode-extensions.sh
+	@python3 scripts/install-vscode-extensions.py
 
 aws:
 	@echo "Installing Antigravity Awesome Skills..."
