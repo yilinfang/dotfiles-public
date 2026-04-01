@@ -80,7 +80,7 @@ hs.hotkey.bind(mods, "return", function()
 		notifyAndLaunchApp("OpenInTerminal-Lite")
 	else
 		-- notifyAndLaunchApp("iTerm")
-		notifyAndLaunchApp("kitty")
-		-- notifyAndLaunchApp("Ghostty")
+		-- notifyAndLaunchApp("kitty")
+		notifyAndLaunchApp("Ghostty")
 	end
 end)
