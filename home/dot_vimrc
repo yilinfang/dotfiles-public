@@ -17,16 +17,13 @@ set noshowmatch
 set list
 set listchars=tab:▸\ ,trail:·,nbsp:␣
 set laststatus=2
-nnoremap ]b gt
-nnoremap [b gT
 vnoremap <leader>y "+y
 nnoremap <leader>/ :noh<CR>
 nnoremap <leader>r :r!<CR>
-" Disable macro record/play and dot repeat
+" Disable macro record/play
 nnoremap q <Nop>
 nnoremap Q <Nop>
 nnoremap @ <Nop>
-nnoremap . <Nop>
 " Resize splits if window got resized
 augroup resize_splits
   autocmd!
