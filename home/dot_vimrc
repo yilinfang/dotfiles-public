@@ -1,9 +1,7 @@
 " Use space as leader key
 let g:mapleader = "\<Space>"
 set nocompatible
-filetype on
-filetype plugin on
-filetype indent on
+filetype plugin indent on
 syntax on
 set number
 set mouse=a
@@ -21,9 +19,9 @@ set listchars=tab:▸\ ,trail:·,nbsp:␣
 set laststatus=2
 nnoremap ]b gt
 nnoremap [b gT
+vnoremap <leader>y "+y
 nnoremap <leader>/ :noh<CR>
 nnoremap <leader>r :r!<CR>
-vnoremap <leader>y "+y<CR>
 " Disable macro record/play and dot repeat
 nnoremap q <Nop>
 nnoremap Q <Nop>
