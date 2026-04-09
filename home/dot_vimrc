@@ -39,3 +39,5 @@ if !empty(globpath(&runtimepath, "colors/wildcharm.vim"))
 else
   colorscheme torte
 endif
+" Force use dark backgroud
+set background=dark
