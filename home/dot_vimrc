@@ -11,6 +11,7 @@ set ignorecase
 set smartcase
 set autoindent
 set smarttab
+set hidden
 set nowrap
 set showcmd
 set noshowmatch
@@ -39,5 +40,5 @@ if !empty(globpath(&runtimepath, "colors/wildcharm.vim"))
 else
   colorscheme torte
 endif
-" Force use dark backgroud
+" Force use dark background
 set background=dark
