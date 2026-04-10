@@ -1,9 +1,8 @@
 # GitHub releases (latest): github:owner/repo
-# github:yilinfang/lineref
+github:yilinfang/lineref
 
 # OpenVSX (latest): openvsx:publisher/name  or  openvsx:publisher.name
 # openvsx:redhat/java
-openvsx:yilinfang/lineref
 
 # Direct URL (pinned version)
 # https://github.com/yilinfang/lineref/releases/download/v0.2.0/lineref-0.2.0.vsix
