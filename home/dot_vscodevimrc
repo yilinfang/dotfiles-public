@@ -10,9 +10,6 @@ nnoremap j gj
 vnoremap j gj
 nnoremap k gk
 vnoremap k gk
-" Map ]b/[b to gt/gT
-nnoremap ]b gt
-nnoremap [b gT
 " Mak K to gh
 nnoremap <S-k> gh
 vnoremap <S-k> gh
