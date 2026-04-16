@@ -126,5 +126,12 @@ codex:
 	fi
 
 vscode:
-	@echo "Installing VSCode extensions from unpublished sources..."
-	@python3 scripts/install-vscode-extensions.py
+	@echo "Installing extensions for VSCode-compatible editors..."
+	@for editor in code cursor; do \
+		if command -v $$editor >/dev/null 2>&1; then \
+			echo "--- Installing extensions for $$editor ---"; \
+			python3 scripts/install-vscode-extensions.py --editor $$editor; \
+		else \
+			echo "$$editor not found, skipping."; \
+		fi; \
+	done

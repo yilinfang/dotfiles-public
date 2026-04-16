@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import argparse
 import json
 import shutil
 import subprocess
@@ -49,12 +50,10 @@ def prompt_from_tty(prompt: str) -> str:
         return ""
 
 
-def check_code_cli() -> None:
-    if shutil.which("code") is None:
+def check_code_cli(editor: str = "code") -> None:
+    if shutil.which(editor) is None:
         fail(
-            "VSCode CLI (code) is not installed.\n"
-            "Please install VSCode and ensure 'code' command is available in PATH.\n"
-            "You can install it from: https://code.visualstudio.com/"
+            f"Editor CLI '{editor}' is not installed or not available in PATH."
         )
 
 
@@ -129,9 +128,9 @@ def get_extension_id(vsix_path: Path) -> str | None:
     return f"{publisher}.{name}"
 
 
-def get_installed_extensions() -> set[str]:
+def get_installed_extensions(editor: str = "code") -> set[str]:
     result = subprocess.run(
-        ["code", "--list-extensions"],
+        [editor, "--list-extensions"],
         check=True,
         text=True,
         capture_output=True,
@@ -152,14 +151,14 @@ def download_file(url: str, destination: Path) -> None:
         raise RuntimeError(f"Failed to download from {url}: {exc}") from exc
 
 
-def install_extension_file(vsix_path: Path, *, force: bool = False) -> None:
-    command = ["code", "--install-extension", str(vsix_path)]
+def install_extension_file(vsix_path: Path, *, editor: str = "code", force: bool = False) -> None:
+    command = [editor, "--install-extension", str(vsix_path)]
     if force:
         command.append("--force")
     subprocess.run(command, check=True)
 
 
-def install_from_url(url: str, installed_extensions: set[str]) -> None:
+def install_from_url(url: str, installed_extensions: set[str], editor: str = "code") -> None:
     parsed_url = urllib.parse.urlparse(url)
     filename = Path(parsed_url.path).name
     if not filename:
@@ -191,7 +190,7 @@ def install_from_url(url: str, installed_extensions: set[str]) -> None:
         if extension_id is None:
             echo(f"{YELLOW}Warning: Could not determine extension ID, attempting installation anyway{NC}")
             echo(f"{GREEN}Installing extension from {vsix_path}...{NC}")
-            install_extension_file(vsix_path)
+            install_extension_file(vsix_path, editor=editor)
             return
 
         echo(f"{GREEN}Extension ID: {extension_id}{NC}")
@@ -200,13 +199,13 @@ def install_from_url(url: str, installed_extensions: set[str]) -> None:
             response = prompt_from_tty("Reinstall? [y/N] ")
             if response.lower() in {"y", "yes"}:
                 echo(f"{GREEN}Reinstalling extension...{NC}")
-                install_extension_file(vsix_path, force=True)
+                install_extension_file(vsix_path, editor=editor, force=True)
             else:
                 echo(f"{YELLOW}Skipping installation.{NC}")
                 return
         else:
             echo(f"{GREEN}Installing extension {extension_id}...{NC}")
-            install_extension_file(vsix_path)
+            install_extension_file(vsix_path, editor=editor)
 
         installed_extensions.add(extension_id.lower())
 
@@ -236,18 +235,25 @@ def iter_entries(plugins_file: Path) -> list[str]:
 
 
 def main() -> int:
-    plugins_file = Path(sys.argv[1]) if len(sys.argv) > 1 else Path("assets/vscode/plugins.txt")
+    parser = argparse.ArgumentParser(description="Install VSCode-compatible extensions")
+    parser.add_argument("plugins_file", nargs="?", default="assets/vscode/plugins.txt", help="Path to plugins list file")
+    parser.add_argument("--editor", default="code", help="Editor CLI to use (default: code)")
+    args = parser.parse_args()
 
-    echo(f"{GREEN}VSCode Extension Installer{NC}")
-    echo("==========================")
+    plugins_file = Path(args.plugins_file)
+    editor = args.editor
 
-    check_code_cli()
+    echo(f"{GREEN}VSCode-compatible Extension Installer{NC}")
+    echo(f"Editor: {editor}")
+    echo("======================================")
+
+    check_code_cli(editor)
 
     if not plugins_file.is_file():
         fail(f"Plugins file not found: {plugins_file}")
 
     echo(f"{GREEN}Reading extension list from: {plugins_file}{NC}")
-    installed_extensions = get_installed_extensions()
+    installed_extensions = get_installed_extensions(editor)
 
     count = 0
     for entry in iter_entries(plugins_file):
@@ -255,7 +261,7 @@ def main() -> int:
         echo("")
         echo(f"{GREEN}[{count}] Processing: {entry}{NC}")
         try:
-            install_from_url(resolve_entry(entry), installed_extensions)
+            install_from_url(resolve_entry(entry), installed_extensions, editor)
         except (RuntimeError, subprocess.CalledProcessError, ValueError) as exc:
             echo(f"{RED}Failed to install extension from {entry}: {exc}{NC}")
 
