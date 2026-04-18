@@ -16,7 +16,7 @@ set nowrap
 set showcmd
 set noshowmatch
 set list
-set listchars=tab:▸\ ,trail:·,nbsp:␣
+set listchars=tab:>\ ,trail:-,nbsp:+
 set laststatus=2
 vnoremap <leader>y "+y
 nnoremap <leader>/ :noh<CR>
