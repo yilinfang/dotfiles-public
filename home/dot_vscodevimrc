@@ -5,6 +5,9 @@ nnoremap <leader>/ :noh<CR>
 nnoremap m <Nop>
 nnoremap ' <Nop>
 nnoremap ` <Nop>
+" Map ]b/[b to gt/gT
+nnoremap ]b gt
+nnoremap [b gT
 " Map j/k to gj/gk to deal with fold better
 nnoremap j gj
 vnoremap j gj

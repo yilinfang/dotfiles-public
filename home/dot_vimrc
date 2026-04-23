@@ -21,6 +21,9 @@ set laststatus=2
 vnoremap <leader>y "+y
 nnoremap <leader>/ :noh<CR>
 nnoremap <leader>r :r!<CR>
+" Map ]b/[b to gt/gT
+nnoremap ]b gt
+nnoremap [b gT
 " Disable macro record/play
 nnoremap q <Nop>
 nnoremap Q <Nop>
