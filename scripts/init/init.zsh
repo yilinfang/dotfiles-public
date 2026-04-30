@@ -85,7 +85,7 @@ fi
 if command -v nvim &>/dev/null; then
 	export EDITOR=nvim
 	export VISUAL=nvim
-	alias vim='nvim'
+	alias n='nvim'
 fi
 
 # If rg is installed
@@ -108,6 +108,11 @@ fi
 # Use cdx for codex
 if command -v codex &>/dev/null; then
 	alias cdx='codex'
+fi
+
+# Use t for tmux
+if command -v tmux &>/dev/null; then
+	alias t='tmux'
 fi
 
 # Use lg for lazygit
