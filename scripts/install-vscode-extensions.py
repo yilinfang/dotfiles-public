@@ -52,9 +52,7 @@ def prompt_from_tty(prompt: str) -> str:
 
 def check_code_cli(editor: str = "code") -> None:
     if shutil.which(editor) is None:
-        fail(
-            f"Editor CLI '{editor}' is not installed or not available in PATH."
-        )
+        fail(f"Editor CLI '{editor}' is not installed or not available in PATH.")
 
 
 def fetch_json(url: str, headers: dict[str, str] | None = None) -> dict:
@@ -80,7 +78,9 @@ def resolve_github_latest(entry: str) -> str:
             },
         )
     except RuntimeError as exc:
-        raise RuntimeError(f"Failed to fetch release info from GitHub for {spec}: {exc}") from exc
+        raise RuntimeError(
+            f"Failed to fetch release info from GitHub for {spec}: {exc}"
+        ) from exc
 
     for asset in response.get("assets", []):
         download_url = asset.get("browser_download_url", "")
@@ -109,7 +109,9 @@ def resolve_openvsx_latest(entry: str) -> str:
 
     download_url = response.get("files", {}).get("download", "")
     if not download_url:
-        raise RuntimeError(f"Could not find download URL in OpenVSX response for {publisher}.{name}")
+        raise RuntimeError(
+            f"Could not find download URL in OpenVSX response for {publisher}.{name}"
+        )
     return download_url
 
 
@@ -145,20 +147,27 @@ def is_extension_installed(installed_extensions: set[str], extension_id: str) ->
 def download_file(url: str, destination: Path) -> None:
     request = urllib.request.Request(url)
     try:
-        with urllib.request.urlopen(request) as response, destination.open("wb") as output:
+        with (
+            urllib.request.urlopen(request) as response,
+            destination.open("wb") as output,
+        ):
             shutil.copyfileobj(response, output)
     except urllib.error.URLError as exc:
         raise RuntimeError(f"Failed to download from {url}: {exc}") from exc
 
 
-def install_extension_file(vsix_path: Path, *, editor: str = "code", force: bool = False) -> None:
+def install_extension_file(
+    vsix_path: Path, *, editor: str = "code", force: bool = False
+) -> None:
     command = [editor, "--install-extension", str(vsix_path)]
     if force:
         command.append("--force")
     subprocess.run(command, check=True)
 
 
-def install_from_url(url: str, installed_extensions: set[str], editor: str = "code") -> None:
+def install_from_url(
+    url: str, installed_extensions: set[str], editor: str = "code"
+) -> None:
     parsed_url = urllib.parse.urlparse(url)
     filename = Path(parsed_url.path).name
     if not filename:
@@ -188,7 +197,9 @@ def install_from_url(url: str, installed_extensions: set[str], editor: str = "co
 
         extension_id = get_extension_id(vsix_path)
         if extension_id is None:
-            echo(f"{YELLOW}Warning: Could not determine extension ID, attempting installation anyway{NC}")
+            echo(
+                f"{YELLOW}Warning: Could not determine extension ID, attempting installation anyway{NC}"
+            )
             echo(f"{GREEN}Installing extension from {vsix_path}...{NC}")
             install_extension_file(vsix_path, editor=editor)
             return
@@ -236,8 +247,15 @@ def iter_entries(plugins_file: Path) -> list[str]:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="Install VSCode-compatible extensions")
-    parser.add_argument("plugins_file", nargs="?", default="assets/vscode/plugins.txt", help="Path to plugins list file")
-    parser.add_argument("--editor", default="code", help="Editor CLI to use (default: code)")
+    parser.add_argument(
+        "plugins_file",
+        nargs="?",
+        default="assets/vscode/plugins.txt",
+        help="Path to plugins list file",
+    )
+    parser.add_argument(
+        "--editor", default="code", help="Editor CLI to use (default: code)"
+    )
     args = parser.parse_args()
 
     plugins_file = Path(args.plugins_file)
