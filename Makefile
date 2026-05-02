@@ -18,7 +18,7 @@ define merge_files
 	$$MERGE_TOOL $(1) $(2) || true
 endef
 
-.PHONY: ensure_mise install pde_install claude opencode codex vscode
+.PHONY: ensure_mise install pde_install claude opencode codex vscode cursor
 
 .IGNORE: install pde_install
 
@@ -126,12 +126,17 @@ codex:
 	fi
 
 vscode:
-	@echo "Installing extensions for VSCode-compatible editors..."
-	@for editor in code cursor; do \
-		if command -v $$editor >/dev/null 2>&1; then \
-			echo "--- Installing extensions for $$editor ---"; \
-			python3 scripts/install-vscode-extensions.py --editor $$editor; \
-		else \
-			echo "$$editor not found, skipping."; \
-		fi; \
-	done
+	@echo "Installing extensions for VS Code..."
+	@if command -v code >/dev/null 2>&1; then \
+		python3 scripts/install-vscode-extensions.py --editor code; \
+	else \
+		echo "code not found, skipping."; \
+	fi
+
+cursor:
+	@echo "Installing extensions for Cursor..."
+	@if command -v cursor >/dev/null 2>&1; then \
+		python3 scripts/install-vscode-extensions.py --editor cursor; \
+	else \
+		echo "cursor not found, skipping."; \
+	fi
