@@ -2,7 +2,6 @@
 bun = "latest"
 gh = "latest"
 jq = "latest"
-"npm:@bitwarden/cli" = "latest"
 "npm:@openai/codex" = "latest"
 "npm:prettier" = "latest"
 ruff = "latest"
