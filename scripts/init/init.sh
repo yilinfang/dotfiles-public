@@ -86,6 +86,7 @@ if command -v nvim &>/dev/null; then
 	export EDITOR=nvim
 	export VISUAL=nvim
 	alias n='nvim'
+	alias vim='nvim'
 fi
 
 # If rg is installed
