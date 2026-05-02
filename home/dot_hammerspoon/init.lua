@@ -84,3 +84,10 @@ hs.hotkey.bind(mods, "return", function()
 		notifyAndLaunchApp("Ghostty")
 	end
 end)
+
+-- Reload Hammerspoon config with mods + R
+hs.hotkey.bind(mods, "R", function()
+    hs.reload()
+end)
+-- Show notification after reload
+hs.alert.show("Hammerspoon config loaded")
