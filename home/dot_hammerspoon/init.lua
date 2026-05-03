@@ -72,6 +72,7 @@ for _, link in ipairs(linkShortcuts) do
 end
 
 -- Other Shortcuts
+
 -- Bind mods+T to OpenInTerminal-Lite in Finder and Terminal Emulator elsewhere
 hs.hotkey.bind(mods, "return", function()
 	-- Check if Finder is the focused application
@@ -85,9 +86,11 @@ hs.hotkey.bind(mods, "return", function()
 	end
 end)
 
--- Reload Hammerspoon config with mods + R
+-- Reload Hammerspoon config with mods+R
+-- NOTE: One important detail to call out here is that hs.reload() destroys the current Lua interpreter and creates a
+-- new one. If we had any code after hs.reload() in this function, it would not be called.
 hs.hotkey.bind(mods, "R", function()
-    hs.reload()
+	hs.reload()
 end)
 -- Show notification after reload
 hs.alert.show("Hammerspoon config loaded")
