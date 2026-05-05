@@ -18,7 +18,7 @@ define merge_files
 	$$MERGE_TOOL $(1) $(2) || true
 endef
 
-.PHONY: ensure_mise install pde_install claude opencode vscode cursor
+.PHONY: ensure_mise install pde_install claude opencode codex vscode cursor
 
 .IGNORE: install pde_install
 
@@ -85,45 +85,47 @@ opencode:
 		$(call merge_files,"$(HOME)/.config/opencode/opencode.jsonc",assets/opencode/opencode.jsonc); \
 	fi
 
-# codex:
-# 	@if ! command -v codex >/dev/null 2>&1; then \
-# 		echo "Installing Codex..."; \
-# 		if command -v mise >/dev/null 2>&1; then \
-# 			mise use -g npm:@openai/codex; \
-# 		elif command -v npm >/dev/null 2>&1; then \
-# 			npm install -g @openai/codex; \
-# 		else \
-# 			echo "Error: neither mise nor npm is available. Please install one of them to install Codex." >&2; \
-# 			exit 1; \
-# 		fi; \
-# 	else \
-# 		echo "Codex already installed"; \
-# 	fi
-# 	@mkdir -p "$(HOME)/.codex"
-# 	@if [ -f "$(HOME)/.codex/auth.json" ]; then \
-# 		echo "Codex auth.json already exists."; \
-# 		read -r -p "Overwrite Codex auth.json from encrypted asset? [y/N] " resp; \
-# 		case "$$resp" in \
-# 			[yY][eE][sS]|[yY]) \
-# 			echo "Overwriting Codex auth.json..."; \
-# 			age -d -o "$(HOME)/.codex/auth.json" "assets/codex/auth.json.age" && chmod 600 "$(HOME)/.codex/auth.json"; \
-# 			;; \
-# 			*) \
-# 			echo "Skipping Codex auth.json installation."; \
-# 			;; \
-# 		esac; \
-# 	else \
-# 		read -r -p "Install Codex auth.json from encrypted asset? [y/N] " resp; \
-# 		case "$$resp" in \
-# 			[yY][eE][sS]|[yY]) \
-# 			echo "Installing Codex auth.json..."; \
-# 			age -d -o "$(HOME)/.codex/auth.json" "assets/codex/auth.json.age" && chmod 600 "$(HOME)/.codex/auth.json"; \
-# 			;; \
-# 			*) \
-# 			echo "Skipping Codex auth.json installation."; \
-# 			;; \
-# 		esac; \
-# 	fi
+codex:
+	@if ! command -v codex >/dev/null 2>&1; then \
+		echo "Installing Codex..."; \
+		if command -v mise >/dev/null 2>&1; then \
+			mise use -g npm:@openai/codex; \
+		elif command -v npm >/dev/null 2>&1; then \
+			npm install -g @openai/codex; \
+		else \
+			echo "Error: neither mise nor npm is available. Please install one of them to install Codex." >&2; \
+			exit 1; \
+		fi; \
+	else \
+		echo "Codex already installed"; \
+	fi
+
+# Optional Codex auth install flow, kept for future reference
+# @mkdir -p "$(HOME)/.codex"
+# @if [ -f "$(HOME)/.codex/auth.json" ]; then \
+# 	echo "Codex auth.json already exists."; \
+# 	read -r -p "Overwrite Codex auth.json from encrypted asset? [y/N] " resp; \
+# 	case "$$resp" in \
+# 		[yY][eE][sS]|[yY]) \
+# 		echo "Overwriting Codex auth.json..."; \
+# 		age -d -o "$(HOME)/.codex/auth.json" "assets/codex/auth.json.age" && chmod 600 "$(HOME)/.codex/auth.json"; \
+# 		;; \
+# 		*) \
+# 		echo "Skipping Codex auth.json installation."; \
+# 		;; \
+# 	esac; \
+# else \
+# 	read -r -p "Install Codex auth.json from encrypted asset? [y/N] " resp; \
+# 	case "$$resp" in \
+# 		[yY][eE][sS]|[yY]) \
+# 		echo "Installing Codex auth.json..."; \
+# 		age -d -o "$(HOME)/.codex/auth.json" "assets/codex/auth.json.age" && chmod 600 "$(HOME)/.codex/auth.json"; \
+# 		;; \
+# 		*) \
+# 		echo "Skipping Codex auth.json installation."; \
+# 		;; \
+# 	esac; \
+# fi
 
 vscode:
 	@echo "Installing extensions for VS Code..."
