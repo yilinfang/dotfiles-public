@@ -99,6 +99,14 @@ codex:
 	else \
 		echo "Codex already installed"; \
 	fi
+	@mkdir -p $(HOME)/.codex; \
+	if [ ! -f "$(HOME)/.codex/config.toml" ]; then \
+		echo "Installing Codex config.toml..."; \
+		cp assets/codex/config.toml "$(HOME)/.codex/config.toml"; \
+	else \
+		echo "Merging Codex config.toml with existing file..."; \
+		$(call merge_files,"$(HOME)/.codex/config.toml",assets/codex/config.toml); \
+	fi
 
 # Optional Codex auth install flow, kept for future reference
 # @mkdir -p "$(HOME)/.codex"
