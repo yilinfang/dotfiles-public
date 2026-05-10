@@ -1,18 +1,16 @@
-"$schema" = "https://yazi-rs.github.io/schemas/yazi.json"
-
 [mgr]
 show_hidden = true
 
 [plugin]
 # Disable some preloaders
-prepend_preloaders = [{ name = "*", run = "noop" }]
+prepend_preloaders = [{ url = "*", run = "noop" }]
 # Disable some previewers
 prepend_previewers = [
-  { name = "*/", run = "folder" },
+  { url = "*/", run = "folder" },
   # Code
   { mime = "text/*", run = "code" },
   # Fallback
-  { name = "*", run = "file" },
+  { url = "*", run = "file" },
 ]
 
 [opener]
@@ -26,7 +24,7 @@ dummy = [
 [open]
 # HACK: Prevent accidental opening files
 prepend_rules = [
-  { name = "*/", use = "dummy" },
-  { mime = "text/*", use = "edit" },
-  { name = "*", use = "dummy" },
+  { url = "*/", use = "dummy" },
+  { url = "text/*", use = "edit" },
+  { url = "*", use = "dummy" },
 ]
