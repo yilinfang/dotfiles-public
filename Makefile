@@ -69,12 +69,25 @@ claude:
 	fi
 
 opencode:
-	@if command -v opencode >/dev/null 2>&1; then \
-		echo "Updating OpenCode..."; \
-		opencode upgrade; \
-	else \
+# @if command -v opencode >/dev/null 2>&1; then \
+# 	echo "Updating OpenCode..."; \
+# 	opencode upgrade; \
+# else \
+# 	echo "Installing OpenCode..."; \
+# 	curl -fsSL https://opencode.ai/install | bash; \
+# fi
+	@if ! command -v opencode >/dev/null 2>&1; then \
 		echo "Installing OpenCode..."; \
-		curl -fsSL https://opencode.ai/install | bash; \
+		if command -v mise >/dev/null 2>&1; then \
+			mise use -g npm:opencode-ai; \
+		elif command -v npm >/dev/null 2>&1; then \
+			npm install -g opencode-ai; \
+		else \
+			echo "Error: neither mise nor npm is available. Please install one of them to install OpenCode." >&2; \
+			exit 1; \
+		fi; \
+	else \
+		echo "OpenCode already installed"; \
 	fi
 	@mkdir -p $(HOME)/.config/opencode; \
 	if [ ! -f "$(HOME)/.config/opencode/opencode.jsonc" ]; then \
@@ -107,7 +120,6 @@ codex:
 		echo "Merging Codex config.toml with existing file..."; \
 		$(call merge_files,"$(HOME)/.codex/config.toml",assets/codex/config.toml); \
 	fi
-
 # Optional Codex auth install flow, kept for future reference
 # @mkdir -p "$(HOME)/.codex"
 # @if [ -f "$(HOME)/.codex/auth.json" ]; then \
