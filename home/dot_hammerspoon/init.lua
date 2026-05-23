@@ -33,6 +33,7 @@ local linkShortcuts = {
 	-- { "D", "DeepSeek", "https://chat.deepseek.com/" },
 	-- { "G", "Gemini", "https://gemini.google.com/" },
 	{ "G", "ChatGPT", "https://chatgpt.com/" },
+	-- { "G", "Claude", "https://claude.ai/" },
 }
 
 -- Function to display notification and open an application
@@ -81,8 +82,8 @@ hs.hotkey.bind(mods, "return", function()
 		notifyAndLaunchApp("OpenInTerminal-Lite")
 	else
 		-- notifyAndLaunchApp("iTerm")
-		-- notifyAndLaunchApp("kitty")
-		notifyAndLaunchApp("Ghostty")
+		notifyAndLaunchApp("kitty")
+		-- notifyAndLaunchApp("Ghostty")
 	end
 end)
 
