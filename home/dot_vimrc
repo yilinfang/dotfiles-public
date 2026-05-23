@@ -18,12 +18,9 @@ set noshowmatch
 set list
 set listchars=tab:>\ ,trail:-,nbsp:+
 set laststatus=2
-"vnoremap <leader>y "+y
-"nnoremap <leader>/ :noh<CR>
-"nnoremap <leader>r :r!<CR>
-"" Map ]b/[b to gt/gT
-"nnoremap ]b gt
-"nnoremap [b gT
+vnoremap <leader>y "+y
+nnoremap <leader>/ :noh<CR>
+nnoremap <leader>r :r!<CR>
 "" Disable macro record/play
 "nnoremap q <Nop>
 "nnoremap Q <Nop>
