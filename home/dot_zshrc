@@ -124,10 +124,10 @@ if command -v eza >/dev/null 2>&1; then
 	alias l='lla'
 fi
 
-# 'kssh' is a better 'ssh' provided by kitten
-if command -v kitten >/dev/null 2>&1; then
-	alias kssh="kitten ssh"
-fi
+# # 'kssh' is a better 'ssh' provided by kitten
+# if command -v kitten >/dev/null 2>&1; then
+# 	alias kssh="kitten ssh"
+# fi
 
 # nvim-test
 alias nvim-test='NVIM_APPNAME=nvim-test nvim'
@@ -160,18 +160,18 @@ omz_update_plugins_and_themes() {
 	fi
 }
 
-# Function: update_terminal_info
-# Helper function to set terminal information in a remote server
-update_terminal_info() {
-	# Check if a server argument is provided
-	if [[ -z "$1" ]]; then
-		echo "Usage: update_terminal_info <server>"
-		return 1
-	fi
-
-	# Run the command with the provided server argument
-	infocmp -x | ssh "$1" -- tic -x -
-}
+# # Function: update_terminal_info
+# # Helper function to set terminal information in a remote server
+# update_terminal_info() {
+# 	# Check if a server argument is provided
+# 	if [[ -z "$1" ]]; then
+# 		echo "Usage: update_terminal_info <server>"
+# 		return 1
+# 	fi
+#
+# 	# Run the command with the provided server argument
+# 	infocmp -x | ssh "$1" -- tic -x -
+# }
 
 # Zsh-syntax-highlighting
 # Tweak colors for zsh-syntax-highlighting
