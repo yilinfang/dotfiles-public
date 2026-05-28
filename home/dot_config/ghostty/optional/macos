@@ -3,7 +3,6 @@
 # Font
 font-family = ""
 font-family = "JetBrains Maple Mono"
-font-family = "JetBrains Mono"
 font-family = "Symbols Nerd Font Mono"
 font-size = 14
 font-feature = -calt,-liga,-dlig

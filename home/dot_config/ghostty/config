@@ -5,7 +5,7 @@ config-file = ?optional/macos
 config-file = ?optional/linux
 
 # Theme
-theme = "iTerm2 Tango Dark"
+theme = "Builtin Tango Dark"
 
 # Window
 window-width = 90
