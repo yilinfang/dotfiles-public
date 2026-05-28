@@ -1,6 +1,6 @@
 # AGENTS.md
 
-## Karpathy-Inspired Behavioral Guidelines
+## Behavioral Guidelines
 
 Behavioral guidelines to reduce common LLM coding mistakes. Merge with project-specific instructions as needed.
 
