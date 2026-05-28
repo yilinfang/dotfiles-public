@@ -1,5 +1,7 @@
 # Scripts for Setting up PDE
 
+_NOTE: Use `~/.chezmoi/dotfiles` as the chezmoi source directory — it is hardcoded in several files (see the main [README](../../README.md)). The commands below already do this._
+
 ## Usage
 
 ```bash

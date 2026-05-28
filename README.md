@@ -5,6 +5,8 @@ Personal dotfiles managed with [chezmoi](https://www.chezmoi.io/).
 _NOTE: I may occasionally create conflicts in this repository by force pushing or rewriting history._
 _This happens when I accidentally commit some sensitive data._
 
+_NOTE: This repository assumes its chezmoi source directory is `~/.chezmoi/dotfiles`. That path is hardcoded in several places — the `sourceDir` and Age key paths in `home/.chezmoi.toml.tmpl`, `home/.chezmoiscripts/run_before_decrypt-private-key.sh`, the helper scripts in `bin/`, and the `PATH` entry in `scripts/init/init.{sh,zsh}`. The commands below already pass `-S ~/.chezmoi/dotfiles`; keep that path (or update those references if you relocate it)._
+
 ## Usage
 
 ### Install tools
