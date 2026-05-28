@@ -21,4 +21,4 @@ keybind = alt+b=esc:b
 
 # Misc
 copy-on-select = clipboard
-shell-integration-features = ssh-env,ssh-terminfo
+# shell-integration-features = ssh-env,ssh-terminfo
