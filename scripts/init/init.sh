@@ -8,6 +8,11 @@ if [[ ":$PATH:" != *":$HOME/.local/bin:"* ]]; then
 	export PATH="$HOME/.local/bin:$PATH"
 fi
 
+# Add chezmoi dotfiles bin to PATH if not already present
+if [[ ":$PATH:" != *":$HOME/.chezmoi/dotfiles/bin:"* ]]; then
+	export PATH="$HOME/.chezmoi/dotfiles/bin:$PATH"
+fi
+
 # Add opencode to PATH if not already present
 if [[ ":$PATH:" != *":$HOME/.opencode/bin:"* ]]; then
 	export PATH="$HOME/.opencode/bin:$PATH"

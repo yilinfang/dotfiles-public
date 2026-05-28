@@ -10,7 +10,7 @@ if ! command -v age &>/dev/null; then
 	exit 1
 fi
 
-KEY_PATH="{{- .keyPath -}}"
+KEY_PATH="$HOME/.chezmoi/dotfiles/keys/key.txt"
 ENCRYPTED_KEY_PATH="$KEY_PATH.age"
 
 # Ensure the encrypted key file exists

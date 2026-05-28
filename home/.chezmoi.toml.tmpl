@@ -1,13 +1,9 @@
-{{- $key_path := ".chezmoi/dotfiles/keys/key.txt" -}}
-{{- $pub_key_path := ".chezmoi/dotfiles/keys/key_pub.txt" -}}
-{{- $tools_install_path := ".local/bin" -}}
-
 sourceDir = "~/.chezmoi/dotfiles"
 
 encryption = "age"
 [age]
-identity = "~/{{- $key_path -}}"
-recipientsFile = "~/{{- $pub_key_path -}}"
+identity = "~/.chezmoi/dotfiles/keys/key.txt"
+recipientsFile = "~/.chezmoi/dotfiles/keys/key_pub.txt"
 
 [status]
 exclude = ["scripts"]
@@ -31,6 +27,3 @@ work = true
 {{- else }}
 work = false
 {{- end }}
-keyPath = "{{- $key_path -}}"
-pubKeyPath = "{{- $pub_key_path -}}"
-toolsInstallPath = "{{- $tools_install_path -}}"
