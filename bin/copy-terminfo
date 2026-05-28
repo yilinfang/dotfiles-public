@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# Copy the current terminal's terminfo entry to a remote host over SSH.
+# Fixes "missing or unsuitable terminal" errors (e.g. xterm-ghostty,
+# xterm-kitty) on servers that lack the entry. Works for whatever
+# terminal $TERM points at, since `infocmp -x` dumps the current one.
+# Usage: copy-terminfo [ssh-options...] <ssh-host>
+
+set -euo pipefail
+
+if [ $# -eq 0 ]; then
+	echo "Usage: $0 [ssh-options...] <ssh-host>" >&2
+	exit 1
+fi
+
+if ! command -v infocmp &>/dev/null; then
+	echo "infocmp could not be found. Please install ncurses." >&2
+	exit 1
+fi
+
+# `infocmp -x` exports the current terminal's extended terminfo;
+# `tic -x -` installs it from stdin on the remote (into ~/.terminfo
+# when the system dir isn't writable).
+infocmp -x | ssh "$@" -- tic -x -
