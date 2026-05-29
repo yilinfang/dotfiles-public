@@ -5,7 +5,7 @@ config-file = ?optional/macos
 config-file = ?optional/linux
 
 # Theme
-theme = "Builtin Tango Dark"
+config-file = ?auto/theme.ghostty
 
 # Window
 window-width = 90
