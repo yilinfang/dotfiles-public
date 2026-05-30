@@ -93,9 +93,9 @@ ZSH_CUSTOM="$HOME/.zsh" # NOTE: Set custom folder to ~/.zsh
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-	extract
+	# extract
 	ssh
-	universalarchive
+	# universalarchive
 	# External plugins
 	zsh-autosuggestions
 	zsh-syntax-highlighting
