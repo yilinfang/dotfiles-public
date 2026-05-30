@@ -10,5 +10,9 @@
       "Read(./build)"
     ]
   },
-  "autoMemoryEnabled": false
+  "autoMemoryEnabled": false,
+  "statusLine": {
+    "type": "command",
+    "command": "sh ~/.claude/statusline-command.sh"
+  }
 }
