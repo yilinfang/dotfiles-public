@@ -41,11 +41,13 @@ if [ -n "$remaining" ]; then
 	fi
 fi
 
-# Cost in USD (yellow)
+# Cost in USD (yellow), shown only when non-zero
 if [ -n "$cost" ]; then
 	cost_fmt=$(printf '%.2f' "$cost")
-	[ -n "$parts" ] && parts="$parts  "
-	parts="$parts$(printf '\033[33m$%s\033[0m' "$cost_fmt")"
+	if [ "$cost_fmt" != "0.00" ]; then
+		[ -n "$parts" ] && parts="$parts  "
+		parts="$parts$(printf '\033[33m$%s\033[0m' "$cost_fmt")"
+	fi
 fi
 
 # # Disabled for now — keep for potential future use
