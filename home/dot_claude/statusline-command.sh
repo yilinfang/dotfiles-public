@@ -4,14 +4,14 @@ input=$(cat)
 # Without jq we can't parse the input, so render nothing
 command -v jq >/dev/null 2>&1 || exit 0
 
-cwd=$(echo "$input" | jq -r '.cwd // .workspace.current_dir // empty')
-model=$(echo "$input" | jq -r '.model.display_name // empty')
-effort=$(echo "$input" | jq -r '.effort.level // empty')
+cwd=$(printf '%s' "$input" | jq -r '.cwd // .workspace.current_dir // empty')
+model=$(printf '%s' "$input" | jq -r '.model.display_name // empty')
+effort=$(printf '%s' "$input" | jq -r '.effort.level // empty')
 # Fall back to the env var if the JSON field is absent
 [ -z "$effort" ] && effort="$CLAUDE_EFFORT"
-remaining=$(echo "$input" | jq -r '.context_window.remaining_percentage // empty')
-cost=$(echo "$input" | jq -r '.cost.total_cost_usd // empty')
-# duration=$(echo "$input" | jq -r '.cost.total_duration_ms // empty')
+remaining=$(printf '%s' "$input" | jq -r '.context_window.remaining_percentage // empty')
+cost=$(printf '%s' "$input" | jq -r '.cost.total_cost_usd // empty')
+# duration=$(printf '%s' "$input" | jq -r '.cost.total_duration_ms // empty')
 
 # Directory: show basename unless it's home
 home="$HOME"
