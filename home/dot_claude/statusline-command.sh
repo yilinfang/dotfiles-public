@@ -6,6 +6,9 @@ command -v jq >/dev/null 2>&1 || exit 0
 
 cwd=$(echo "$input" | jq -r '.cwd // .workspace.current_dir // empty')
 model=$(echo "$input" | jq -r '.model.display_name // empty')
+effort=$(echo "$input" | jq -r '.effort.level // empty')
+# Fall back to the env var if the JSON field is absent
+[ -z "$effort" ] && effort="$CLAUDE_EFFORT"
 remaining=$(echo "$input" | jq -r '.context_window.remaining_percentage // empty')
 cost=$(echo "$input" | jq -r '.cost.total_cost_usd // empty')
 # duration=$(echo "$input" | jq -r '.cost.total_duration_ms // empty')
@@ -28,6 +31,9 @@ parts=""
 if [ -n "$model" ]; then
 	[ -n "$parts" ] && parts="$parts  "
 	parts="$parts$(printf '\033[35m%s\033[0m' "$model")"
+	if [ -n "$effort" ]; then
+		parts="$parts$(printf '\033[35m \302\267 %s\033[0m' "$effort")"
+	fi
 fi
 
 # Context remaining: green normally, red when low (show only after first API call)
