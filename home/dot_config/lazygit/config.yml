@@ -5,7 +5,7 @@ git:
     - pager: delta --dark --paging=never
 customCommands:
   - key: "<c-g>"
-    command: "git czg"
+    command: "npx czg"
     description: "Commit with czg"
     context: "files"
     loadingText: "Opening czg"
