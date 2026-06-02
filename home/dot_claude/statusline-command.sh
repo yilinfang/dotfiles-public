@@ -10,7 +10,7 @@ effort=$(printf '%s' "$input" | jq -r '.effort.level // empty')
 # Fall back to the env var if the JSON field is absent
 [ -z "$effort" ] && effort="$CLAUDE_EFFORT"
 remaining=$(printf '%s' "$input" | jq -r '.context_window.remaining_percentage // empty')
-cost=$(printf '%s' "$input" | jq -r '.cost.total_cost_usd // empty')
+# cost=$(printf '%s' "$input" | jq -r '.cost.total_cost_usd // empty')
 # duration=$(printf '%s' "$input" | jq -r '.cost.total_duration_ms // empty')
 
 # Directory: show basename unless it's home
@@ -47,14 +47,14 @@ if [ -n "$remaining" ]; then
 	fi
 fi
 
-# Cost in USD (yellow), shown only when non-zero
-if [ -n "$cost" ]; then
-	cost_fmt=$(printf '%.2f' "$cost")
-	if [ "$cost_fmt" != "0.00" ]; then
-		[ -n "$parts" ] && parts="$parts  "
-		parts="$parts$(printf '\033[33m$%s\033[0m' "$cost_fmt")"
-	fi
-fi
+# # Cost in USD (yellow), shown only when non-zero
+# if [ -n "$cost" ]; then
+# 	cost_fmt=$(printf '%.2f' "$cost")
+# 	if [ "$cost_fmt" != "0.00" ]; then
+# 		[ -n "$parts" ] && parts="$parts  "
+# 		parts="$parts$(printf '\033[33m$%s\033[0m' "$cost_fmt")"
+# 	fi
+# fi
 
 # # Disabled for now — keep for potential future use
 # # Elapsed time (blue), formatted as s / m / h+m
