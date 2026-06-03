@@ -32,7 +32,7 @@ if [ -n "$model" ]; then
 	[ -n "$parts" ] && parts="$parts  "
 	parts="$parts$(printf '\033[35m%s\033[0m' "$model")"
 	if [ -n "$effort" ]; then
-		parts="$parts$(printf '\033[35m \302\267 %s\033[0m' "$effort")"
+		parts="$parts$(printf '\033[35m - %s\033[0m' "$effort")"
 	fi
 fi
 
@@ -56,7 +56,6 @@ fi
 # 	fi
 # fi
 
-# # Disabled for now — keep for potential future use
 # # Elapsed time (blue), formatted as s / m / h+m
 # if [ -n "$duration" ]; then
 # 	ms=$(printf '%.0f' "$duration")
