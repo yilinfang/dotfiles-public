@@ -5,12 +5,13 @@ local mods = { "cmd", "alt", "shift", "ctrl" } -- Change this line to modify all
 local appShortcuts = {
 	-- Key, Application
 	{ "E", "Finder" },
-	{ "B", "Google Chrome" },
-	-- { "B", "Brave Browser" },
-	{ "P", "Bitwarden" },
+	-- { "B", "Google Chrome" },
+	{ "B", "Brave Browser" },
+	-- { "P", "Bitwarden" },
+	{ "P", "Proton Pass" },
 	{ "W", "WeChat" },
-	{ "C", "Visual Studio Code" },
-	-- { "C", "Cursor" },
+	-- { "C", "Visual Studio Code" },
+	{ "C", "Cursor" },
 	-- { "C", "Windsurf" },
 	-- { "C", "Antigravity" },
 	-- { "F", "Firefox" },
@@ -31,8 +32,8 @@ local linkShortcuts = {
 	-- { "N", "Notion", "https://www.notion.so/" },
 	-- { "M", "Monica", "https://monica.im/" },
 	-- { "D", "DeepSeek", "https://chat.deepseek.com/" },
-	-- { "G", "Gemini", "https://gemini.google.com/" },
 	{ "G", "ChatGPT", "https://chatgpt.com/" },
+	-- { "G", "Gemini", "https://gemini.google.com/" },
 	-- { "G", "Claude", "https://claude.ai/" },
 }
 
