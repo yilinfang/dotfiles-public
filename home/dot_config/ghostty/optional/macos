@@ -2,10 +2,12 @@
 
 # Font
 font-family = ""
-font-family = "JetBrains Maple Mono"
+font-family = "Operator Mono SSm"
+# Use Book variants instead of Medium
+font-style = "Book"
+font-style-italic = "Book Italic"
 font-family = "Symbols Nerd Font Mono"
-font-size = 14
-font-feature = -calt,-liga,-dlig
+font-size = 13
 adjust-underline-position = 2
 
 # Misc
