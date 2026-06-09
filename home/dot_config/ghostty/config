@@ -8,8 +8,6 @@ config-file = ?optional/linux
 config-file = ?auto/theme.ghostty
 
 # Window
-window-width = 90
-window-height = 30
 window-padding-balance = true
 window-padding-color = extend
 
