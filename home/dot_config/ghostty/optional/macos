@@ -2,14 +2,12 @@
 
 # Font
 font-family = ""
-font-family = "Operator Mono SSm"
-# Use Book variants instead of Medium
-font-style = "Book"
-font-style-italic = "Book Italic"
+font-family = "JetBrains Maple Mono"
 font-family = "Symbols Nerd Font Mono"
-font-size = 13
-adjust-cell-height = 10%
-adjust-underline-position = 4
+font-size = 14
+# I don't like noisy ligatures
+font-feature = -calt,-liga,-dlig
+adjust-underline-position = 2
 
 # Window
 window-width = 90
