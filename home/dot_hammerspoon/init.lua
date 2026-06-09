@@ -21,7 +21,7 @@ local appShortcuts = {
 	-- { "A", "Antinote" },
 	-- { "M", "Monica" },
 	-- { "N", "Obsidian" },
-	{ "N", "UpNote" },
+	-- { "N", "UpNote" },
 	-- { "G", "ChatGPT" },
 	{ "S", "Spotify" },
 }
@@ -29,7 +29,7 @@ local appShortcuts = {
 -- General Shortcuts for Links
 local linkShortcuts = {
 	-- Key, Description, URL
-	-- { "N", "Notion", "https://www.notion.so/" },
+	{ "N", "Notion", "https://app.notion.com/" },
 	-- { "M", "Monica", "https://monica.im/" },
 	-- { "D", "DeepSeek", "https://chat.deepseek.com/" },
 	{ "G", "ChatGPT", "https://chatgpt.com/" },
