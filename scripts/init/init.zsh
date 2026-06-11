@@ -161,10 +161,10 @@ if command -v fzf &>/dev/null; then
 	fi
 fi
 
-# Initialize starship if installed
-if command -v starship &>/dev/null; then
-	eval "$(starship init zsh)"
-fi
+# # Initialize starship if installed
+# if command -v starship &>/dev/null; then
+# 	eval "$(starship init zsh)"
+# fi
 
 # Initialize zoxide if installed
 if command -v zoxide &>/dev/null; then
