@@ -60,6 +60,8 @@ fi
 # Use t for tmux
 if command -v tmux &>/dev/null; then
 	alias t='tmux'
+	alias tn='tmux new -s'
+	alias ta='tmux attach -t'
 fi
 
 # Use lg for lazygit
