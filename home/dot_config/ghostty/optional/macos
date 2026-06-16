@@ -2,11 +2,9 @@
 
 # Font
 font-family = ""
-font-family = "IBM Plex Mono"
+font-family = "Lilex"
 font-family = "Symbols Nerd Font Mono"
 font-size = 14
-# I don't like noisy ligatures
-font-feature = -calt,-liga,-dlig
 adjust-underline-position = 2
 
 # Window
