@@ -2,10 +2,9 @@
 
 # Font
 font-family = ""
-font-family = "Lilex"
-font-family = "Symbols Nerd Font Mono"
+font-family = "CaskaydiaCove Nerd Font"
 font-size = 14
-adjust-underline-position = 2
+adjust-underline-position = 4
 
 # Window
 window-width = 90
