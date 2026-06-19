@@ -16,7 +16,7 @@ ripgrep = "latest"
 # ruff = "latest"
 # starship = "latest"
 # tmux = "latest"
-yazi = "latest"
+# yazi = "latest"
 # zellij = "latest"
 zoxide = "latest"
 

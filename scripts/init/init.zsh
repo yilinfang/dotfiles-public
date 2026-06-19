@@ -133,16 +133,16 @@ if command -v claude &>/dev/null; then
 	# fi
 fi
 
-# Use y for yazi wrapper
-if command -v yazi &>/dev/null; then
-	function y() {
-		local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
-		yazi "$@" --cwd-file="$tmp"
-		IFS= read -r -d '' cwd <"$tmp"
-		[ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
-		rm -f -- "$tmp"
-	}
-fi
+# # Use y for yazi wrapper
+# if command -v yazi &>/dev/null; then
+# 	function y() {
+# 		local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+# 		yazi "$@" --cwd-file="$tmp"
+# 		IFS= read -r -d '' cwd <"$tmp"
+# 		[ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
+# 		rm -f -- "$tmp"
+# 	}
+# fi
 
 # Initialize fzf if installed
 if command -v fzf &>/dev/null; then
