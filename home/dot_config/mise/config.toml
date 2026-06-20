@@ -1,9 +1,8 @@
 [tools]
 bun = "latest"
-codex = "latest"
 gh = "latest"
 jq = "latest"
-# "npm:@openai/codex" = "latest"
+"npm:@openai/codex" = "latest"
 # "npm:prettier" = "latest"
 # ruff = "latest"
 shellcheck = "latest"
