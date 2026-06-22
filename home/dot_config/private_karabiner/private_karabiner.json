@@ -1,16 +1,17 @@
 {
+    "machine_specific": { "krbn-4b079d58-84f4-46be-8727-853b988ba735": { "external_editor_path": "/Applications/CotEditor.app" } },
     "profiles": [
         {
             "complex_modifications": {
                 "rules": [
                     {
-                        "description": "Caps Lock + Right Shift -> Caps Lock, Caps Lock -> LeftCommand+Control+Shift+Option",
+                        "description": "Caps Lock + Shift -> Caps Lock, Caps Lock -> LeftCommand+Control+Shift+Option",
                         "manipulators": [
                             {
                                 "from": {
                                     "key_code": "caps_lock",
                                     "modifiers": {
-                                        "mandatory": ["right_shift"],
+                                        "mandatory": ["shift"],
                                         "optional": ["caps_lock"]
                                     }
                                 },
