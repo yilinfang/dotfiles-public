@@ -36,6 +36,7 @@ if has("termguicolors")
 endif
 " Force use dark background
 set background=dark
+colorscheme torte
 "" Enable wildcharm with torte as a backup
 "if !empty(globpath(&runtimepath, "colors/wildcharm.vim"))
 "  colorscheme wildcharm
