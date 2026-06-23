@@ -12,3 +12,4 @@ uv = "latest"
 
 [settings]
 python.compile = false
+minimum_release_age_excludes = ["npm:@openai/codex"]
