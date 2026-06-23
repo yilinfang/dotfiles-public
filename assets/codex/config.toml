@@ -3,4 +3,4 @@ memories = false
 prevent_idle_sleep = true
 
 [tui]
-status_line = ["model-with-reasoning", "current-dir", "context-used", "five-hour-limit", "weekly-limit", "fast-mode"]
+status_line = ["current-dir", "model-with-reasoning", "context-used", "five-hour-limit", "weekly-limit", "fast-mode"]
