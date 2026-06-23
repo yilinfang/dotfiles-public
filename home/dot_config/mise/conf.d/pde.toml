@@ -22,3 +22,4 @@ zoxide = "latest"
 
 [settings]
 disable_backends = ["asdf"]
+minimum_release_age_excludes = ["codex", "npm:@openai/codex"]
