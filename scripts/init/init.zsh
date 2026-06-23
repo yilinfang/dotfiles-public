@@ -81,7 +81,7 @@ fi
 
 # Use c for codex
 if command -v codex &>/dev/null; then
-	alias cdx='codex'
+	alias c='codex'
 fi
 
 # # Create wrappers for claude
