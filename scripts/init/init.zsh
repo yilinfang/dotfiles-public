@@ -42,7 +42,7 @@ fi
 
 # If rg is installed
 if command -v rg &>/dev/null; then
-	export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
+	# export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
 	alias rgv='rg --vimgrep'
 	alias brg='rg --smart-case --max-columns=150 --max-columns-preview'
 fi
