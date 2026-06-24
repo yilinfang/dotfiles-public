@@ -79,15 +79,20 @@ if command -v opencode &>/dev/null; then
 	alias oc='opencode'
 fi
 
-# Use c for codex
-if command -v codex &>/dev/null; then
-	alias c='codex'
-fi
+# # Use c for codex
+# if command -v codex &>/dev/null; then
+# 	alias c='codex'
+# fi
+
+# # Use c for claude
+# if command -v claude &>/dev/null; then
+# 	alias c='claude'
+# fi
 
 # # Create wrappers for claude
 # if command -v claude &>/dev/null; then
-# 	# Use c for claude
-# 	alias c='claude'
+# 	# Use cld for claude
+# 	alias cld='claude'
 # 	# # MiniMax Provider
 # 	# SECRETS_MINIMAX_ENV="$HOME/.secrets/claude_code_with_minimax.env"
 # 	# if [ -f "$SECRETS_MINIMAX_ENV" ]; then
