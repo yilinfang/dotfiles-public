@@ -1,0 +1,21 @@
+#!/usr/bin/env python3
+import os
+import sqlite3
+
+path = os.path.join(os.path.expanduser("~"), ".codex", "logs_2.sqlite")
+con = sqlite3.connect(path, timeout=10)
+con.execute("PRAGMA busy_timeout = 10000;")
+
+con.executescript("""
+CREATE TRIGGER IF NOT EXISTS codex_block_trace_logs
+BEFORE INSERT ON logs
+WHEN NEW.level = 'TRACE'
+BEGIN
+  SELECT RAISE(IGNORE);
+END;
+
+PRAGMA wal_checkpoint(TRUNCATE);
+""")
+
+con.close()
+print("OK: TRACE log blocker installed")

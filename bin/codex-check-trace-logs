@@ -1,0 +1,26 @@
+#!/usr/bin/env python3
+import os
+import sqlite3
+import time
+
+path = os.path.join(os.path.expanduser("~"), ".codex", "logs_2.sqlite")
+
+
+def snap(label):
+    con = sqlite3.connect(path, timeout=5)
+    cur = con.cursor()
+    print(label)
+    print("trigger:", cur.execute("""
+      SELECT name FROM sqlite_master
+      WHERE type='trigger' AND name='codex_block_trace_logs'
+    """).fetchall())
+    print("levels:", cur.execute("""
+      SELECT level, COUNT(*) FROM logs GROUP BY level ORDER BY COUNT(*) DESC
+    """).fetchall())
+    print("max:", cur.execute("SELECT COUNT(*), MAX(id), MAX(ts) FROM logs").fetchone())
+    con.close()
+
+
+snap("before")
+time.sleep(60)
+snap("after_60s")
