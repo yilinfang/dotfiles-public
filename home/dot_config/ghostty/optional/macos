@@ -2,9 +2,9 @@
 
 # Font
 font-family = ""
-font-family = "JetBrains Maple Mono"
+font-family = "Maple Mono"
 font-family = "Symbols Nerd Font Mono"
-font-feature = "'calt' off, 'liga' off, 'dlig' off, 'zero' on"
+font-feature = "'calt' on, 'cv01' on, 'cv02' on, 'cv05' on, 'cv61' on, 'cv62' on, 'zero' on"
 font-size = 14
 adjust-underline-position = 2
 
