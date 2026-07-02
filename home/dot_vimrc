@@ -27,19 +27,15 @@ nnoremap <leader>r :r!<CR>
 "nnoremap @ <Nop>
 " Resize splits if window got resized
 augroup resize_splits
-  autocmd!
-  autocmd VimResized * wincmd =
+	autocmd!
+	autocmd VimResized * wincmd =
 augroup END
 " Enable termguicolors if terminal supports it
 if has("termguicolors")
-  set termguicolors
+	set termguicolors
 endif
 " Force use dark background
 set background=dark
-colorscheme torte
-"" Enable wildcharm with torte as a backup
-"if !empty(globpath(&runtimepath, "colors/wildcharm.vim"))
-"  colorscheme wildcharm
-"else
-"  colorscheme torte
-"endif
+if has("nvim")
+	colorscheme catppuccin
+endif
