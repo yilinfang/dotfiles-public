@@ -1,14 +1,22 @@
+#!/usr/bin/env fish
+
 # init.fish
 # This script initializes the Fish shell environment
-# NOTE: Deprecated
 
 # Add $HOME/.local/bin to PATH if not already present
-fish_add_path -g $HOME/.local/bin # Automatically deduplicates
+fish_add_path -g "$HOME/.local/bin"
+
+# Add chezmoi dotfiles bin to PATH if not already present
+fish_add_path -g "$HOME/.chezmoi/dotfiles/bin"
+
+# Add opencode to PATH if not already present
+fish_add_path -g "$HOME/.opencode/bin"
 
 # If mise is installed, activate it
 if command -v mise >/dev/null
     mise activate fish | source
-    set -gx MISE_PIPX_UVX false # Use pipx instead of uvx by default
+    # set -gx MISE_DISABLE_BACKENDS asdf # Disable some backends (comma separated)
+    # set -gx MISE_PYTHON_COMPILE false # Always download pre-compiled python binaries
 end
 
 # If nvim is installed, set it as the default editor
@@ -16,11 +24,12 @@ if command -v nvim >/dev/null
     set -gx EDITOR nvim
     set -gx VISUAL nvim
     alias n='nvim'
+    alias vim='nvim'
 end
 
 # If rg is installed
 if command -v rg >/dev/null
-    set -gx RIPGREP_CONFIG_PATH "$HOME/.ripgreprc"
+    # set -gx RIPGREP_CONFIG_PATH "$HOME/.ripgreprc"
     alias rgv='rg --vimgrep'
     alias brg='rg --smart-case --max-columns=150 --max-columns-preview'
 end
@@ -30,19 +39,16 @@ if command -v bat >/dev/null
     alias bcat='bat --color=always --paging=never --style=plain'
 end
 
-# If bat or delta is installed, set BAT_THEME
-if command -v bat >/dev/null or command -v delta >/dev/null
-    set -gx BAT_THEME ansi
-end
-
-# Use g for git
-if command -v git >/dev/null
-    alias g='git'
-end
+# # If bat or delta is installed, set BAT_THEME
+# if command -v bat >/dev/null; or command -v delta >/dev/null
+#     set -gx BAT_THEME ansi
+# end
 
 # Use t for tmux
 if command -v tmux >/dev/null
     alias t='tmux'
+    alias tn='tmux new -s'
+    alias ta='tmux attach -t'
 end
 
 # Use lg for lazygit
@@ -50,27 +56,30 @@ if command -v lazygit >/dev/null
     alias lg='lazygit'
 end
 
-# # Use zj for zellij
-# if command -v zellij >/dev/null
-#     alias zj='zellij'
-# end
+# Use zj for zellij
+if command -v zellij >/dev/null
+    alias zj='zellij'
+end
 
-# # Use y for yazi
-# if command -v yazi >/dev/null
-#     function y
-#         set tmp (mktemp -t "yazi-cwd.XXXXXX")
-#         yazi $argv --cwd-file="$tmp"
-#         if read -z cwd <"$tmp"; and [ -n "$cwd" ]; and [ "$cwd" != "$PWD" ]
-#             builtin cd -- "$cwd"
-#         end
-#         rm -f -- "$tmp"
-#     end
-# end
+# Use oc for opencode
+if command -v opencode >/dev/null
+    alias oc='opencode'
+end
 
-# Create wrapper for lf
-if command -v lf >/dev/null
-    function lf
-        env LF_OLD_PWD=(pwd) command lf $argv
+# Use c for codex
+if command -v codex >/dev/null
+    alias c='codex'
+end
+
+# Use y for yazi wrapper
+if command -v yazi >/dev/null
+    function y
+        set -l tmp (mktemp -t "yazi-cwd.XXXXXX")
+        command yazi $argv --cwd-file="$tmp"
+        if read -z cwd <"$tmp"; and [ "$cwd" != "$PWD" ]; and test -d "$cwd"
+            builtin cd -- "$cwd"
+        end
+        command rm -f -- "$tmp"
     end
 end
 
@@ -80,13 +89,13 @@ if command -v fzf >/dev/null
 
     # Check for fd or fdfind command
     if command -v fdfind >/dev/null
-        set fd_command fdfind
+        set -gx fd_command fdfind
     else if command -v fd >/dev/null
-        set fd_command fd
+        set -gx fd_command fd
     end
 
     # Set up fzf commands if fd/fdfind is available
-    if set -q fd_command
+    if test -n "$fd_command"
         set -gx FZF_DEFAULT_COMMAND "$fd_command --strip-cwd-prefix --no-ignore-vcs --hidden"
         set -gx FZF_CTRL_T_COMMAND "$FZF_DEFAULT_COMMAND"
         set -gx FZF_ALT_C_COMMAND "$fd_command --type dir --strip-cwd-prefix --no-ignore-vcs --hidden"

@@ -27,13 +27,13 @@ fi
 EOF
 )
 
-# FISH_CONFIG_SNIPPET=$(
-# 	cat <<EOF
-# if test -f "\$HOME/${RELATIVE_INIT_PATH}/init.fish"
-#     source "\$HOME/${RELATIVE_INIT_PATH}/init.fish"
-# end
-# EOF
-# )
+FISH_CONFIG_SNIPPET=$(
+	cat <<EOF
+if test -f "\$HOME/${RELATIVE_INIT_PATH}/init.fish"
+    source "\$HOME/${RELATIVE_INIT_PATH}/init.fish"
+end
+EOF
+)
 
 # --- Main Logic ---
 
@@ -68,10 +68,10 @@ echo "Setup: Detected default shell: ${current_shell}"
 case "${current_shell}" in
 bash) add_config "${HOME}/.bashrc" "$BASH_CONFIG_SNIPPET" ;;
 zsh) add_config "${ZDOTDIR:-$HOME}/.zshrc" "$ZSH_CONFIG_SNIPPET" ;;
-# fish)
-# 	config_file="${HOME}/.config/fish/config.fish"
-# 	mkdir -p "$(dirname "$config_file")"
-# 	add_config "$config_file" "$FISH_CONFIG_SNIPPET"
-# 	;;
+fish)
+	config_file="${HOME}/.config/fish/config.fish"
+	mkdir -p "$(dirname "$config_file")"
+	add_config "$config_file" "$FISH_CONFIG_SNIPPET"
+	;;
 *) echo "Setup: Unsupported shell ('${current_shell}')." ;;
 esac
