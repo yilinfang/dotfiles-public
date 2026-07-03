@@ -2,6 +2,9 @@ if status is-interactive
     # Commands to run in interactive sessions can go here
 end
 
+# Homebrew
+fish_add_path -g /opt/homebrew/bin
+
 # Add $HOME/.local/bin to PATH
 fish_add_path -g $HOME/.local/bin
 
