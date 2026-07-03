@@ -26,6 +26,7 @@ if command -v kitten >/dev/null
     function kssh
         kitten ssh $argv
     end
+    complete --command kssh --wraps ssh
 end
 
 if test -f "$HOME/.chezmoi/dotfiles/scripts/init/init.fish"
