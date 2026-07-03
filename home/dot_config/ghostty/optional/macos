@@ -2,10 +2,9 @@
 
 # Font
 font-family = ""
-font-family = "JetBrains Mono"
-font-family = "Symbols Nerd Font Mono"
-font-feature = "'calt' off, 'zero' on"
-font-size = 13
+font-family = "Maple Mono NF CN"
+font-feature = +calt,+cv02,+cv05,-ss03
+font-size = 14
 adjust-underline-position = 2
 
 # Window
