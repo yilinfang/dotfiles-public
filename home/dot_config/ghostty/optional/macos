@@ -2,10 +2,12 @@
 
 # Font
 font-family = ""
-font-family = "Maple Mono NF CN"
-font-feature = +calt,+cv02,+cv05,-ss03
-font-size = 14
-adjust-underline-position = 2
+font-family = "Fira Code"
+font-family = "Symbols Nerd Font Mono"
+font-feature = +zero
+font-size = 13
+font-codepoint-map = U+2E80-U+9FFF,U+F900-U+FAFF,U+FF00-U+FFEF="LXGW Neo XiHei"
+adjust-underline-position = 4
 
 # Window
 window-width = 90
