@@ -4,6 +4,7 @@ end
 
 # Homebrew
 fish_add_path -g /opt/homebrew/bin
+fish_add_path -g /opt/homebrew/sbin
 
 # Add $HOME/.local/bin to PATH
 fish_add_path -g $HOME/.local/bin
