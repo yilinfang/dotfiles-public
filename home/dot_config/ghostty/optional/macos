@@ -3,6 +3,10 @@
 # Font
 font-family = ""
 font-family = "MonoLisa"
+font-style = "Light"
+font-style-bold = "Medium"
+font-style-italic = "Light Italic"
+font-style-bold-italic = "Medium Italic"
 font-feature = -calt,-liga,+ss02
 font-family = "Symbols Nerd Font Mono"
 font-size = 13
