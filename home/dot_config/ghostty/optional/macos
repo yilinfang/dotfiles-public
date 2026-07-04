@@ -2,14 +2,12 @@
 
 # Font
 font-family = ""
-font-family = "Fira Code"
-font-feature = +calt,+zero,+ss01
-font-style = "regular"
-font-style-bold = "SemiBold"
+font-family = "MonoLisa"
+font-feature = -calt,-liga,+ss02
 font-family = "Symbols Nerd Font Mono"
 font-size = 13
 font-codepoint-map = U+2E80-U+9FFF,U+F900-U+FAFF,U+FF00-U+FFEF="LXGW Neo XiHei"
-adjust-underline-position = 4
+adjust-underline-position = 2
 
 # Window
 window-width = 90
