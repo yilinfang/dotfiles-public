@@ -1,0 +1,5 @@
+# Some muscle memory
+[keys]
+prefix = "ctrl+a"
+detach = "prefix+d"
+copy_mode = "prefix+enter"
