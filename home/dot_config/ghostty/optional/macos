@@ -2,16 +2,11 @@
 
 # Font
 font-family = ""
-font-family = "MonoLisa"
-font-style = "Light"
-font-style-bold = "Medium"
-font-style-italic = "Light Italic"
-font-style-bold-italic = "Medium Italic"
-font-feature = -calt,-liga,+ss02
+font-family = "Redwood Mono"
 font-family = "Symbols Nerd Font Mono"
-font-size = 13
+font-size = 14
 font-codepoint-map = U+2E80-U+9FFF,U+F900-U+FAFF,U+FF00-U+FFEF="LXGW Neo XiHei"
-adjust-underline-position = 2
+adjust-underline-position = 4
 
 # Window
 window-width = 90
