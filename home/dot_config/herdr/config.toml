@@ -1,5 +1,7 @@
+onboarding = false
 # Some muscle memory
 [keys]
-prefix = "ctrl+a"
-detach = "prefix+d"
-copy_mode = "prefix+enter"
+prefix = "ctrl+b"
+detach = ["prefix+q", "prefix+d"]
+copy_mode = ["prefix+[", "prefix+enter"]
+split_vertical = ["prefix+v", "prefix+|"]
