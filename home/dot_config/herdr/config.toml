@@ -1,9 +1,12 @@
 onboarding = false
+[theme]
+name = "tokyo-night"
+auto_switch = false
 # Some muscle memories
 [keys]
 prefix = "ctrl+b"
 detach = ["prefix+q", "prefix+d"]
 copy_mode = ["prefix+[", "prefix+enter"]
 split_vertical = ["prefix+v", "prefix+|"]
-[terminals]
+[terminal]
 new_cwd = "home" # Avoid confusion
