@@ -1,10 +1,18 @@
 onboarding = false
+
 [theme]
-name = "tokyo-night"
+name = "catppuccin"
 auto_switch = false
-# Some muscle memories
+
 [keys]
+# Some muscle memories
 prefix = "ctrl+a"
 detach = ["prefix+q", "prefix+d"]
 copy_mode = ["prefix+[", "prefix+enter"]
 split_vertical = ["prefix+v", "prefix+|"]
+
+[ui.toast]
+delivery = "terminal"
+
+[ui.sound]
+enabled = false
