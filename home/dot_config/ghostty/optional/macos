@@ -3,10 +3,12 @@
 # Font
 font-family = ""
 font-family = "Redwood Mono"
-font-family = "Symbols Nerd Font Mono"
 font-size = 14
-font-codepoint-map = U+2E80-U+9FFF,U+F900-U+FAFF,U+FF00-U+FFEF="LXGW Neo XiHei"
 adjust-underline-position = 4
+# CJK glyphs
+config-file = fonts/cjk
+# Nerd fonts glyphs
+config-file = fonts/nerd-font
 
 # Window
 window-width = 90

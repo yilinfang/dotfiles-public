@@ -1,0 +1,3 @@
+# CJK glyphs
+
+font-codepoint-map = U+2E80-U+9FFF,U+F900-U+FAFF,U+FF00-U+FFEF="LXGW Neo XiHei"
