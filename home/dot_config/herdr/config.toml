@@ -4,7 +4,7 @@ name = "tokyo-night"
 auto_switch = false
 # Some muscle memories
 [keys]
-prefix = "ctrl+b"
+prefix = "ctrl+a"
 detach = ["prefix+q", "prefix+d"]
 copy_mode = ["prefix+[", "prefix+enter"]
 split_vertical = ["prefix+v", "prefix+|"]
