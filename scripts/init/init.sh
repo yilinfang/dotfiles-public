@@ -36,8 +36,8 @@ fi
 if command -v nvim &>/dev/null; then
 	export EDITOR=nvim
 	export VISUAL=nvim
-	alias n='nvim'
-	alias vim='nvim'
+	# alias n='nvim'
+	# alias vim='nvim'
 fi
 
 # If rg is installed
@@ -57,12 +57,12 @@ fi
 # 	export BAT_THEME="ansi"
 # fi
 
-# Use t for tmux
-if command -v tmux &>/dev/null; then
-	alias t='tmux'
-	alias tn='tmux new -s'
-	alias ta='tmux attach -t'
-fi
+# # Use t for tmux
+# if command -v tmux &>/dev/null; then
+# 	alias t='tmux'
+# 	alias tn='tmux new -s'
+# 	alias ta='tmux attach -t'
+# fi
 
 # Use lg for lazygit
 if command -v lazygit &>/dev/null; then
@@ -84,10 +84,10 @@ fi
 # 	alias c='codex'
 # fi
 
-# Use c for claude
-if command -v claude &>/dev/null; then
-	alias c='claude'
-fi
+# # Use c for claude
+# if command -v claude &>/dev/null; then
+# 	alias c='claude'
+# fi
 
 # # Create wrappers for claude
 # if command -v claude &>/dev/null; then
