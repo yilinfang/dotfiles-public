@@ -79,15 +79,15 @@ if command -v opencode &>/dev/null; then
 	alias oc='opencode'
 fi
 
-# Use c for codex
-if command -v codex &>/dev/null; then
-	alias c='codex'
-fi
-
-# # Use c for claude
-# if command -v claude &>/dev/null; then
-# 	alias c='claude'
+# # Use c for codex
+# if command -v codex &>/dev/null; then
+# 	alias c='codex'
 # fi
+
+# Use c for claude
+if command -v claude &>/dev/null; then
+	alias c='claude'
+fi
 
 # # Create wrappers for claude
 # if command -v claude &>/dev/null; then
