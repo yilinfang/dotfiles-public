@@ -1,3 +1,5 @@
+# NOTE: Deprecated
+
 #!/usr/bin/env fish
 
 # init.fish
