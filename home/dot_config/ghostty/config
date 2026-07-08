@@ -1,11 +1,13 @@
-# MacOS
-config-file = ?optional/macos
-
-# Linux
-config-file = ?optional/linux
-
 # Theme
 config-file = ?auto/theme.ghostty
+
+# Font
+font-family = ""
+font-family = "Redwood Mono"
+# CJK glyphs
+config-file = fonts/cjk
+# Nerd fonts glyphs
+config-file = fonts/nerd-font
 
 # Window
 window-padding-balance = true
@@ -20,3 +22,9 @@ keybind = alt+b=esc:b
 # Misc
 copy-on-select = clipboard
 # shell-integration-features = ssh-env,ssh-terminfo
+
+# MacOS
+config-file = ?optional/macos
+
+# Linux
+config-file = ?optional/linux
