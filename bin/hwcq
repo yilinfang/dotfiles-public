@@ -6,6 +6,11 @@ if ! command -v herdr >/dev/null 2>&1; then
 	exit 127
 fi
 
+if [ "${HERDR_ENV:-}" = "1" ]; then
+	echo "error: hwcq must be run outside a herdr session" >&2
+	exit 1
+fi
+
 cwd="$(pwd)"
 if [ "$cwd" = "$HOME" ]; then
 	label="~"
