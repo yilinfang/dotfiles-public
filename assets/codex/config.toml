@@ -4,3 +4,6 @@ prevent_idle_sleep = true
 
 [tui]
 status_line = ["current-dir", "model-with-reasoning", "context-used", "fast-mode"]
+
+[tui.keymap.chat]
+interrupt_turn = "ctrl-]"
