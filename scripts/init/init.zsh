@@ -74,15 +74,22 @@ if command -v zellij &>/dev/null; then
 	alias zj='zellij'
 fi
 
+# Use h for herdr
+if command -v herdr &>/dev/null; then
+	alias h='herdr'
+	alias hss='herdr server stop'
+	alias hsr='herdr server reload-config'
+fi
+
 # Use oc for opencode
 if command -v opencode &>/dev/null; then
 	alias oc='opencode'
 fi
 
-# # Use c for codex
-# if command -v codex &>/dev/null; then
-# 	alias c='codex'
-# fi
+# Use c for codex
+if command -v codex &>/dev/null; then
+	alias c='codex'
+fi
 
 # # Use c for claude
 # if command -v claude &>/dev/null; then
