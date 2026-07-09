@@ -11,8 +11,8 @@ local appShortcuts = {
 	-- { "P", "Proton Pass" },
 	{ "P", "KeePassXC" },
 	{ "W", "WeChat" },
-	{ "C", "Visual Studio Code" },
-	-- { "C", "Cursor" },
+	-- { "C", "Visual Studio Code" },
+	{ "C", "Cursor" },
 	-- { "C", "Windsurf" },
 	-- { "C", "Antigravity" },
 	-- { "F", "Firefox" },
@@ -84,8 +84,8 @@ hs.hotkey.bind(mods, "return", function()
 		notifyAndLaunchApp("OpenInTerminal-Lite")
 	else
 		-- notifyAndLaunchApp("iTerm")
-		-- notifyAndLaunchApp("kitty")
-		notifyAndLaunchApp("Ghostty")
+		notifyAndLaunchApp("kitty")
+		-- notifyAndLaunchApp("Ghostty")
 	end
 end)
 
