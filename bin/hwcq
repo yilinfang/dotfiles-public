@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if ! command -v herdr >/dev/null 2>&1; then
+	echo "error: herdr is not installed or not in PATH" >&2
+	exit 127
+fi
+
+cwd="$(pwd)"
+if [ "$cwd" = "$HOME" ]; then
+	label="~"
+else
+	label="$(basename "$cwd")"
+fi
+
+herdr workspace create \
+	--cwd "$cwd" \
+	--label "$label" \
+	--focus
+
+exec herdr
