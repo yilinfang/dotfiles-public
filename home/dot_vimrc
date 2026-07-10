@@ -32,9 +32,12 @@ augroup resize_splits
 augroup END
 " Force use dark background
 set background=dark
-" Use catppuccin colorscheme in Neovim
 if has("nvim")
-	colorscheme catppuccin
+	" Use wildcharm in Neovim
+	colorscheme wildcharm
+else
+	" Use torte in Vim
+	colorscheme torte
 endif
 " Enable termguicolors if terminal supports it
 if has("termguicolors")
