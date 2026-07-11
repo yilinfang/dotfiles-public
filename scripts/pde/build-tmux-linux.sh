@@ -7,28 +7,40 @@
 
 set -euo pipefail
 
-# If in MacOS, notify and exit
-if [[ "$(uname)" == "Darwin" ]]; then
+# Exit before creating build state on unsupported systems.
+if [[ "$(uname -s)" != "Linux" ]]; then
 	echo "This script is intended for Linux systems only."
-	echo "For MacOS, please use homebrew with 'brew install tmux'."
 	exit 1
 fi
 
 # --- Configuration ---
 NCURSES_VERSION="6.6"
-LIBEVENT_VERSION="2.1.12-stable"
-TMUX_VERSION="3.6a"
+NCURSES_SHA256="355b4cbbed880b0381a04c46617b7656e362585d52e9cf84a67e2009b749ff11"
+LIBEVENT_VERSION="2.1.13-stable"
+LIBEVENT_SHA256="f7e9383b8c0baa81b687e5b5eecc01beefaf1b19b64151d95ed61647fe7a315c"
+TMUX_VERSION="3.7b"
+TMUX_SHA256="87f2e99e3b685973f2ca002ffd6ed7e51a5744f7009daae5a15670b6d532db96"
 
 # --- Script Start ---
 
 #  Set ~/.local/bin as the default output directory.
 readonly OUTPUT_DIR="${HOME}/.local/bin"
+mkdir -p "${OUTPUT_DIR}"
 
 # Create a temporary directory for the entire build process.
-readonly BUILD_DIR="$(mktemp -d -t tmux-build-XXXXXX)"
+BUILD_DIR="$(mktemp -d -t tmux-build-XXXXXX)"
+readonly BUILD_DIR
+OUTPUT_TMP=""
 
-# Set up a trap to clean up the temporary directory on exit (including on error).
-trap 'echo "--- Cleaning up temporary build directory: ${BUILD_DIR}"; rm -rf "${BUILD_DIR}"' EXIT
+# Clean up temporary build and output files on exit (including on error).
+cleanup() {
+	if [[ -n "${OUTPUT_TMP}" ]]; then
+		rm -f -- "${OUTPUT_TMP}"
+	fi
+	echo "--- Cleaning up temporary build directory: ${BUILD_DIR}"
+	rm -rf -- "${BUILD_DIR}"
+}
+trap cleanup EXIT
 
 echo "--- Starting static build process ---"
 echo "Temporary build directory: ${BUILD_DIR}"
@@ -39,6 +51,16 @@ readonly LOCAL_INSTALL_DIR="${BUILD_DIR}/local"
 readonly SRC_DIR="${BUILD_DIR}/sources"
 mkdir -p "${LOCAL_INSTALL_DIR}" "${SRC_DIR}"
 
+download_and_extract() {
+	local url="$1"
+	local archive="$2"
+	local checksum="$3"
+
+	wget -q -O "${archive}" "${url}"
+	printf '%s  %s\n' "${checksum}" "${archive}" | sha256sum --check -
+	tar -xzf "${archive}"
+}
+
 # Set environment variables for the build process to use our temporary locations.
 export CFLAGS="-I${LOCAL_INSTALL_DIR}/include"
 export CPPFLAGS="-I${LOCAL_INSTALL_DIR}/include"
@@ -48,34 +70,50 @@ export PKG_CONFIG_PATH="${LOCAL_INSTALL_DIR}/lib/pkgconfig"
 # --- libevent ---
 echo "--- Compiling libevent ${LIBEVENT_VERSION} ---"
 cd "${SRC_DIR}"
-wget -qO- "https://github.com/libevent/libevent/releases/download/release-${LIBEVENT_VERSION}/libevent-${LIBEVENT_VERSION}.tar.gz" | tar -xzf -
+download_and_extract \
+	"https://github.com/libevent/libevent/releases/download/release-${LIBEVENT_VERSION}/libevent-${LIBEVENT_VERSION}.tar.gz" \
+	"libevent-${LIBEVENT_VERSION}.tar.gz" \
+	"${LIBEVENT_SHA256}"
 cd "libevent-${LIBEVENT_VERSION}"
 ./configure --prefix="$LOCAL_INSTALL_DIR" --disable-openssl >/dev/null
-make -j$(nproc) -s
+make -j"$(nproc)" -s
 make install -s
 echo "--- Libevent installation complete ---"
 
 # --- ncurses ---
 echo "--- Compiling ncurses ${NCURSES_VERSION} ---"
 cd "${SRC_DIR}"
-wget -qO- "https://invisible-island.net/archives/ncurses/ncurses-${NCURSES_VERSION}.tar.gz" | tar -xzf -
+download_and_extract \
+	"https://invisible-island.net/archives/ncurses/ncurses-${NCURSES_VERSION}.tar.gz" \
+	"ncurses-${NCURSES_VERSION}.tar.gz" \
+	"${NCURSES_SHA256}"
 cd "ncurses-${NCURSES_VERSION}"
-./configure --prefix="$LOCAL_INSTALL_DIR" --with-pkg-config-libdir="$LOCAL_INSTALL_DIR/lib/pkgconfig" >/dev/null
-make -j$(nproc) -s
+./configure \
+	--prefix="$LOCAL_INSTALL_DIR" \
+	--enable-pc-files \
+	--with-pkg-config-libdir="$LOCAL_INSTALL_DIR/lib/pkgconfig" \
+	>/dev/null
+make -j"$(nproc)" -s
 make install -s
 echo "--- Ncurses installation complete ---"
 
 # --- tmux (static) ---
 echo "--- Compiling static tmux ${TMUX_VERSION} ---"
 cd "${SRC_DIR}"
-wget -qO- "https://github.com/tmux/tmux/releases/download/${TMUX_VERSION}/tmux-${TMUX_VERSION}.tar.gz" | tar -xzf -
+download_and_extract \
+	"https://github.com/tmux/tmux/releases/download/${TMUX_VERSION}/tmux-${TMUX_VERSION}.tar.gz" \
+	"tmux-${TMUX_VERSION}.tar.gz" \
+	"${TMUX_SHA256}"
 cd "tmux-${TMUX_VERSION}"
 ./configure --enable-static --disable-utf8proc --prefix="$LOCAL_INSTALL_DIR" >/dev/null
-make -j$(nproc) -s
+make -j"$(nproc)" -s
 echo "--- Static tmux build complete ---"
 
-# Copy the final binary to the original directory.
-cp tmux "${OUTPUT_DIR}/tmux"
+# Atomically replace the final binary.
+OUTPUT_TMP="$(mktemp "${OUTPUT_DIR}/.tmux.XXXXXX")"
+install -m 0755 tmux "${OUTPUT_TMP}"
+mv -f -- "${OUTPUT_TMP}" "${OUTPUT_DIR}/tmux"
+OUTPUT_TMP=""
 
 # --- Final Instructions ---
 echo
