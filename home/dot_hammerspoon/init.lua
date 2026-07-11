@@ -7,6 +7,7 @@ local appShortcuts = {
 	{ "E", "Finder" },
 	-- { "B", "Google Chrome" },
 	{ "B", "Brave Browser" },
+	-- { "B", "Vivaldi" },
 	-- { "P", "Bitwarden" },
 	-- { "P", "Proton Pass" },
 	{ "P", "KeePassXC" },
@@ -84,8 +85,8 @@ hs.hotkey.bind(mods, "return", function()
 		notifyAndLaunchApp("OpenInTerminal-Lite")
 	else
 		-- notifyAndLaunchApp("iTerm")
-		notifyAndLaunchApp("kitty")
-		-- notifyAndLaunchApp("Ghostty")
+		-- notifyAndLaunchApp("kitty")
+		notifyAndLaunchApp("Ghostty")
 	end
 end)
 
