@@ -57,12 +57,12 @@ fi
 # 	export BAT_THEME="ansi"
 # fi
 
-# # Use t for tmux
-# if command -v tmux &>/dev/null; then
-# 	alias t='tmux'
-# 	alias tn='tmux new -s'
-# 	alias ta='tmux attach -t'
-# fi
+# Use t for tmux
+if command -v tmux &>/dev/null; then
+	alias t='tmux'
+	alias tns='tmux new -s'
+	alias tat='tmux attach -t'
+fi
 
 # Use lg for lazygit
 if command -v lazygit &>/dev/null; then
