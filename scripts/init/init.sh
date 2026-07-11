@@ -61,6 +61,7 @@ fi
 if command -v tmux &>/dev/null; then
 	alias t='tmux'
 	alias ta='tmux a'
+	alias tl='tmux ls'
 	alias tns='tmux new -s'
 	alias tat='tmux attach -t'
 fi
