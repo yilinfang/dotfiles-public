@@ -3,8 +3,7 @@ config-file = ?auto/theme.ghostty
 
 # Font
 font-family = ""
-font-family = "MonoLisaCode"
-font-feature = "'calt' off, 'liga' off, 'dlig' off, 'ss01' on"
+font-family = "Redwood Mono"
 # CJK glyphs
 config-file = fonts/cjk
 # Nerd fonts glyphs

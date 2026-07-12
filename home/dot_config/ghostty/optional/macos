@@ -1,8 +1,8 @@
 # MacOS Specific Configuraions
 
 # Font
-font-size = 13
-adjust-underline-position = 2
+font-size = 14
+adjust-underline-position = 4
 
 # Window
 window-width = 90
