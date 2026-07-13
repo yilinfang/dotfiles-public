@@ -7,7 +7,7 @@ delta = "latest"
 difftastic = { version = "latest", exe = "difft" }
 fd = "latest"
 fzf = "latest"
-# herdr = "latest"
+herdr = "latest"
 lazygit = "latest"
 neovim = "latest"
 node = "lts"
