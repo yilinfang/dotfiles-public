@@ -3,8 +3,10 @@ config-file = ?auto/theme.ghostty
 
 # Font
 font-family = ""
-font-family = "MonoLisaCode CUSTOM"
-# Nerd fonts glyphs
+font-family = "MonoLisaCode CUSTOM-VF"
+font-size = 13
+adjust-underline-position = 2
+# Nerd font glyphs
 config-file = fonts/nerd-font
 
 # Window

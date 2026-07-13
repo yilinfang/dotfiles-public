@@ -1,8 +1,6 @@
 # MacOS Specific Configuraions
 
-# Font
-font-size = 13
-adjust-underline-position = 2
+# Simplified Chinese glyphs
 font-codepoint-map = U+2E80-U+9FFF,U+F900-U+FAFF,U+FF00-U+FFEF="PingFang SC"
 
 # Window
