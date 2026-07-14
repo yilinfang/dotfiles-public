@@ -18,6 +18,16 @@ if [[ ":$PATH:" != *":$HOME/.opencode/bin:"* ]]; then
 	export PATH="$HOME/.opencode/bin:$PATH"
 fi
 
+# Define an alias only if the name is not already taken (command, builtin,
+# alias, or function). Warns and skips on collision instead of clobbering.
+safe_alias() {
+	if command -v -- "$1" >/dev/null 2>&1; then
+		printf 'safe_alias: skipping %s (already defined)\n' "$1" >&2
+		return
+	fi
+	alias "$1=$2"
+}
+
 # If mise is installed, activate it
 if command -v mise &>/dev/null; then
 	eval "$(mise activate bash)"
@@ -36,20 +46,20 @@ fi
 if command -v nvim &>/dev/null; then
 	export EDITOR=nvim
 	export VISUAL=nvim
-	alias n='nvim'
+	safe_alias n 'nvim'
 	# alias vim='nvim'
 fi
 
 # If rg is installed
 if command -v rg &>/dev/null; then
 	# export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
-	alias rgv='rg --vimgrep'
-	alias brg='rg --smart-case --max-columns=150 --max-columns-preview'
+	safe_alias rgv 'rg --vimgrep'
+	safe_alias brg 'rg --smart-case --max-columns=150 --max-columns-preview'
 fi
 
 # If bat is installed
 if command -v bat &>/dev/null; then
-	alias bcat='bat --color=always --paging=never --style=plain'
+	safe_alias bcat 'bat --color=always --paging=never --style=plain'
 fi
 
 # # If bat or delta is installed, set BAT_THEME
@@ -59,33 +69,33 @@ fi
 
 # Use t for tmux
 if command -v tmux &>/dev/null; then
-	alias t='tmux'
-	alias ta='tmux a'
-	alias tl='tmux ls'
-	alias tns='tmux new -s'
-	alias tat='tmux attach -t'
+	safe_alias t 'tmux'
+	safe_alias ta 'tmux a'
+	safe_alias tl 'tmux ls'
+	safe_alias tns 'tmux new -s'
+	safe_alias tat 'tmux attach -t'
 fi
 
 # Use lg for lazygit
 if command -v lazygit &>/dev/null; then
-	alias lg='lazygit'
+	safe_alias lg 'lazygit'
 fi
 
 # Use zj for zellij
 if command -v zellij &>/dev/null; then
-	alias zj='zellij'
+	safe_alias zj 'zellij'
 fi
 
 # Use h for herdr
 if command -v herdr &>/dev/null; then
-	alias h='herdr'
-	alias hss='herdr server stop'
-	alias hsr='herdr server reload-config'
+	safe_alias h 'herdr'
+	safe_alias hss 'herdr server stop'
+	safe_alias hsr 'herdr server reload-config'
 fi
 
 # Use oc for opencode
 if command -v opencode &>/dev/null; then
-	alias oc='opencode'
+	safe_alias oc 'opencode'
 fi
 
 # # Use c for codex
@@ -95,10 +105,10 @@ fi
 
 # Use c for claude
 if command -v claude &>/dev/null; then
-	alias c='claude'
-	alias co='claude --model opus'
-	alias cs='claude --model sonnet'
-	alias ch='claude --model haiku'
+	safe_alias c 'claude'
+	safe_alias co 'claude --model opus'
+	safe_alias cs 'claude --model sonnet'
+	safe_alias ch 'claude --model haiku'
 fi
 
 # # Create wrappers for claude
