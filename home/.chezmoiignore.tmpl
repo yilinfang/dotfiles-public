@@ -31,11 +31,11 @@
 
 # Linux
 {{ if ne .chezmoi.os "linux" }}
-.config/ghostty/optional/linux
+.config/ghostty/optional/linux.ghostty
 {{ end }}
 
 {{ if ne .chezmoi.os "darwin" }}
-.config/ghostty/optional/macos
+.config/ghostty/optional/macos.ghostty
 {{ end }}
 
 {{ if .work }}
