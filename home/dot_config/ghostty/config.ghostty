@@ -25,7 +25,7 @@ copy-on-select = clipboard
 # shell-integration-features = ssh-env,ssh-terminfo
 
 # MacOS
-config-file = ?optional/macos
+config-file = ?optional/macos.ghostty
 
 # Linux
-config-file = ?optional/linux
+config-file = ?optional/linux.ghostty
