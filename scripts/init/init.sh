@@ -98,18 +98,18 @@ if command -v opencode &>/dev/null; then
 	safe_alias oc 'opencode'
 fi
 
-# # Use c for codex
-# if command -v codex &>/dev/null; then
-# 	alias c='codex'
-# fi
-
-# Use c for claude
-if command -v claude &>/dev/null; then
-	safe_alias c 'claude'
-	safe_alias co 'claude --model opus'
-	safe_alias cs 'claude --model sonnet'
-	safe_alias ch 'claude --model haiku'
+# Use c for codex
+if command -v codex &>/dev/null; then
+	safe_alias c 'codex'
 fi
+
+# # Use c for claude
+# if command -v claude &>/dev/null; then
+# 	safe_alias c 'claude'
+# 	safe_alias co 'claude --model opus'
+# 	safe_alias cs 'claude --model sonnet'
+# 	safe_alias ch 'claude --model haiku'
+# fi
 
 # # Create wrappers for claude
 # if command -v claude &>/dev/null; then
