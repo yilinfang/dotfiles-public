@@ -98,9 +98,12 @@ if command -v opencode &>/dev/null; then
 	safe_alias oc 'opencode'
 fi
 
-# Use c for codex
+# Alias for codex
 if command -v codex &>/dev/null; then
 	safe_alias c 'codex -s danger-full-access -a on-request'
+	safe_alias cm 'codex -s danger-full-access -a on-request -c model=gpt-5.6-sol -c model_reasoning_effort=medium -c plan_mode_reasoning_effort=medium'
+	safe_alias ch 'codex -s danger-full-access -a on-request -c model=gpt-5.6-sol -c model_reasoning_effort=high -c plan_mode_reasoning_effort=high'
+	safe_alias cq 'codex -s danger-full-access -a on-request -c model=gpt-5.6-luna -c model_reasoning_effort=medium -c plan_mode_reasoning_effort=medium'
 fi
 
 # # Use c for claude
