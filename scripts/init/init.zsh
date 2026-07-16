@@ -100,7 +100,7 @@ fi
 
 # Use c for codex
 if command -v codex &>/dev/null; then
-	safe_alias c 'codex'
+	safe_alias c 'codex -s danger-full-access'
 fi
 
 # # Use c for claude
