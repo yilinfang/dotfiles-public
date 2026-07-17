@@ -109,9 +109,9 @@ fi
 # Alias for claude
 if command -v claude &>/dev/null; then
 	safe_alias c 'claude'
-	safe_alias cm 'claude --model opus --effort high'
+	safe_alias cm 'claude --model opus --effort medium'
 	safe_alias ch 'claude --model opus --effort xhigh'
-	safe_alias cq 'claude --model sonnet --effort high'
+	safe_alias cq 'claude --model sonnet --effort medium'
 fi
 
 # # Create wrappers for claude
