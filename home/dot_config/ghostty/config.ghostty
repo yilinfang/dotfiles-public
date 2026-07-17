@@ -4,7 +4,7 @@ config-file = ?auto/theme.ghostty
 # Font
 font-family = ""
 font-family = "MonoLisaCode"
-font-feature = "'calt' off, 'dlig' off, 'liga' off, 'ss10' on, 'ss11' on"
+font-feature = "'calt' on, 'dlig' on, 'liga' on, 'ss10' on, 'ss11' on"
 # Nerd font glyphs
 font-family = "Symbols Nerd Font Mono"
 font-size = 13
