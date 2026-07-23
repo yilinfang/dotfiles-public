@@ -1,5 +1,4 @@
 [tools]
-bun = "latest"
 gh = "latest"
 jq = "latest"
 "npm:@openai/codex" = "latest"

@@ -2,6 +2,7 @@
 age = "latest"
 # "aqua:micro-editor/micro" = "latest"
 bat = "latest"
+bun = "latest"
 chezmoi = "latest"
 delta = "latest"
 difftastic = { version = "latest", exe = "difft" }
