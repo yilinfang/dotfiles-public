@@ -98,21 +98,21 @@ if command -v opencode &>/dev/null; then
 	safe_alias oc 'opencode'
 fi
 
-# # Alias for codex
-# if command -v codex &>/dev/null; then
-# 	safe_alias c 'codex -s danger-full-access -a on-request'
-# 	safe_alias cm 'codex -s danger-full-access -a on-request -c model=gpt-5.6-sol -c model_reasoning_effort=medium -c plan_mode_reasoning_effort=medium'
-# 	safe_alias ch 'codex -s danger-full-access -a on-request -c model=gpt-5.6-sol -c model_reasoning_effort=xhigh -c plan_mode_reasoning_effort=xhigh'
-# 	safe_alias cq 'codex -s danger-full-access -a on-request -c model=gpt-5.6-luna -c model_reasoning_effort=medium -c plan_mode_reasoning_effort=medium'
-# fi
-
-# Alias for claude
-if command -v claude &>/dev/null; then
-	safe_alias c 'claude'
-	safe_alias cm 'claude --model opus --effort medium'
-	safe_alias ch 'claude --model opus --effort xhigh'
-	safe_alias cq 'claude --model sonnet --effort medium'
+# Alias for codex
+if command -v codex &>/dev/null; then
+	safe_alias c 'codex -s danger-full-access -a on-request'
+	safe_alias cm 'codex -s danger-full-access -a on-request -c model=gpt-5.6-sol -c model_reasoning_effort=medium -c plan_mode_reasoning_effort=medium'
+	safe_alias ch 'codex -s danger-full-access -a on-request -c model=gpt-5.6-sol -c model_reasoning_effort=xhigh -c plan_mode_reasoning_effort=xhigh'
+	safe_alias cq 'codex -s danger-full-access -a on-request -c model=gpt-5.6-luna -c model_reasoning_effort=medium -c plan_mode_reasoning_effort=medium'
 fi
+
+# # Alias for claude
+# if command -v claude &>/dev/null; then
+# 	safe_alias c 'claude'
+# 	safe_alias cm 'claude --model opus --effort medium'
+# 	safe_alias ch 'claude --model opus --effort xhigh'
+# 	safe_alias cq 'claude --model sonnet --effort medium'
+# fi
 
 # # Create wrappers for claude
 # if command -v claude &>/dev/null; then
