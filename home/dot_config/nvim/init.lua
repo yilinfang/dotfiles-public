@@ -206,21 +206,6 @@ require('custom.code-agents').setup()
 
 -- BOOTSTRAP & SETUP PLUGINS {{{
 
--- local add = vim.pack.add
---
--- -- Install plugins
--- add({
---   'https://github.com/sainnhe/sonokai',
---   'https://github.com/nvim-tree/nvim-web-devicons',
---   'https://github.com/ibhagwan/fzf-lua',
---   'https://github.com/tpope/vim-fugitive',
---   'https://github.com/tpope/vim-sleuth',
--- })
---
--- -- NOTE: Be careful with the order of setting up plugins!!!
--- require('config/sonokai')
--- require('config/fzf')
-
 -- [[ Bootstrap lazy.nvim ]]
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
@@ -250,11 +235,17 @@ require('lazy').setup({
   -- add your plugins here
   spec = {
     -- NOTE: Be careful with the order of setting up plugins!!!
+    -- {
+    --   'sainnhe/sonokai',
+    --   lazy = false,
+    --   priority = 1000, -- NOTE: load theme first
+    --   config = function() require('config.sonokai') end,
+    -- },
     {
-      'sainnhe/sonokai',
+      'folke/tokyonight.nvim',
       lazy = false,
-      priority = 1000, -- NOTE: load theme first
-      config = function() require('config.sonokai') end,
+      priority = 1000,
+      config = function() require('config.tokyonight') end,
     },
     {
       'ibhagwan/fzf-lua',
