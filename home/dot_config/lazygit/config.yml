@@ -1,8 +1,8 @@
 # gui:
 #   nerdFontsVersion: "3"
 git:
-  pagers:
-    - pager: delta --dark --paging=never
+  diffRenderers:
+    - command: delta --dark --paging=never
 customCommands:
   - key: "<c-g>"
     command: "git czg"
