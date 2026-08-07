@@ -168,3 +168,5 @@ ZSH_HIGHLIGHT_STYLES[comment]='fg=8'
 if [ -f "$HOME/.chezmoi/dotfiles/scripts/init/init.zsh" ]; then
 	source "$HOME/.chezmoi/dotfiles/scripts/init/init.zsh"
 fi
+
+alias chezmoi-private='chezmoi -c "${XDG_CONFIG_HOME:-$HOME/.config}/chezmoi-private/chezmoi.toml" -S "$HOME/.chezmoi/dotfiles-private"'
