@@ -1,14 +1,19 @@
 onboarding = false
 
 [theme]
-name = "catppuccin"
-auto_switch = false
+name = "terminal"
+
+[theme.custom]
+panel_bg = "black"
 
 [keys]
 # Some muscle memories
 detach = ["prefix+q", "prefix+d"]
 copy_mode = ["prefix+[", "prefix+enter"]
 split_vertical = ["prefix+v", "prefix+|"]
+
+[ui]
+accent = "blue"
 
 [ui.sound]
 enabled = false
