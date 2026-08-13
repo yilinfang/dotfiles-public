@@ -89,8 +89,7 @@ codex:
 	@if ! command -v codex >/dev/null 2>&1; then \
 		echo "Installing Codex..."; \
 		if command -v mise >/dev/null 2>&1; then \
-			mise use -g --minimum-release-age 0s npm:@openai/codex@latest; \
-			mise settings set minimum_release_age_excludes npm:@openai/codex; \
+			mise use -g npm:@openai/codex; \
 		elif command -v npm >/dev/null 2>&1; then \
 			npm install -g @openai/codex; \
 		else \
