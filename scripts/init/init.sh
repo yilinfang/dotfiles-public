@@ -89,8 +89,6 @@ fi
 # Use h for herdr
 if command -v herdr &>/dev/null; then
 	safe_alias h 'herdr'
-	safe_alias hss 'herdr server stop'
-	safe_alias hsr 'herdr server reload-config'
 fi
 
 # Use oc for opencode

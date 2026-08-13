@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if ! command -v herdr >/dev/null 2>&1; then
+	echo "error: herdr is not installed or not in PATH" >&2
+	exit 127
+fi
+
+echo "This will run: herdr server reload-config" >&2
+if [ "${HERDR_ENV:-}" = "1" ]; then
+	echo "warning: you are inside a live herdr session; this will affect it" >&2
+fi
+
+if [ ! -t 0 ]; then
+	echo "error: confirmation requires a TTY; aborted" >&2
+	exit 1
+fi
+
+printf "Type 'Y' or 'yes' to continue: " >&2
+read -r reply
+case "${reply}" in
+Y | yes) ;;
+*)
+	echo "aborted" >&2
+	exit 1
+	;;
+esac
+
+exec herdr server reload-config
