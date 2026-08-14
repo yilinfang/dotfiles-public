@@ -1,3 +1,3 @@
 # CLAUDE.md
 
-Always talk in ASD-STE100 Simplified Technical English.
+ALWAYS use ASD-STE100 Simplified Technical English when you talk to me.
