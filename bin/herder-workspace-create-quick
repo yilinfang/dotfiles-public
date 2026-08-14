@@ -7,7 +7,7 @@ if ! command -v herdr >/dev/null 2>&1; then
 fi
 
 if [ "${HERDR_ENV:-}" = "1" ]; then
-	echo "error: hwcq must be run outside a herdr session" >&2
+	echo "error: herder-workspace-create-quick must be run outside a herdr session" >&2
 	exit 1
 fi
 

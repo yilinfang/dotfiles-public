@@ -90,6 +90,8 @@ fi
 if command -v herdr &>/dev/null; then
 	safe_alias h 'herdr'
 	safe_alias hsr 'herdr server reload-config'
+	safe_alias hss 'herder-server-stop'
+	safe_alias hwcq 'herder-workspace-create-quick'
 fi
 
 # Use oc for opencode
