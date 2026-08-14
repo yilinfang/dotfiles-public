@@ -28,6 +28,16 @@ safe_alias() {
 	alias "$1=$2"
 }
 
+# Personal scripts
+# Use hss for herder server stop
+if command -v herder-server-stop &>/dev/null; then
+	safe_alias hss 'herder-server-stop'
+fi
+# Use hwcq for herder workspace create quick
+if command -v herder-workspace-create-quick &>/dev/null; then
+	safe_alias hwcq 'herder-workspace-create-quick'
+fi
+
 # If mise is installed, activate it
 if command -v mise &>/dev/null; then
 	eval "$(mise activate bash)"
@@ -90,8 +100,6 @@ fi
 if command -v herdr &>/dev/null; then
 	safe_alias h 'herdr'
 	safe_alias hsr 'herdr server reload-config'
-	safe_alias hss 'herder-server-stop'
-	safe_alias hwcq 'herder-workspace-create-quick'
 fi
 
 # Use oc for opencode
