@@ -102,9 +102,9 @@ fi
 # Alias for codex
 if command -v codex &>/dev/null; then
 	safe_alias c 'codex --yolo'
-	# safe_alias cm 'codex -s danger-full-access -a on-request -c model=gpt-5.6-sol -c model_reasoning_effort=medium -c plan_mode_reasoning_effort=medium'
-	# safe_alias ch 'codex -s danger-full-access -a on-request -c model=gpt-5.6-sol -c model_reasoning_effort=xhigh -c plan_mode_reasoning_effort=xhigh'
-	# safe_alias cq 'codex -s danger-full-access -a on-request -c model=gpt-5.6-terra -c model_reasoning_effort=high -c plan_mode_reasoning_effort=high'
+	safe_alias cm 'codex --yolo -c model=gpt-5.6-sol -c model_reasoning_effort=medium -c plan_mode_reasoning_effort=medium'
+	safe_alias ch 'codex --yolo -c model=gpt-5.6-sol -c model_reasoning_effort=xhigh -c plan_mode_reasoning_effort=xhigh'
+	safe_alias cq 'codex --yolo -c model=gpt-5.6-terra -c model_reasoning_effort=high -c plan_mode_reasoning_effort=high'
 fi
 
 # # Alias for claude
