@@ -7,8 +7,8 @@ name = "terminal"
 panel_bg = "black"
 
 [keys]
+prefix = "ctrl+space"
 # Some muscle memories
-prefix = "ctrl+a"
 detach = ["prefix+q", "prefix+d"]
 copy_mode = ["prefix+[", "prefix+enter"]
 split_vertical = ["prefix+v", "prefix+|"]
