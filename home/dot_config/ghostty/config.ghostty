@@ -11,7 +11,7 @@ config-file = ?auto/theme.ghostty
 # adjust-underline-position = 2
 font-family = ""
 font-family = "FiraCode Nerd Font"
-font-size = 13
+font-size = 14
 adjust-underline-position = 4
 
 # Window
