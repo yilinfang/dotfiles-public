@@ -1,7 +1,6 @@
 [tools]
 age = "latest"
 # "aqua:micro-editor/micro" = "latest"
-"aqua:gokcehan/lf" = "latest"
 bat = "latest"
 bun = "latest"
 chezmoi = "latest"
@@ -9,6 +8,7 @@ delta = "latest"
 difftastic = { version = "latest", exe = "difft" }
 fd = "latest"
 fzf = "latest"
+"github:gokcehan/lf" = "latest"
 herdr = "latest"
 lazygit = "latest"
 neovim = "latest"
