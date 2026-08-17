@@ -1,6 +1,7 @@
 [tools]
 age = "latest"
 # "aqua:micro-editor/micro" = "latest"
+"aqua:gokcehan/lf" = "latest"
 bat = "latest"
 bun = "latest"
 chezmoi = "latest"
@@ -18,7 +19,7 @@ ripgrep = "latest"
 # ruff = "latest"
 # starship = "latest"
 # tmux = "3.7b"
-yazi = "latest"
+# yazi = "latest"
 # zellij = "latest"
 zoxide = "latest"
 
