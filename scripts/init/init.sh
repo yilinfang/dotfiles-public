@@ -13,10 +13,10 @@ if [[ ":$PATH:" != *":$HOME/.chezmoi/dotfiles/bin:"* ]]; then
 	export PATH="$HOME/.chezmoi/dotfiles/bin:$PATH"
 fi
 
-# Add opencode to PATH if not already present
-if [[ ":$PATH:" != *":$HOME/.opencode/bin:"* ]]; then
-	export PATH="$HOME/.opencode/bin:$PATH"
-fi
+# # Add opencode to PATH if not already present
+# if [[ ":$PATH:" != *":$HOME/.opencode/bin:"* ]]; then
+# 	export PATH="$HOME/.opencode/bin:$PATH"
+# fi
 
 # Define an alias only if the name is not already taken (command, builtin,
 # alias, or function). Warns and skips on collision instead of clobbering.
@@ -91,10 +91,10 @@ if command -v lazygit &>/dev/null; then
 	safe_alias lg 'lazygit'
 fi
 
-# Use zj for zellij
-if command -v zellij &>/dev/null; then
-	safe_alias zj 'zellij'
-fi
+# # Use zj for zellij
+# if command -v zellij &>/dev/null; then
+# 	safe_alias zj 'zellij'
+# fi
 
 # Use h for herdr
 if command -v herdr &>/dev/null; then
@@ -102,10 +102,10 @@ if command -v herdr &>/dev/null; then
 	safe_alias hsr 'herdr server reload-config'
 fi
 
-# Use oc for opencode
-if command -v opencode &>/dev/null; then
-	safe_alias oc 'opencode'
-fi
+# # Use oc for opencode
+# if command -v opencode &>/dev/null; then
+# 	safe_alias oc 'opencode'
+# fi
 
 # Alias for codex
 if command -v codex &>/dev/null; then
@@ -172,16 +172,16 @@ fi
 # 	# fi
 # fi
 
-# Use y for yazi wrapper
-if command -v yazi &>/dev/null; then
-	function y() {
-		local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
-		yazi "$@" --cwd-file="$tmp"
-		IFS= read -r -d '' cwd <"$tmp"
-		[ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
-		rm -f -- "$tmp"
-	}
-fi
+# # Use y for yazi wrapper
+# if command -v yazi &>/dev/null; then
+# 	function y() {
+# 		local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+# 		yazi "$@" --cwd-file="$tmp"
+# 		IFS= read -r -d '' cwd <"$tmp"
+# 		[ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
+# 		rm -f -- "$tmp"
+# 	}
+# fi
 
 # Initialize fzf if installed
 if command -v fzf &>/dev/null; then
