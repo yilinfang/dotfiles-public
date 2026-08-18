@@ -88,14 +88,7 @@ opencode:
 codex:
 	@if ! command -v codex >/dev/null 2>&1; then \
 		echo "Installing Codex..."; \
-		if command -v mise >/dev/null 2>&1; then \
-			mise use -g npm:@openai/codex; \
-		elif command -v npm >/dev/null 2>&1; then \
-			npm install -g @openai/codex; \
-		else \
-			echo "Error: neither mise nor npm is available. Please install one of them to install Codex." >&2; \
-			exit 1; \
-		fi; \
+		curl -fsSL https://chatgpt.com/codex/install.sh | sh; \
 	else \
 		echo "Codex already installed"; \
 	fi
@@ -107,32 +100,6 @@ codex:
 		echo "Merging Codex config.toml with existing file..."; \
 		$(call merge_files,"$(HOME)/.codex/config.toml",assets/codex/config.toml); \
 	fi
-# Optional Codex auth install flow, kept for future reference
-# @mkdir -p "$(HOME)/.codex"
-# @if [ -f "$(HOME)/.codex/auth.json" ]; then \
-# 	echo "Codex auth.json already exists."; \
-# 	read -r -p "Overwrite Codex auth.json from encrypted asset? [y/N] " resp; \
-# 	case "$$resp" in \
-# 		[yY][eE][sS]|[yY]) \
-# 		echo "Overwriting Codex auth.json..."; \
-# 		age -d -o "$(HOME)/.codex/auth.json" "assets/codex/auth.json.age" && chmod 600 "$(HOME)/.codex/auth.json"; \
-# 		;; \
-# 		*) \
-# 		echo "Skipping Codex auth.json installation."; \
-# 		;; \
-# 	esac; \
-# else \
-# 	read -r -p "Install Codex auth.json from encrypted asset? [y/N] " resp; \
-# 	case "$$resp" in \
-# 		[yY][eE][sS]|[yY]) \
-# 		echo "Installing Codex auth.json..."; \
-# 		age -d -o "$(HOME)/.codex/auth.json" "assets/codex/auth.json.age" && chmod 600 "$(HOME)/.codex/auth.json"; \
-# 		;; \
-# 		*) \
-# 		echo "Skipping Codex auth.json installation."; \
-# 		;; \
-# 	esac; \
-# fi
 
 vscode:
 	@echo "Installing extensions for VS Code..."
