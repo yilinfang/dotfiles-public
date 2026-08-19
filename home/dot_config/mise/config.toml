@@ -1,7 +1,7 @@
 [tools]
 gh = "latest"
 jq = "latest"
-"npm:prettier" = "latest"
+# "npm:prettier" = "latest"
 ruff = "latest"
 shellcheck = "latest"
 shfmt = "latest"
