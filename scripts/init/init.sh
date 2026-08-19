@@ -110,9 +110,8 @@ fi
 # Alias for codex
 if command -v codex &>/dev/null; then
 	safe_alias c 'codex --approve-for-me'
-	# safe_alias cm 'codex --yolo -c model=gpt-5.6-sol -c model_reasoning_effort=high -c plan_mode_reasoning_effort=high'
-	# safe_alias ch 'codex --yolo -c model=gpt-5.6-sol -c model_reasoning_effort=xhigh -c plan_mode_reasoning_effort=xhigh'
-	safe_alias cq 'codex --approve-for-me -c model=gpt-5.6-luna -c model_reasoning_effort=max -c plan_mode_reasoning_effort=max'
+	safe_alias ch 'codex --approve-for-me -c model=gpt-5.6-sol -c model_reasoning_effort=xhigh -c plan_mode_reasoning_effort=xhigh'
+	safe_alias cl 'codex --approve-for-me -c model=gpt-5.6-luna -c model_reasoning_effort=max -c plan_mode_reasoning_effort=max'
 fi
 
 # # Alias for claude
