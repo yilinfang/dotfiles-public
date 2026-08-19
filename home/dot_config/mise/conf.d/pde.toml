@@ -25,4 +25,4 @@ zoxide = "latest"
 
 [settings]
 disable_backends = ["asdf"]
-minimum_release_age = "0s"
+# minimum_release_age = "0s"
