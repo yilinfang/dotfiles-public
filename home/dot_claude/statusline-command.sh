@@ -4,14 +4,11 @@ input=$(cat)
 # Without jq we can't parse the input, so render nothing
 command -v jq >/dev/null 2>&1 || exit 0
 
-cwd=$(printf '%s' "$input" | jq -r '.cwd // .workspace.current_dir // empty')
-model=$(printf '%s' "$input" | jq -r '.model.display_name // empty')
-effort=$(printf '%s' "$input" | jq -r '.effort.level // empty')
+# Single jq call; @sh quotes each value so eval is safe
+eval "$(printf '%s' "$input" | jq -r '@sh "cwd=\(.cwd // .workspace.current_dir // "") model=\(.model.display_name // "") effort=\(.effort.level // "") tokens=\(.context_window.total_input_tokens // "") pct=\(.context_window.used_percentage // "")"')"
+
 # Fall back to the env var if the JSON field is absent
 [ -z "$effort" ] && effort="$CLAUDE_EFFORT"
-remaining=$(printf '%s' "$input" | jq -r '.context_window.remaining_percentage // empty')
-# cost=$(printf '%s' "$input" | jq -r '.cost.total_cost_usd // empty')
-# duration=$(printf '%s' "$input" | jq -r '.cost.total_duration_ms // empty')
 
 # Directory: show basename unless it's home
 home="$HOME"
@@ -36,39 +33,18 @@ if [ -n "$model" ]; then
 	fi
 fi
 
-# Context remaining: green normally, red when low (show only after first API call)
-if [ -n "$remaining" ]; then
-	[ -n "$parts" ] && parts="$parts  "
-	remaining_int=$(printf '%.0f' "$remaining")
-	if [ "$remaining_int" -le 20 ]; then
-		parts="$parts$(printf '\033[31m%s%%\033[0m' "$remaining_int")"
+# Context used: "147k (15%)" — shown only once usage has been reported
+if [ -n "$pct" ]; then
+	if [ "$tokens" -lt 1000 ]; then
+		tok="<1k"
+	elif [ "$tokens" -lt 999500 ]; then
+		tok="$(((tokens + 500) / 1000))k"
 	else
-		parts="$parts$(printf '\033[32m%s%%\033[0m' "$remaining_int")"
+		tenths=$(((tokens + 50000) / 100000))
+		tok="$((tenths / 10)).$((tenths % 10))M"
 	fi
+	[ -n "$parts" ] && parts="$parts  "
+	parts="$parts$(printf '\033[32m%s (%s%%)\033[0m' "$tok" "$pct")"
 fi
-
-# # Cost in USD (yellow), shown only when non-zero
-# if [ -n "$cost" ]; then
-# 	cost_fmt=$(printf '%.2f' "$cost")
-# 	if [ "$cost_fmt" != "0.00" ]; then
-# 		[ -n "$parts" ] && parts="$parts  "
-# 		parts="$parts$(printf '\033[33m$%s\033[0m' "$cost_fmt")"
-# 	fi
-# fi
-
-# # Elapsed time (blue), formatted as s / m / h+m
-# if [ -n "$duration" ]; then
-# 	ms=$(printf '%.0f' "$duration")
-# 	secs=$((ms / 1000))
-# 	if [ "$secs" -lt 60 ]; then
-# 		elapsed="${secs}s"
-# 	elif [ "$secs" -lt 3600 ]; then
-# 		elapsed="$((secs / 60))m"
-# 	else
-# 		elapsed="$((secs / 3600))h$(((secs % 3600) / 60))m"
-# 	fi
-# 	[ -n "$parts" ] && parts="$parts  "
-# 	parts="$parts$(printf '\033[34m%s\033[0m' "$elapsed")"
-# fi
 
 printf '%s' "$parts"
