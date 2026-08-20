@@ -15,7 +15,14 @@
                                         "optional": ["any"]
                                     }
                                 },
-                                "to": [{ "key_code": "fn" }],
+                                "parameters": { "basic.to_if_alone_timeout_milliseconds": 500 },
+                                "to": [
+                                    {
+                                        "key_code": "left_shift",
+                                        "modifiers": ["left_control"]
+                                    }
+                                ],
+                                "to_if_alone": [{ "key_code": "fn" }],
                                 "type": "basic"
                             }
                         ]
