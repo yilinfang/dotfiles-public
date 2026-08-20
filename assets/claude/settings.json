@@ -16,5 +16,8 @@
     "command": "sh ~/.claude/statusline-command.sh"
   },
   "theme": "auto",
-  "outputStyle": "Concise"
+  "outputStyle": "Concise",
+  "attribution": {
+    "sessionUrl": false
+  }
 }
