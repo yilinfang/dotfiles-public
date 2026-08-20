@@ -15,5 +15,6 @@
     "type": "command",
     "command": "sh ~/.claude/statusline-command.sh"
   },
-  "theme": "auto"
+  "theme": "auto",
+  "outputStyle": "Concise"
 }
