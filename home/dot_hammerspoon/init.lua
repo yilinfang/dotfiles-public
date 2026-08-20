@@ -6,25 +6,18 @@ local appShortcuts = {
 	-- Key, Application
 	{ "E", "Finder" },
 	-- { "B", "Google Chrome" },
+	-- { "B", "Firefox" },
 	{ "B", "Brave Browser" },
 	-- { "B", "Vivaldi" },
 	{ "P", "Bitwarden" },
 	-- { "P", "Proton Pass" },
 	-- { "P", "KeePassXC" },
 	{ "W", "WeChat" },
-	-- { "C", "Visual Studio Code" },
-	{ "C", "Cursor" },
+	{ "C", "Visual Studio Code" },
+	-- { "C", "Cursor" },
 	-- { "C", "Windsurf" },
 	-- { "C", "Antigravity" },
-	-- { "F", "Firefox" },
-	-- { "F", "LibreWolf" },
 	{ "T", "TickTick" },
-	-- { "N", "Notion" },
-	-- { "A", "Antinote" },
-	-- { "M", "Monica" },
-	-- { "N", "Obsidian" },
-	-- { "N", "UpNote" },
-	-- { "G", "ChatGPT" },
 	{ "S", "Spotify" },
 }
 
@@ -32,7 +25,6 @@ local appShortcuts = {
 local linkShortcuts = {
 	-- Key, Description, URL
 	{ "N", "Notion", "https://app.notion.com/" },
-	-- { "M", "Monica", "https://monica.im/" },
 	-- { "D", "DeepSeek", "https://chat.deepseek.com/" },
 	{ "G", "ChatGPT", "https://chatgpt.com/" },
 	-- { "G", "Gemini", "https://gemini.google.com/" },
