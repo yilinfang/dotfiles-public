@@ -8,7 +8,7 @@ auto_switch = false
 panel_bg = "black"
 
 [keys]
-prefix = "ctrl+space"
+# prefix = "ctrl+space"
 # Some muscle memories
 detach = ["prefix+q", "prefix+d"]
 copy_mode = ["prefix+[", "prefix+enter"]
