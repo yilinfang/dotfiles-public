@@ -2,6 +2,7 @@ onboarding = false
 
 [theme]
 name = "terminal"
+auto_switch = false
 
 [theme.custom]
 panel_bg = "black"
