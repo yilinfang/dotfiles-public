@@ -117,7 +117,7 @@ fi
 # Alias for claude
 if command -v claude &>/dev/null; then
 	safe_alias c 'claude'
-	safe_alias cm 'claude --model opus --effort medium'
+	safe_alias cm 'claude --model opus --effort high'
 	safe_alias ch 'claude --model opus --effort xhigh'
 	safe_alias cl 'claude --model sonnet --effort high'
 fi
