@@ -1,21 +1,9 @@
 {
-  "permissions": {
-    "deny": [
-      "Read(./.env)",
-      "Read(./.env.*)",
-      "Read(./.secret)",
-      "Read(./.secrets/**)",
-      "Read(./secrets/**)",
-      "Read(./config/credentials.json)",
-      "Read(./build)"
-    ]
-  },
   "autoMemoryEnabled": false,
   "statusLine": {
     "type": "command",
     "command": "sh ~/.claude/statusline-command.sh"
   },
-  "theme": "auto",
   "outputStyle": "Concise",
   "attribution": {
     "sessionUrl": false
