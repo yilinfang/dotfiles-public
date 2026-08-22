@@ -4,6 +4,10 @@ onboarding = false
 name = "terminal"
 auto_switch = false
 
+[theme.custom]
+# FIX: Make active tab text easy to read
+panel_bg = "black"
+
 [keys]
 prefix = "ctrl+space"
 # Some muscle memories
