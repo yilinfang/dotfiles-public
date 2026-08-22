@@ -5,7 +5,7 @@ git:
     - command: delta --dark --paging=never
 customCommands:
   - key: "<c-g>"
-    command: "bunx czg@latest"
+    command: "git czg"
     description: "Commit with czg"
     context: "files"
     loadingText: "Opening czg"
