@@ -13,6 +13,11 @@ if [[ ":$PATH:" != *":$HOME/.chezmoi/dotfiles/bin:"* ]]; then
 	export PATH="$HOME/.chezmoi/dotfiles/bin:$PATH"
 fi
 
+# Add bun global bin to PATH if not already present
+if [[ ":$PATH:" != *":$HOME/.bun/bin:"* ]]; then
+	export PATH="$HOME/.bun/bin:$PATH"
+fi
+
 # # Add opencode to PATH if not already present
 # if [[ ":$PATH:" != *":$HOME/.opencode/bin:"* ]]; then
 # 	export PATH="$HOME/.opencode/bin:$PATH"
