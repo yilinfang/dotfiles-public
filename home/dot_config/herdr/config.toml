@@ -4,18 +4,12 @@ onboarding = false
 name = "terminal"
 auto_switch = false
 
-[theme.custom]
-panel_bg = "black"
-
 [keys]
 prefix = "ctrl+space"
 # Some muscle memories
 detach = ["prefix+q", "prefix+d"]
 copy_mode = ["prefix+[", "prefix+enter"]
 split_vertical = ["prefix+v", "prefix+|"]
-
-[ui]
-accent = "blue"
 
 [ui.sound]
 enabled = false
@@ -25,4 +19,3 @@ delivery = "terminal"
 
 [ui.toast.clipboard]
 enabled = true
-position = "top-right" # Fix flickering in Codex
