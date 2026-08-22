@@ -1,6 +1,10 @@
 # Theme
 config-file = ?auto/theme.ghostty
 
+# Fix split color
+unfocused-split-opacity = 1
+split-divider-color = green
+
 # Font
 # font-family = ""
 # font-family = "MonoLisaCode"
