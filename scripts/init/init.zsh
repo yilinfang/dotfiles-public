@@ -121,10 +121,10 @@ fi
 
 # Alias for claude
 if command -v claude &>/dev/null; then
-	safe_alias c 'claude --dangerously-skip-permissions'
-	safe_alias cm 'claude --dangerously-skip-permissions --model opus --effort high'
-	safe_alias ch 'claude --dangerously-skip-permissions --model opus --effort xhigh'
-	safe_alias cl 'claude --dangerously-skip-permissions --model sonnet --effort high'
+	safe_alias c 'claude'
+	safe_alias cm 'claude --model opus --effort high'
+	safe_alias ch 'claude --model opus --effort xhigh'
+	safe_alias cl 'claude --model sonnet --effort high'
 fi
 
 # # Create wrappers for claude
