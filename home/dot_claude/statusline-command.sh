@@ -44,8 +44,8 @@ if [ -n "$pct" ]; then
 		tok="$((tenths / 10)).$((tenths % 10))M"
 	fi
 
-	# Color by usage: <25% green, 25-80% yellow, >80% red
-	pct_color=$(awk -v p="$pct" 'BEGIN { if (p < 25) print "32"; else if (p <= 80) print "33"; else print "31" }')
+	# Color by usage: <25% green, 25-75% yellow, >75% red
+	pct_color=$(awk -v p="$pct" 'BEGIN { if (p < 25) print "32"; else if (p <= 75) print "33"; else print "31" }')
 
 	[ -n "$parts" ] && parts="$parts  "
 	parts="$parts$(printf '\033[%sm%s (%s%%)\033[0m' "$pct_color" "$tok" "$pct")"
