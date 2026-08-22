@@ -1,5 +1,6 @@
 [tools]
 age = "latest"
+aube = "latest"
 # "aqua:micro-editor/micro" = "latest"
 bat = "latest"
 bun = "latest"
@@ -13,7 +14,7 @@ herdr = "latest"
 lazygit = "latest"
 neovim = "latest"
 node = "lts"
-# "npm:czg" = "latest"
+"npm:czg" = "latest"
 python = "3.13"
 ripgrep = "latest"
 # ruff = "latest"
@@ -26,3 +27,6 @@ zoxide = "latest"
 [settings]
 disable_backends = ["asdf"]
 minimum_release_age = "0s"
+
+[settings.npm]
+package_manager = "aube_cli"
