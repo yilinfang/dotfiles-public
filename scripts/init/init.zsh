@@ -187,6 +187,15 @@ fi
 # 	}
 # fi
 
+# Add lfcd
+if command -v lf &>/dev/null; then
+	# Source: https://raw.githubusercontent.com/gokcehan/lf/master/etc/lfcd.sh
+	lfcd() {
+		# `command` is needed in case `lfcd` is aliased to `lf`
+		cd "$(command lf -print-last-dir "$@")"
+	}
+fi
+
 # Initialize fzf if installed
 if command -v fzf &>/dev/null; then
 	source <(fzf --zsh)
