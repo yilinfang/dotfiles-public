@@ -113,24 +113,26 @@ if [ -z "$XDG_CONFIG_HOME" ]; then
 	export XDG_CONFIG_HOME="$HOME/.config"
 fi
 
-# 'bls' a better 'ls' using 'eza' if available
-if command -v eza >/dev/null 2>&1; then
-	alias bls='eza --color=always --icons=always --group-directories-first'
-	alias la='bls -a'
-	alias ll='bls -l'
-	alias lla='ll -a'
-	alias lt='bls -l --tree --level=2 --git'
-	alias lta='lt -a'
-	alias l='lla'
-fi
+# # 'bls' a better 'ls' using 'eza' if available
+# if command -v eza >/dev/null 2>&1; then
+# 	alias bls='eza --color=always --icons=always --group-directories-first'
+# 	alias la='bls -a'
+# 	alias ll='bls -l'
+# 	alias lla='ll -a'
+# 	alias lt='bls -l --tree --level=2 --git'
+# 	alias lta='lt -a'
+# 	alias l='lla'
+# fi
 
-# 'kssh' is a better 'ssh' provided by kitten
-if command -v kitten >/dev/null 2>&1; then
-	alias kssh="kitten ssh"
-fi
+alias chezmoi-private='chezmoi -c "${XDG_CONFIG_HOME:-$HOME/.config}/chezmoi-private/chezmoi.toml" -S "$HOME/.chezmoi/dotfiles-private"'
 
-# nvim-test
-alias nvim-test='NVIM_APPNAME=nvim-test nvim'
+# # 'kssh' is a better 'ssh' provided by kitten
+# if command -v kitten >/dev/null 2>&1; then
+# 	alias kssh="kitten ssh"
+# fi
+#
+# # nvim-test
+# alias nvim-test='NVIM_APPNAME=nvim-test nvim'
 
 # Function: Update external plugins_and_themes managed by Oh My Zsh
 # Helper function to update Oh My Zsh plugins and themes
@@ -168,5 +170,3 @@ ZSH_HIGHLIGHT_STYLES[comment]='fg=8'
 if [ -f "$HOME/.chezmoi/dotfiles/scripts/init/init.zsh" ]; then
 	source "$HOME/.chezmoi/dotfiles/scripts/init/init.zsh"
 fi
-
-alias chezmoi-private='chezmoi -c "${XDG_CONFIG_HOME:-$HOME/.config}/chezmoi-private/chezmoi.toml" -S "$HOME/.chezmoi/dotfiles-private"'
