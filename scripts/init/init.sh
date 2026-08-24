@@ -125,6 +125,7 @@ if command -v claude &>/dev/null; then
 	safe_alias cm 'claude --model opus --effort high'
 	safe_alias ch 'claude --model opus --effort xhigh'
 	safe_alias cl 'claude --model sonnet --effort high'
+	safe_alias cx 'claude --model fable --effort high'
 fi
 
 # # Create wrappers for claude
