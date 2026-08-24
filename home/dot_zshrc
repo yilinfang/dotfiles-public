@@ -124,6 +124,15 @@ fi
 # 	alias l='lla'
 # fi
 
+# better ls with eza
+alias ls='eza --color=always --icons=always --group-directories-first'
+alias la='ls -a'
+alias ll='ls -l'
+alias lla='ll -a'
+alias lt='ls -l --tree --level=2 --git'
+alias lta='lt -a'
+alias l='lla'
+
 alias chezmoi-private='chezmoi -c "${XDG_CONFIG_HOME:-$HOME/.config}/chezmoi-private/chezmoi.toml" -S "$HOME/.chezmoi/dotfiles-private"'
 
 # # 'kssh' is a better 'ssh' provided by kitten
