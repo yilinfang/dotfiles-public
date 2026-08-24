@@ -49,17 +49,20 @@ cmd open-from-old-pwd ${{
 if [ -n "$LF_OLD_PWD" ] && [ -d "$LF_OLD_PWD" ]; then
 	cd "$LF_OLD_PWD"
 fi
-case $(file -Lb --mime-type -- $f) in
-text/* | inode/x-empty | application/json | application/xml | application/javascript | \
-	application/x-yaml | application/toml | application/x-sh | application/x-shellscript)
-	"$EDITOR" -- $fx
-	;;
-*)
-	for f in $fx; do
-		xdg-open -- $f >/dev/null 2>/dev/null &
-	done
-	;;
-esac
+
+# case $(file -Lb --mime-type -- $f) in
+# text/* | inode/x-empty | application/json | application/xml | application/javascript | \
+# 	application/x-yaml | application/toml | application/x-sh | application/x-shellscript)
+# 	"$EDITOR" -- $fx
+# 	;;
+# *)
+# 	for f in $fx; do
+# 		xdg-open -- $f >/dev/null 2>/dev/null &
+# 	done
+# 	;;
+# esac
+
+"$EDITOR" -- $fx
 
 }}
 map E open-from-old-pwd
