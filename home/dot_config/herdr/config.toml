@@ -1,12 +1,12 @@
 onboarding = false
 
 [theme]
-name = "terminal"
+name = "tokyo-night"
 auto_switch = false
 
-[theme.custom]
-# FIX: Make active tab text easy to read
-panel_bg = "black"
+# [theme.custom]
+# # FIX: Make active tab text easy to read
+# panel_bg = "black"
 
 [keys]
 prefix = "ctrl+space"
