@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 # lfcd.sh
 # From: https://github.com/gokcehan/lf/blob/master/etc/lfcd.sh

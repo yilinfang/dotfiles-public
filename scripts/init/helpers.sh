@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 # helpers.sh
 # Shared helpers for init.sh and init.zsh (source, do not execute).
