@@ -30,16 +30,16 @@ augroup resize_splits
 	autocmd!
 	autocmd VimResized * wincmd =
 augroup END
-" Force use dark background
-set background=dark
-if has("nvim")
-	" Use wildcharm in Neovim
-	colorscheme wildcharm
-else
-	" Use torte in Vim
-	colorscheme torte
-endif
 " Enable termguicolors if terminal supports it
 if has("termguicolors")
 	set termguicolors
 endif
+" Force use dark background
+set background=dark
+"if has("nvim")
+"	" Use wildcharm in Neovim
+"	colorscheme wildcharm
+"else
+"	" Use torte in Vim
+"	colorscheme torte
+"endif
