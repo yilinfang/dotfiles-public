@@ -14,7 +14,8 @@ split-divider-color = green
 # font-size = 13
 # adjust-underline-position = 2
 font-family = ""
-font-family = "JetBrains Mono Nerd Font"
+font-family = "FiraCode Nerd Font"
+adjust-underline-position = 4
 
 # Window
 window-padding-balance = true
