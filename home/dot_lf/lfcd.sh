@@ -1,3 +1,8 @@
+#!/usr/bin/env sh
+
+# lfcd.sh
+# From: https://github.com/gokcehan/lf/blob/master/etc/lfcd.sh
+
 # Change working dir in shell to last dir in lf on exit (adapted from ranger).
 #
 # You need to either copy the content of this file to your shell rc file
