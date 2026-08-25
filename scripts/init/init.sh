@@ -20,6 +20,7 @@ export VISUAL=nvim
 safe_alias n 'nvim'
 
 # ripgrep
+export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
 safe_alias rgv 'rg --vimgrep'
 safe_alias brg 'rg --smart-case --max-columns=150 --max-columns-preview'
 
