@@ -49,6 +49,7 @@ safe_alias cm 'claude --model opus --effort high'
 safe_alias ch 'claude --model opus --effort xhigh'
 safe_alias cl 'claude --model sonnet --effort high'
 safe_alias cx 'claude --model fable --effort high'
+safe_alias cr 'claude --resume'
 
 # lfcd
 LFCD="$HOME/.lf/lfcd.sh"
