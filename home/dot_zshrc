@@ -133,15 +133,15 @@ alias lt='ls -l --tree --level=2 --git'
 alias lta='lt -a'
 alias l='lla'
 
-alias chezmoi-private='chezmoi -c "${XDG_CONFIG_HOME:-$HOME/.config}/chezmoi-private/chezmoi.toml" -S "$HOME/.chezmoi/dotfiles-private"'
-
 # # 'kssh' is a better 'ssh' provided by kitten
 # if command -v kitten >/dev/null 2>&1; then
 # 	alias kssh="kitten ssh"
 # fi
-#
 # # nvim-test
 # alias nvim-test='NVIM_APPNAME=nvim-test nvim'
+
+# chezmoi-private
+alias chezmoi-private='chezmoi -c "${XDG_CONFIG_HOME:-$HOME/.config}/chezmoi-private/chezmoi.toml" -S "$HOME/.chezmoi/dotfiles-private"'
 
 # Function: Update external plugins_and_themes managed by Oh My Zsh
 # Helper function to update Oh My Zsh plugins and themes
