@@ -4,6 +4,9 @@ local mods = { "cmd", "alt", "shift", "ctrl" } -- Change this line to modify all
 -- General Shortcuts for Applications
 local appShortcuts = {
 	-- Key, Application
+	-- { "return", "iTerm" },
+	-- { "return", "kitty" },
+	{ "return", "Ghostty" },
 	{ "E", "Finder" },
 	-- { "B", "Google Chrome" },
 	-- { "B", "Firefox" },
@@ -13,12 +16,13 @@ local appShortcuts = {
 	-- { "P", "Proton Pass" },
 	-- { "P", "KeePassXC" },
 	{ "W", "WeChat" },
-	-- { "C", "Visual Studio Code" },
-	{ "C", "Cursor" },
+	{ "C", "Visual Studio Code" },
+	-- { "C", "Cursor" },
 	-- { "C", "Windsurf" },
 	-- { "C", "Antigravity" },
 	{ "T", "TickTick" },
 	{ "S", "Spotify" },
+	{ "O", "OpenInTerminal-Lite" },
 }
 
 -- General Shortcuts for Links
@@ -69,18 +73,18 @@ end
 
 -- Other Shortcuts
 
--- Bind mods+T to OpenInTerminal-Lite in Finder and Terminal Emulator elsewhere
-hs.hotkey.bind(mods, "return", function()
-	-- Check if Finder is the focused application
-	local frontApp = hs.application.frontmostApplication()
-	if frontApp:name() == "Finder" then
-		notifyAndLaunchApp("OpenInTerminal-Lite")
-	else
-		-- notifyAndLaunchApp("iTerm")
-		-- notifyAndLaunchApp("kitty")
-		notifyAndLaunchApp("Ghostty")
-	end
-end)
+-- -- Bind mods+T to OpenInTerminal-Lite in Finder and Terminal Emulator elsewhere
+-- hs.hotkey.bind(mods, "return", function()
+-- 	-- Check if Finder is the focused application
+-- 	local frontApp = hs.application.frontmostApplication()
+-- 	if frontApp:name() == "Finder" then
+-- 		notifyAndLaunchApp("OpenInTerminal-Lite")
+-- 	else
+-- 		-- notifyAndLaunchApp("iTerm")
+-- 		-- notifyAndLaunchApp("kitty")
+-- 		notifyAndLaunchApp("Ghostty")
+-- 	end
+-- end)
 
 -- Reload Hammerspoon config with mods+R
 -- NOTE: One important detail to call out here is that hs.reload() destroys the current Lua interpreter and creates a
