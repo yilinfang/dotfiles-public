@@ -5,6 +5,7 @@ jq = "latest"
 ruff = "latest"
 shellcheck = "latest"
 shfmt = "latest"
+stylua = "latest"
 taplo = "latest"
 uv = "latest"
 
