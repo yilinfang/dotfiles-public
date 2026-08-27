@@ -6,16 +6,9 @@ unfocused-split-opacity = 1
 split-divider-color = green
 
 # Font
-# font-family = ""
-# font-family = "MonoLisaCode"
-# font-feature = "'calt' off, 'liga' off, 'dlig' off, 'ss01', 'ss10', 'ss11'"
-# # Nerd font glyphs
-# font-family = "Symbols Nerd Font Mono"
-# font-size = 13
-# adjust-underline-position = 2
 font-family = ""
-font-family = "FiraCode Nerd Font"
-adjust-underline-position = 4
+font-family = "MesloLGSDZ Nerd Font"
+adjust-underline-position = 2
 
 # Window
 window-padding-balance = true
