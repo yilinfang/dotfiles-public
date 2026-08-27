@@ -124,15 +124,6 @@ fi
 # 	alias l='lla'
 # fi
 
-# better ls with eza
-alias ls='eza --color=always --icons=always --group-directories-first'
-alias la='ls -a'
-alias ll='ls -l'
-alias lla='ll -a'
-alias lt='ls -l --tree --level=2 --git'
-alias lta='lt -a'
-alias l='lla'
-
 # # 'kssh' is a better 'ssh' provided by kitten
 # if command -v kitten >/dev/null 2>&1; then
 # 	alias kssh="kitten ssh"
