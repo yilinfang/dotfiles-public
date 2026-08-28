@@ -111,6 +111,9 @@ export PATH=$HOME/.local/bin:$PATH
 # Set XDG_CONFIG_HOME to "$HOME/.config" if not already set
 export XDG_CONFIG_HOME="$HOME/.config"
 
+# kitten ssh
+alias kssh="kitten ssh"
+
 # Function: Update external plugins_and_themes managed by Oh My Zsh
 # Helper function to update Oh My Zsh plugins and themes
 omz_update_plugins_and_themes() {
