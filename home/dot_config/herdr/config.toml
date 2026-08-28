@@ -5,8 +5,7 @@ name = "terminal"
 auto_switch = false
 
 [theme.custom]
-accent = "blue"
-panel_bg = "black"
+accent = "white"
 
 [update]
 # Managed with mise
