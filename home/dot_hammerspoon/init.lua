@@ -5,8 +5,8 @@ local mods = { "cmd", "alt", "shift", "ctrl" } -- Change this line to modify all
 local appShortcuts = {
 	-- Key, Application
 	-- { "return", "iTerm" },
-	-- { "return", "kitty" },
-	{ "return", "Ghostty" },
+	{ "return", "kitty" },
+	-- { "return", "Ghostty" },
 	{ "E", "Finder" },
 	-- { "B", "Google Chrome" },
 	-- { "B", "Firefox" },
@@ -16,8 +16,8 @@ local appShortcuts = {
 	-- { "P", "Proton Pass" },
 	-- { "P", "KeePassXC" },
 	{ "W", "WeChat" },
-	{ "C", "Visual Studio Code" },
-	-- { "C", "Cursor" },
+	-- { "C", "Visual Studio Code" },
+	{ "C", "Cursor" },
 	-- { "C", "Windsurf" },
 	-- { "C", "Antigravity" },
 	{ "T", "TickTick" },
