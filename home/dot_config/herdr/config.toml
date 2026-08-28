@@ -1,12 +1,16 @@
 onboarding = false
 
 [theme]
-name = "tokyo-night"
+name = "terminal"
 auto_switch = false
 
-# [theme.custom]
-# # FIX: Make active tab text easy to read
-# panel_bg = "black"
+[theme.custom]
+accent = "blue"
+panel_bg = "black"
+
+[update]
+# Managed with mise
+version_check = false
 
 [keys]
 prefix = "ctrl+space"
@@ -14,6 +18,9 @@ prefix = "ctrl+space"
 detach = ["prefix+q", "prefix+d"]
 copy_mode = ["prefix+[", "prefix+enter"]
 split_vertical = ["prefix+v", "prefix+|"]
+
+[ui]
+prompt_new_tab_name = false
 
 [ui.sound]
 enabled = false
