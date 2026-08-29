@@ -111,6 +111,17 @@ export PATH=$HOME/.local/bin:$PATH
 # Set XDG_CONFIG_HOME to "$HOME/.config" if not already set
 export XDG_CONFIG_HOME="$HOME/.config"
 
+# Replace ls with eza
+if command -v eza >/dev/null 2>&1; then
+	alias ls='eza --color=always --icons=always --group-directories-first'
+	alias la='ls -a'
+	alias ll='ls -l'
+	alias lla='ll -a'
+	alias lt='ls -l --tree --level=2 --git'
+	alias lta='lt -a'
+	alias l='lla'
+fi
+
 # kitten ssh
 alias kssh="kitten ssh"
 
