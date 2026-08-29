@@ -3,8 +3,24 @@
 # init.zsh
 # This script initializes the Zsh shell environment
 
-# helper functions
-source "${${(%):-%x}:A:h}/helpers.sh"
+# Add a directory to PATH without duplicates. The directory does not have to
+# exist yet, so a tool installed later in the session is still found.
+add_path_without_duplicate() {
+	local dir="${1%/}"
+	[[ -n "$dir" ]] || return
+	# $path is tied to $PATH; (Ie) gives the index of an exact match, 0 if none
+	(($path[(Ie)$dir])) || path=("$dir" $path)
+}
+
+# Define an alias only if the name is not already taken (command, builtin,
+# alias, or function). Warns and skips on collision instead of clobbering.
+safe_alias() {
+	if whence -- "$1" >/dev/null 2>&1; then
+		print -u2 "safe_alias: skipping $1 (already defined)"
+		return
+	fi
+	alias -- "$1=$2"
+}
 
 # The first added path has the lowest priority
 add_path_without_duplicate "$HOME/.bun/bin"
