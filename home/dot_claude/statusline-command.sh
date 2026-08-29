@@ -33,22 +33,23 @@ if [ -n "$model" ]; then
 	fi
 fi
 
-# Context used: "147k (15%)" — shown only once usage has been reported
+# Context used: "200.0k (20.0%)" — shown only once usage has been reported
 if [ -n "$pct" ]; then
-	if [ "$tokens" -lt 1000 ]; then
-		tok="<1k"
-	elif [ "$tokens" -lt 999500 ]; then
-		tok="$(((tokens + 500) / 1000))k"
+	if [ "$tokens" -lt 999500 ]; then
+		tenths=$(( (tokens + 50) / 100 ))
+		tok="$((tenths / 10)).$((tenths % 10))k"
 	else
 		tenths=$(((tokens + 50000) / 100000))
 		tok="$((tenths / 10)).$((tenths % 10))M"
 	fi
 
+	pct_fmt=$(awk -v p="$pct" 'BEGIN { printf "%.1f", p }')
+
 	# Color by usage: <25% green, 25-75% yellow, >75% red
 	pct_color=$(awk -v p="$pct" 'BEGIN { if (p < 25) print "32"; else if (p <= 75) print "33"; else print "31" }')
 
 	[ -n "$parts" ] && parts="$parts  "
-	parts="$parts$(printf '\033[%sm%s (%s%%)\033[0m' "$pct_color" "$tok" "$pct")"
+	parts="$parts$(printf '\033[%sm\033[1m%s\033[22m (%s%%)\033[0m' "$pct_color" "$tok" "$pct_fmt")"
 fi
 
 printf '%s' "$parts"
