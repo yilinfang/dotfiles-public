@@ -7,8 +7,7 @@ split-divider-color = green
 
 # Font
 font-family = ""
-font-family = "FiraCode Nerd Font"
-adjust-underline-position = 4
+font-family = "JetBrainsMonoNL Nerd Font"
 
 # Window
 window-padding-balance = true
