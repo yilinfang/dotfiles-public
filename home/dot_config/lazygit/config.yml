@@ -1,5 +1,5 @@
-# gui:
-#   nerdFontsVersion: "3"
+gui:
+  nerdFontsVersion: "3"
 git:
   diffRenderers:
     - command: delta --dark --paging=never
