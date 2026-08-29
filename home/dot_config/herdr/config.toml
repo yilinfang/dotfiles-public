@@ -20,6 +20,7 @@ split_vertical = ["prefix+v", "prefix+|"]
 
 [ui]
 prompt_new_tab_name = false
+status_indicators = "symbols"
 
 [ui.sound]
 enabled = false
