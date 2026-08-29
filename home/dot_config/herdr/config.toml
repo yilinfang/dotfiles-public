@@ -1,11 +1,11 @@
 onboarding = false
 
 [theme]
-name = "terminal"
+name = "catppuccin"
 auto_switch = false
 
-[theme.custom]
-accent = "white"
+# [theme.custom]
+# accent = "white"
 
 [update]
 # Managed with mise
