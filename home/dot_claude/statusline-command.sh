@@ -21,22 +21,22 @@ fi
 # Build status line
 parts=""
 
-# Cyan for directory
-[ -n "$dir" ] && parts=$(printf '\033[36m%s\033[0m' "$dir")
+# Bold cyan for directory
+[ -n "$dir" ] && parts=$(printf '\033[1;36m%s\033[0m' "$dir")
 
-# Magenta for model
+# Bold magenta for model
 if [ -n "$model" ]; then
 	[ -n "$parts" ] && parts="$parts  "
-	parts="$parts$(printf '\033[35m%s\033[0m' "$model")"
+	parts="$parts$(printf '\033[1;35m%s\033[0m' "$model")"
 	if [ -n "$effort" ]; then
-		parts="$parts$(printf '\033[35m - %s\033[0m' "$effort")"
+		parts="$parts$(printf '\033[35m (%s)\033[0m' "$effort")"
 	fi
 fi
 
 # Context used: "200.0k (20.0%)" — shown only once usage has been reported
 if [ -n "$pct" ]; then
 	if [ "$tokens" -lt 999500 ]; then
-		tenths=$(( (tokens + 50) / 100 ))
+		tenths=$(((tokens + 50) / 100))
 		tok="$((tenths / 10)).$((tenths % 10))k"
 	else
 		tenths=$(((tokens + 50000) / 100000))
