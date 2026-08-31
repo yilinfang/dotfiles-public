@@ -66,6 +66,7 @@ safe_alias ch 'claude --dangerously-skip-permissions --model opus --effort xhigh
 safe_alias cx 'claude --dangerously-skip-permissions --model fable --effort xhigh'
 safe_alias cm 'claude --dangerously-skip-permissions --model sonnet --effort high'
 safe_alias cr 'claude --dangerously-skip-permissions --resume'
+safe_alias ca 'claude --dangerously-skip-permissions agents'
 
 # lfcd
 LFCD="$HOME/.lf/lfcd.sh"
