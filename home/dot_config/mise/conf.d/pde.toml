@@ -1,6 +1,6 @@
 [tools]
 age = "latest"
-aube = "latest"
+# aube = "latest"
 # "aqua:micro-editor/micro" = "latest"
 bat = "latest"
 bun = "latest"
@@ -29,4 +29,4 @@ disable_backends = ["asdf"]
 minimum_release_age = "0s"
 
 [settings.npm]
-package_manager = "aube_cli"
+package_manager = "bun"
