@@ -8,9 +8,9 @@ local appShortcuts = {
 	-- { "return", "kitty" },
 	{ "return", "Ghostty" },
 	{ "E", "Finder" },
-	-- { "B", "Google Chrome" },
+	{ "B", "Google Chrome" },
 	-- { "B", "Firefox" },
-	{ "B", "Brave Browser" },
+	-- { "B", "Brave Browser" },
 	-- { "B", "Vivaldi" },
 	{ "P", "Bitwarden" },
 	-- { "P", "Proton Pass" },
@@ -23,13 +23,13 @@ local appShortcuts = {
 	{ "T", "TickTick" },
 	{ "S", "Spotify" },
 	{ "O", "OpenInTerminal-Lite" },
-	{ "N", "Obsidian" },
+	-- { "N", "Obsidian" },
 }
 
 -- General Shortcuts for Links
 local linkShortcuts = {
 	-- Key, Description, URL
-	-- { "N", "Notion", "https://app.notion.com/" },
+	{ "N", "Notion", "https://app.notion.com/" },
 	-- { "D", "DeepSeek", "https://chat.deepseek.com/" },
 	{ "G", "ChatGPT", "https://chatgpt.com/" },
 	-- { "G", "Gemini", "https://gemini.google.com/" },
