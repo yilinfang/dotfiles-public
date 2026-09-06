@@ -13,6 +13,8 @@ version_check = false
 
 [keys]
 prefix = "ctrl+space"
+next_tab = ["prefix+n", "prefix+right"]
+previous_tab = ["prefix+p", "prefix+left"]
 # Some muscle memories
 detach = ["prefix+q", "prefix+d"]
 copy_mode = ["prefix+[", "prefix+enter"]
