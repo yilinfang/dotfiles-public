@@ -45,8 +45,8 @@ if [ -n "$pct" ]; then
 
 	pct_fmt=$(awk -v p="$pct" 'BEGIN { printf "%.1f", p }')
 
-	# Color by usage: <25% green, 25-75% yellow, >75% red
-	pct_color=$(awk -v p="$pct" 'BEGIN { if (p < 25) print "32"; else if (p <= 75) print "33"; else print "31" }')
+	# Color by usage: <15% green, 15-25% yellow, >25% red
+	pct_color=$(awk -v p="$pct" 'BEGIN { if (p < 15) print "32"; else if (p <= 25) print "33"; else print "31" }')
 
 	[ -n "$parts" ] && parts="$parts  "
 	parts="$parts$(printf '\033[%sm\033[1m%s\033[22m (%s%%)\033[0m' "$pct_color" "$tok" "$pct_fmt")"
