@@ -1,10 +1,6 @@
 # Theme
 config-file = ?auto/theme.ghostty
 
-# Fix split color
-unfocused-split-opacity = 1
-split-divider-color = green
-
 # Font
 font-family = ""
 font-family = "JetBrainsMonoNL Nerd Font"
@@ -21,7 +17,6 @@ keybind = alt+b=esc:b
 
 # Misc
 copy-on-select = clipboard
-# shell-integration-features = ssh-env,ssh-terminfo
 
 # MacOS
 config-file = ?optional/macos.ghostty
