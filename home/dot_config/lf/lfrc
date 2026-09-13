@@ -41,31 +41,31 @@ cmd open ${{
 # Also use enter for opening files.
 map <enter> open
 
-# Synchronous opening with initial directory preserved.
-# NOTE: Openning files with $EDITOR while preserving the initial directory when starting lf.
-#  $LF_OLD_PWD needs to be set before stariting lf, e.g. `LF_OLD_PWD="$PWD" lf`.
-cmd open-from-old-pwd ${{
-
-if [ -n "$LF_OLD_PWD" ] && [ -d "$LF_OLD_PWD" ]; then
-	cd "$LF_OLD_PWD"
-fi
-
-# case $(file -Lb --mime-type -- $f) in
-# text/* | inode/x-empty | application/json | application/xml | application/javascript | \
-# 	application/x-yaml | application/toml | application/x-sh | application/x-shellscript)
-# 	"$EDITOR" -- $fx
-# 	;;
-# *)
-# 	for f in $fx; do
-# 		xdg-open -- $f >/dev/null 2>/dev/null &
-# 	done
-# 	;;
-# esac
-
-"$EDITOR" -- $fx
-
-}}
-map E open-from-old-pwd
+# # Synchronous opening with initial directory preserved.
+# # NOTE: Openning files with $EDITOR while preserving the initial directory when starting lf.
+# #  $LF_OLD_PWD needs to be set before stariting lf, e.g. `LF_OLD_PWD="$PWD" lf`.
+# cmd open-from-old-pwd ${{
+#
+# if [ -n "$LF_OLD_PWD" ] && [ -d "$LF_OLD_PWD" ]; then
+# 	cd "$LF_OLD_PWD"
+# fi
+#
+# # case $(file -Lb --mime-type -- $f) in
+# # text/* | inode/x-empty | application/json | application/xml | application/javascript | \
+# # 	application/x-yaml | application/toml | application/x-sh | application/x-shellscript)
+# # 	"$EDITOR" -- $fx
+# # 	;;
+# # *)
+# # 	for f in $fx; do
+# # 		xdg-open -- $f >/dev/null 2>/dev/null &
+# # 	done
+# # 	;;
+# # esac
+#
+# "$EDITOR" -- $fx
+#
+# }}
+# map E open-from-old-pwd
 
 # Remove mappings I don't use.
 map i
@@ -102,12 +102,12 @@ $EDITOR "$tmpfile"
 }}
 map Y yank-path
 
-# Change to initial directory when starting if uppon quitting.
-cmd quit-to-old-pwd ${{
-    if [ -n "$LF_OLD_PWD" ] && [ -d "$LF_OLD_PWD" ]; then
-        lf -remote "send $id :cd \"$LF_OLD_PWD\"; quit"
-    else
-        lf -remote "send $id :quit"
-    fi
-}}
-map Q quit-to-old-pwd
+# # Change to initial directory when starting if uppon quitting.
+# cmd quit-to-old-pwd ${{
+#     if [ -n "$LF_OLD_PWD" ] && [ -d "$LF_OLD_PWD" ]; then
+#         lf -remote "send $id :cd \"$LF_OLD_PWD\"; quit"
+#     else
+#         lf -remote "send $id :quit"
+#     fi
+# }}
+# map Q quit-to-old-pwd
