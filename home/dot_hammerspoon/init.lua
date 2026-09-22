@@ -25,12 +25,13 @@ local appShortcuts = {
 	{ "S", "Spotify" },
 	{ "O", "OpenInTerminal-Lite" },
 	-- { "N", "Obsidian" },
+	{ "N", "UpNote" },
 }
 
 -- General Shortcuts for Links
 local linkShortcuts = {
 	-- Key, Description, URL
-	{ "N", "Notion", "https://app.notion.com/" },
+	-- { "N", "Notion", "https://app.notion.com/" },
 	-- { "D", "DeepSeek", "https://chat.deepseek.com/" },
 	{ "G", "ChatGPT", "https://chatgpt.com/" },
 	-- { "G", "Gemini", "https://gemini.google.com/" },
