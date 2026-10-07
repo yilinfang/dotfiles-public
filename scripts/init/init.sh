@@ -61,13 +61,13 @@ safe_alias hss 'herder-server-stop'
 safe_alias hwcq 'herder-workspace-create-quick'
 
 # claude
-safe_alias c 'claude --dangerously-skip-permissions'
-safe_alias cm 'claude --dangerously-skip-permissions --model opus --effort medium'
-safe_alias ch 'claude --dangerously-skip-permissions --model fable --effort medium'
-safe_alias cx 'claude --dangerously-skip-permissions --model fable --effort high'
-safe_alias cl 'claude --dangerously-skip-permissions --model sonnet --effort high'
-safe_alias cr 'claude --dangerously-skip-permissions --resume'
-safe_alias ca 'claude --dangerously-skip-permissions agents'
+safe_alias c 'claude'
+safe_alias cm 'claude --model opus --effort medium'
+safe_alias ch 'claude --model fable --effort medium'
+safe_alias cx 'claude --model fable --effort high'
+safe_alias cl 'claude --model sonnet --effort high'
+safe_alias cr 'claude --resume'
+safe_alias ca 'claude agents'
 
 # lfcd
 LFCD="$HOME/.lf/lfcd.sh"
