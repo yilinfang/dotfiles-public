@@ -13,9 +13,9 @@ fzf = "latest"
 herdr = "latest"
 lazygit = "latest"
 neovim = "latest"
-node = "lts"
+node = "latest"
 # "npm:czg" = "latest"
-python = "3.13"
+python = "latest"
 ripgrep = "latest"
 # ruff = "latest"
 # starship = "latest"
@@ -28,5 +28,5 @@ zoxide = "latest"
 disable_backends = ["asdf"]
 # minimum_release_age = "0s"
 
-[settings.npm]
-package_manager = "bun"
+# [settings.npm]
+# package_manager = "bun"
