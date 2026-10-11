@@ -89,6 +89,12 @@ end
 -- 	end
 -- end)
 
+-- Toggle caffeinate (prevent display sleep) with mods+A
+hs.hotkey.bind(mods, "A", function()
+	local enabled = hs.caffeinate.toggle("displayIdle")
+	hs.alert.show(enabled and "Caffeinate on" or "Caffeinate off")
+end)
+
 -- Reload Hammerspoon config with mods+R
 -- NOTE: One important detail to call out here is that hs.reload() destroys the current Lua interpreter and creates a
 -- new one. If we had any code after hs.reload() in this function, it would not be called.
