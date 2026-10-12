@@ -89,10 +89,25 @@ end
 -- 	end
 -- end)
 
--- Toggle caffeinate (prevent display sleep) with mods+A
+-- Toggle keep-mac-awake (caffeinate -dimsu) with mods+A
+-- Hammerspoon does not load the shell PATH, so use the absolute path.
+local keepMacAwake = os.getenv("HOME") .. "/.chezmoi/dotfiles/bin/keep-mac-awake"
+
+local function runKeepMacAwake(action, callback)
+	hs.task
+		.new(keepMacAwake, function(exitCode, stdOut, stdErr)
+			callback(exitCode, (stdOut .. stdErr):gsub("%s+$", ""))
+		end, { action })
+		:start()
+end
+
 hs.hotkey.bind(mods, "A", function()
-	local enabled = hs.caffeinate.toggle("displayIdle")
-	hs.alert.show(enabled and "Caffeinate on" or "Caffeinate off")
+	runKeepMacAwake("status", function(_, status)
+		local action = status:find("is running with PID") and "stop" or "start"
+		runKeepMacAwake(action, function(_, output)
+			hs.alert.show(output)
+		end)
+	end)
 end)
 
 -- Reload Hammerspoon config with mods+R
