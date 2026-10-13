@@ -30,3 +30,6 @@ disable_backends = ["asdf"]
 
 # [settings.npm]
 # package_manager = "bun"
+
+[settings.self_update]
+auto = true
