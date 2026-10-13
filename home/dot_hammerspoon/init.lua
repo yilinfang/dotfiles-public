@@ -13,29 +13,35 @@ local appShortcuts = {
 	-- { "B", "Brave Browser" },
 	-- { "B", "Vivaldi" },
 	-- { "P", "Bitwarden" },
-	-- { "P", "1Password" },
+	{ "P", "1Password" },
 	-- { "P", "Proton Pass" },
-	{ "P", "KeePassXC" },
+	-- { "P", "KeePassXC" },
 	{ "W", "WeChat" },
 	{ "C", "Visual Studio Code" },
 	-- { "C", "Cursor" },
 	-- { "C", "Windsurf" },
 	-- { "C", "Antigravity" },
-	{ "T", "TickTick" },
+	-- { "T", "TickTick" },
+	-- { "T", "Todoist" },
+	{ "T", "RTM" },
 	{ "S", "Spotify" },
 	{ "O", "OpenInTerminal-Lite" },
 	-- { "N", "Obsidian" },
 	{ "N", "UpNote" },
+	{ "A", "Antinote" },
+	{ "M", "Mole" },
 }
 
 -- General Shortcuts for Links
 local linkShortcuts = {
 	-- Key, Description, URL
 	-- { "N", "Notion", "https://app.notion.com/" },
-	-- { "D", "DeepSeek", "https://chat.deepseek.com/" },
+	-- { "T", "RTM", "https://www.rememberthemilk.com/app/" },
+	-- { "T", "Todoist", "https://app.todoist.com/app/" },
 	{ "G", "ChatGPT", "https://chatgpt.com/" },
-	-- { "G", "Gemini", "https://gemini.google.com/" },
 	-- { "G", "Claude", "https://claude.ai/" },
+	-- { "G", "Gemini", "https://gemini.google.com/" },
+	-- { "D", "DeepSeek", "https://chat.deepseek.com/" },
 }
 
 -- Function to display notification and open an application
@@ -89,7 +95,7 @@ end
 -- 	end
 -- end)
 
--- Toggle keep-mac-awake (caffeinate -dimsu) with mods+A
+-- Toggle keep-mac-awake (caffeinate -dimsu) with mods+K
 -- Hammerspoon does not load the shell PATH, so use the absolute path.
 local keepMacAwake = os.getenv("HOME") .. "/.chezmoi/dotfiles/bin/keep-mac-awake"
 
@@ -101,7 +107,7 @@ local function runKeepMacAwake(action, callback)
 		:start()
 end
 
-hs.hotkey.bind(mods, "A", function()
+hs.hotkey.bind(mods, "K", function()
 	runKeepMacAwake("status", function(_, status)
 		local action = status:find("is running with PID") and "stop" or "start"
 		runKeepMacAwake(action, function(_, output)
