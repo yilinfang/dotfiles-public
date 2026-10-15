@@ -124,3 +124,6 @@ hs.hotkey.bind(mods, "R", function()
 end)
 -- Show notification after reload
 hs.alert.show("Hammerspoon config loaded")
+
+-- Better window switching with alt+tab
+require("custom.alttab")

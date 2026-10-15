@@ -1,0 +1,246 @@
+-- Windows-style Alt+Tab switcher (text list, no previews)
+-- Hold Alt, press Tab to cycle, release Alt to switch.
+-- Shift+Tab or Up goes back, Down goes forward, Esc cancels.
+
+local M = {}
+
+local MOD = "alt" -- modifier to hold while pressing Tab
+local SHOW_DELAY = 0.08 -- quick Alt+Tab switches without flashing the list
+local ROW_H = 38
+local MAX_WIDTH = 720
+local PAD = 8 -- inner padding of the panel
+local MARGIN = 40 -- room around the panel for its shadow
+local ICON = 24
+local FONT_SIZE = 14
+local MAX_ROWS = 12
+
+local fonts = hs.styledtext.defaultFonts
+
+-- Window filter that tracks focus order (most recently used first)
+local wf = hs.window.filter.new()
+wf:subscribe(hs.window.filter.windowFocused, function() end)
+
+local windows, selected, canvas, showTimer = {}, 1, nil, nil
+local iconCache = {}
+
+local function theme()
+	local accent = { list = "System", name = "controlAccentColor" }
+	if hs.host.interfaceStyle() == "Dark" then
+		return {
+			panel = { white = 0.14, alpha = 0.97 },
+			border = { white = 1, alpha = 0.12 },
+			primary = { white = 0.95 },
+			secondary = { white = 1, alpha = 0.5 },
+			accent = accent,
+		}
+	end
+	return {
+		panel = { white = 0.98, alpha = 0.97 },
+		border = { white = 0, alpha = 0.1 },
+		primary = { white = 0.1 },
+		secondary = { white = 0, alpha = 0.5 },
+		accent = accent,
+	}
+end
+
+local function appIcon(app)
+	local id = app and app:bundleID()
+	if not id then
+		return nil
+	end
+	if iconCache[id] == nil then
+		iconCache[id] = hs.image.imageFromAppBundle(id) or false
+	end
+	return iconCache[id] or nil
+end
+
+local function label(win, isSelected, t)
+	local app = win:application()
+	local appName = app and app:name() or "?"
+	local title = win:title() or ""
+	local para = { lineBreak = "truncateTail" }
+	local text = hs.styledtext.new(appName, {
+		font = { name = fonts.boldSystem.name, size = FONT_SIZE },
+		color = isSelected and { white = 1 } or t.primary,
+		paragraphStyle = para,
+	})
+	if title ~= "" and title ~= appName then
+		text = text
+			.. hs.styledtext.new("   " .. title, {
+				font = { name = fonts.system.name, size = FONT_SIZE },
+				color = isSelected and { white = 1, alpha = 0.8 } or t.secondary,
+				paragraphStyle = para,
+			})
+	end
+	return text
+end
+
+local function draw()
+	local t = theme()
+	local sf = hs.screen.mainScreen():frame()
+	local width = math.min(MAX_WIDTH, sf.w * 0.6)
+	local n = math.min(#windows, MAX_ROWS)
+	local first = math.max(1, math.min(selected - math.floor(n / 2), #windows - n + 1))
+	local h = n * ROW_H + PAD * 2
+	canvas:frame({
+		x = sf.x + (sf.w - width) / 2 - MARGIN,
+		y = sf.y + (sf.h - h) / 2 - MARGIN,
+		w = width + MARGIN * 2,
+		h = h + MARGIN * 2,
+	})
+
+	local els = {
+		{
+			type = "rectangle",
+			action = "strokeAndFill",
+			fillColor = t.panel,
+			strokeColor = t.border,
+			strokeWidth = 1,
+			roundedRectRadii = { xRadius = 14, yRadius = 14 },
+			frame = { x = MARGIN, y = MARGIN, w = width, h = h },
+			withShadow = true,
+			shadow = { blurRadius = 30, color = { alpha = 0.35 }, offset = { h = -8, w = 0 } },
+		},
+	}
+	for row = 1, n do
+		local i = first + row - 1
+		local win = windows[i]
+		local x = MARGIN + PAD
+		local y = MARGIN + PAD + (row - 1) * ROW_H
+		local rowW = width - PAD * 2
+		if i == selected then
+			table.insert(els, {
+				type = "rectangle",
+				action = "fill",
+				fillColor = t.accent,
+				roundedRectRadii = { xRadius = 8, yRadius = 8 },
+				frame = { x = x, y = y, w = rowW, h = ROW_H },
+			})
+		end
+		local icon = appIcon(win:application())
+		if icon then
+			table.insert(els, {
+				type = "image",
+				image = icon,
+				imageScaling = "scaleProportionally",
+				frame = { x = x + 8, y = y + (ROW_H - ICON) / 2, w = ICON, h = ICON },
+			})
+		end
+		local textX = x + 8 + ICON + 10
+		table.insert(els, {
+			type = "text",
+			text = label(win, i == selected, t),
+			frame = {
+				x = textX,
+				y = y + (ROW_H - FONT_SIZE * 1.3) / 2,
+				w = x + rowW - textX - 10,
+				h = FONT_SIZE * 1.5,
+			},
+		})
+	end
+	canvas:replaceElements(els)
+end
+
+local function hide()
+	if showTimer then
+		showTimer:stop()
+		showTimer = nil
+	end
+	if canvas then
+		canvas:delete()
+		canvas = nil
+	end
+	windows = {}
+end
+
+local function show(reverse)
+	-- Keep only real, visible windows (skip panels, popups and helper windows)
+	windows = {}
+	for _, win in ipairs(wf:getWindows(hs.window.filter.sortByFocusedLast)) do
+		if win:isStandard() and win:isVisible() then
+			table.insert(windows, win)
+		end
+	end
+	if #windows == 0 then
+		return
+	end
+	-- Like Windows: first Tab selects the previous window
+	selected = reverse and #windows or math.min(2, #windows)
+	canvas = hs.canvas.new({ x = 0, y = 0, w = 1, h = 1 })
+	canvas:level(hs.canvas.windowLevels.overlay)
+	draw()
+	showTimer = hs.timer.doAfter(SHOW_DELAY, function()
+		showTimer = nil
+		if canvas then
+			canvas:show(0.1)
+		end
+	end)
+end
+
+local function step(delta)
+	selected = (selected - 1 + delta) % #windows + 1
+	draw()
+end
+
+local function commit()
+	local win = windows[selected]
+	hide()
+	if win then
+		pcall(function()
+			win:focus()
+		end)
+	end
+end
+
+local types = hs.eventtap.event.types
+local keys = hs.keycodes.map
+
+local function onlyMod(f)
+	local others = { "cmd", "alt", "ctrl", "fn" }
+	if not f[MOD] then
+		return false
+	end
+	for _, m in ipairs(others) do
+		if m ~= MOD and f[m] then
+			return false
+		end
+	end
+	return true
+end
+
+M.tap = hs.eventtap.new({ types.keyDown, types.flagsChanged }, function(e)
+	local flags = e:getFlags()
+	if e:getType() == types.flagsChanged then
+		if canvas and not flags[MOD] then
+			commit()
+		end
+		return false
+	end
+
+	local key = e:getKeyCode()
+	if key == keys.tab and onlyMod(flags) then
+		if not canvas then
+			show(flags.shift)
+		else
+			step(flags.shift and -1 or 1)
+		end
+		return true
+	end
+
+	if canvas then
+		if key == keys.escape then
+			hide()
+		elseif key == keys.up then
+			step(-1)
+		elseif key == keys.down then
+			step(1)
+		elseif key == keys["return"] then
+			commit()
+		end
+		return true -- swallow other keys while the switcher is open
+	end
+	return false
+end)
+M.tap:start()
+
+return M
