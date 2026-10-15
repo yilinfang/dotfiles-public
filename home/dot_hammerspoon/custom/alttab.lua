@@ -16,11 +16,15 @@ local MAX_ROWS = 12
 
 local fonts = hs.styledtext.defaultFonts
 
--- Window filter that tracks focus order (most recently used first)
-local wf = hs.window.filter.new()
+-- Window filter that tracks focus order (most recently used first).
+-- Keep only visible standard windows (skip panels, popups and helper windows).
+-- The filter caches these properties, so checking them here costs nothing at show time.
+local wf =
+  hs.window.filter.new():setDefaultFilter({ visible = true, allowRoles = 'AXStandardWindow' })
 wf:subscribe(hs.window.filter.windowFocused, function() end)
 
-local windows, selected, canvas, showTimer = {}, 1, nil, nil
+-- windows holds entries cached at show time: { win, id, appName, title, icon }
+local windows, selected, canvas, showTimer, colors = {}, 1, nil, nil, nil
 local iconCache = {}
 
 local function theme()
@@ -54,10 +58,8 @@ local function appIcon(app)
   return iconCache[id] or nil
 end
 
-local function label(win, isSelected, t)
-  local app = win:application()
-  local appName = app and app:name() or '?'
-  local title = win:title() or ''
+local function label(entry, isSelected, t)
+  local appName, title = entry.appName, entry.title
   local para = { lineBreak = 'truncateTail' }
   local text = hs.styledtext.new(appName, {
     font = { name = fonts.boldSystem.name, size = FONT_SIZE },
@@ -76,7 +78,7 @@ local function label(win, isSelected, t)
 end
 
 local function draw()
-  local t = theme()
+  local t = colors
   local sf = hs.screen.mainScreen():frame()
   local width = math.min(MAX_WIDTH, sf.w * 0.6)
   local n = math.min(#windows, MAX_ROWS)
@@ -104,7 +106,7 @@ local function draw()
   }
   for row = 1, n do
     local i = first + row - 1
-    local win = windows[i]
+    local entry = windows[i]
     local x = MARGIN + PAD
     local y = MARGIN + PAD + (row - 1) * ROW_H
     local rowW = width - PAD * 2
@@ -117,7 +119,7 @@ local function draw()
         frame = { x = x, y = y, w = rowW, h = ROW_H },
       })
     end
-    local icon = appIcon(win:application())
+    local icon = entry.icon
     if icon then
       table.insert(els, {
         type = 'image',
@@ -129,7 +131,7 @@ local function draw()
     local textX = x + 8 + ICON + 10
     table.insert(els, {
       type = 'text',
-      text = label(win, i == selected, t),
+      text = label(entry, i == selected, t),
       frame = {
         x = textX,
         y = y + (ROW_H - FONT_SIZE * 1.3) / 2,
@@ -154,12 +156,17 @@ local function hide()
 end
 
 local function show(reverse)
-  -- Keep only real, visible windows (skip panels, popups and helper windows)
+  -- Read window data once here so each Tab press does no Accessibility calls.
   windows = {}
   for _, win in ipairs(wf:getWindows(hs.window.filter.sortByFocusedLast)) do
-    if win:isStandard() and win:isVisible() then
-      table.insert(windows, win)
-    end
+    local app = win:application()
+    table.insert(windows, {
+      win = win,
+      id = win:id(),
+      appName = app and app:name() or '?',
+      title = win:title() or '',
+      icon = appIcon(app),
+    })
   end
   if #windows == 0 then
     return
@@ -167,8 +174,9 @@ local function show(reverse)
   -- Like Windows: first Tab selects the previous window. If focus is on the
   -- desktop or an excluded window, entry 1 already is the previous window.
   local focused = hs.window.focusedWindow()
-  local current = focused and windows[1]:id() == focused:id()
+  local current = focused and windows[1].id == focused:id()
   selected = reverse and #windows or math.min(current and 2 or 1, #windows)
+  colors = theme()
   canvas = hs.canvas.new({ x = 0, y = 0, w = 1, h = 1 })
   canvas:level(hs.canvas.windowLevels.overlay)
   draw()
@@ -188,17 +196,17 @@ end
 local function commit()
   local list, start = windows, selected
   hide()
-  -- A window may have closed while the list was open; skip to the next live one
+  -- A window may have closed while the list was open; skip to the next live one.
+  -- Use the filter's cached list: hs.window.allWindows() queries every app and is slow.
   local alive = {}
-  for _, w in ipairs(hs.window.allWindows()) do
+  for _, w in ipairs(wf:getWindows()) do
     alive[w:id()] = true
   end
   for k = 0, #list - 1 do
-    local win = list[(start - 1 + k) % #list + 1]
-    local id = win:id()
-    if id and alive[id] then
+    local entry = list[(start - 1 + k) % #list + 1]
+    if entry.id and alive[entry.id] then
       pcall(function()
-        win:focus()
+        entry.win:focus()
       end)
       return
     end
