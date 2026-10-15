@@ -18,9 +18,10 @@ local fonts = hs.styledtext.defaultFonts
 
 -- Window filter that tracks focus order (most recently used first).
 -- Keep only visible standard windows (skip panels, popups and helper windows).
+-- Use an override so app-specific rules copied from the default filter also get these limits.
 -- The filter caches these properties, so checking them here costs nothing at show time.
 local wf =
-  hs.window.filter.new():setDefaultFilter({ visible = true, allowRoles = 'AXStandardWindow' })
+  hs.window.filter.new():setOverrideFilter({ visible = true, allowRoles = 'AXStandardWindow' })
 wf:subscribe(hs.window.filter.windowFocused, function() end)
 
 -- windows holds entries cached at show time: { win, id, appName, title, icon }
@@ -200,7 +201,10 @@ local function commit()
   -- Use the filter's cached list: hs.window.allWindows() queries every app and is slow.
   local alive = {}
   for _, w in ipairs(wf:getWindows()) do
-    alive[w:id()] = true
+    local id = w:id()
+    if id then
+      alive[id] = true
+    end
   end
   for k = 0, #list - 1 do
     local entry = list[(start - 1 + k) % #list + 1]
