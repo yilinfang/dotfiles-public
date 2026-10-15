@@ -164,8 +164,11 @@ local function show(reverse)
 	if #windows == 0 then
 		return
 	end
-	-- Like Windows: first Tab selects the previous window
-	selected = reverse and #windows or math.min(2, #windows)
+	-- Like Windows: first Tab selects the previous window. If focus is on the
+	-- desktop or an excluded window, entry 1 already is the previous window.
+	local focused = hs.window.focusedWindow()
+	local current = focused and windows[1]:id() == focused:id()
+	selected = reverse and #windows or math.min(current and 2 or 1, #windows)
 	canvas = hs.canvas.new({ x = 0, y = 0, w = 1, h = 1 })
 	canvas:level(hs.canvas.windowLevels.overlay)
 	draw()
@@ -183,12 +186,22 @@ local function step(delta)
 end
 
 local function commit()
-	local win = windows[selected]
+	local list, start = windows, selected
 	hide()
-	if win then
-		pcall(function()
-			win:focus()
-		end)
+	-- A window may have closed while the list was open; skip to the next live one
+	local alive = {}
+	for _, w in ipairs(hs.window.allWindows()) do
+		alive[w:id()] = true
+	end
+	for k = 0, #list - 1 do
+		local win = list[(start - 1 + k) % #list + 1]
+		local id = win:id()
+		if id and alive[id] then
+			pcall(function()
+				win:focus()
+			end)
+			return
+		end
 	end
 end
 
