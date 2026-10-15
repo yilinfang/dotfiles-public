@@ -28,7 +28,7 @@ local appShortcuts = {
 	{ "O", "OpenInTerminal-Lite" },
 	-- { "N", "Obsidian" },
 	{ "N", "UpNote" },
-	{ "A", "Antinote" },
+	-- { "A", "Antinote" },
 	{ "M", "Mole" },
 }
 
@@ -95,7 +95,7 @@ end
 -- 	end
 -- end)
 
--- Toggle keep-mac-awake (caffeinate -dimsu) with mods+K
+-- Toggle keep-mac-awake (caffeinate -dimsu) with mods+A
 -- Hammerspoon does not load the shell PATH, so use the absolute path.
 local keepMacAwake = os.getenv("HOME") .. "/.chezmoi/dotfiles/bin/keep-mac-awake"
 
@@ -107,7 +107,7 @@ local function runKeepMacAwake(action, callback)
 		:start()
 end
 
-hs.hotkey.bind(mods, "K", function()
+hs.hotkey.bind(mods, "A", function()
 	runKeepMacAwake("status", function(_, status)
 		local action = status:find("is running with PID") and "stop" or "start"
 		runKeepMacAwake(action, function(_, output)
