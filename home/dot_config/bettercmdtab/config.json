@@ -1,0 +1,30 @@
+{
+  "$schema" : "schema.json",
+  "appExceptions" : [
+    {
+      "bundleID" : "com.apple.finder",
+      "hide" : "whenNoWindows",
+      "ignore" : "never"
+    },
+    {
+      "bundleID" : "com.tencent.xinWeChat",
+      "hide" : "whenNoWindows",
+      "ignore" : "never"
+    }
+  ],
+  "clickOutsideToDismiss" : false,
+  "cycleTileWidths" : false,
+  "hideFromScreenSharing" : true,
+  "hideMenuBarIcon" : true,
+  "hoverActionsEnabled" : false,
+  "hoverShowForceQuit" : true,
+  "mouseClickSelectionEnabled" : false,
+  "mouseHoverSelectionEnabled" : false,
+  "nextScopedShortcutID" : 2,
+  "scopedShortcutList" : [
+
+  ],
+  "scrollToSwitch" : false,
+  "searchIncludesLaunchableApps" : false,
+  "tabDrillEnabled" : false
+}
