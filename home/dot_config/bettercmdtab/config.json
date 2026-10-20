@@ -12,6 +12,7 @@
       "ignore" : "never"
     }
   ],
+  "applicationsOnly" : false,
   "clickOutsideToDismiss" : false,
   "cycleTileWidths" : false,
   "hideFromScreenSharing" : true,
@@ -26,5 +27,8 @@
   ],
   "scrollToSwitch" : false,
   "searchIncludesLaunchableApps" : false,
+  "showHiddenApps" : false,
+  "showMinimizedWindows" : true,
+  "showWindowlessApps" : false,
   "tabDrillEnabled" : false
 }
