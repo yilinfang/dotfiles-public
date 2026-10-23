@@ -19,6 +19,7 @@
   "hideMenuBarIcon" : true,
   "hoverActionsEnabled" : false,
   "hoverShowForceQuit" : true,
+  "layoutMode" : "iconDock",
   "mouseClickSelectionEnabled" : false,
   "mouseHoverSelectionEnabled" : false,
   "nextScopedShortcutID" : 2,
@@ -27,8 +28,10 @@
   ],
   "scrollToSwitch" : false,
   "searchIncludesLaunchableApps" : false,
+  "showApplicationNames" : false,
   "showHiddenApps" : false,
   "showMinimizedWindows" : true,
   "showWindowlessApps" : false,
+  "showWindowStatusIcons" : true,
   "tabDrillEnabled" : false
 }
