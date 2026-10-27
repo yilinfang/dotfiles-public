@@ -1,5 +1,5 @@
 [tools]
-age = "latest"
+# age = "latest"
 # aube = "latest"
 # "aqua:micro-editor/micro" = "latest"
 bat = "latest"

@@ -1,8 +1,9 @@
 [tools]
+age = "latest"
 gh = "latest"
 jq = "latest"
 # "npm:prettier" = "latest"
-ruff = "latest"
+# ruff = "latest"
 shellcheck = "latest"
 shfmt = "latest"
 taplo = "latest"
