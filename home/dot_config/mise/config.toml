@@ -1,5 +1,6 @@
 [tools]
 age = "latest"
+age-plugin-yubikey = "latest"
 gh = "latest"
 jq = "latest"
 # "npm:prettier" = "latest"
