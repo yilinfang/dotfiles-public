@@ -70,6 +70,9 @@ safe_alias cxs 'claude --dangerously-skip-permissions --model sonnet --effort hi
 safe_alias cr 'claude --dangerously-skip-permissions --resume'
 safe_alias ca 'claude --dangerously-skip-permissions agents'
 
+# passage
+safe_alias p 'passage.fzf'
+
 # lfcd
 LFCD="$HOME/.lf/lfcd.sh"
 if [ -f "$LFCD" ]; then
