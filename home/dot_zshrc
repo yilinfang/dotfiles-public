@@ -125,6 +125,9 @@ fi
 # kitten ssh
 alias kssh="kitten ssh"
 
+# passage.fzf
+alias p="$HOME/.chezmoi/dotfiles/bin/passage.fzf"
+
 # Function: Update external plugins_and_themes managed by Oh My Zsh
 # Helper function to update Oh My Zsh plugins and themes
 omz_update_plugins_and_themes() {
