@@ -101,6 +101,9 @@ plugins=(
 	zsh-syntax-highlighting
 )
 
+# HACK: Add $HOME/.local/share/zsh/site-functions to completions path
+fpath=($HOME/.local/share/zsh/site-functions $fpath)
+
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -125,6 +128,8 @@ fi
 # kitten ssh
 alias kssh="kitten ssh"
 
+# use rage in passage
+export PASSAGE_AGE=rage
 # passage.fzf
 alias p="$HOME/.chezmoi/dotfiles/bin/passage.fzf"
 
