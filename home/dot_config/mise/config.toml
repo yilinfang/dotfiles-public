@@ -1,8 +1,8 @@
 [tools]
 # age = "latest"
-age-plugin-yubikey = "latest"
+# age-plugin-yubikey = "latest"
 gh = "latest"
-"github:str4d/rage" = "latest"
+# "github:str4d/rage" = "latest"
 jq = "latest"
 # "npm:prettier" = "latest"
 # ruff = "latest"
