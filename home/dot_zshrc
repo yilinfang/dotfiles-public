@@ -131,7 +131,6 @@ alias kssh="kitten ssh"
 # replace age with rage
 alias age="rage"
 alias age-keygen="rage-keygen"
-# use rage in passage
 export PASSAGE_AGE=rage
 # # passage.fzf
 # alias p="$HOME/.chezmoi/dotfiles/bin/passage.fzf"
