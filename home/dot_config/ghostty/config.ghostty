@@ -3,7 +3,8 @@ config-file = ?auto/theme.ghostty
 
 # Font
 font-family = ""
-font-family = "JetBrainsMonoNL Nerd Font"
+font-family = "MonoLisaCode NL"
+font-family = "Symbols Nerd Font Mono"
 
 # Window
 window-padding-balance = true
