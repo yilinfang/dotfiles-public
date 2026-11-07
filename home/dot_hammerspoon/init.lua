@@ -1,134 +1,96 @@
 -- Define your modifier keys in one place for easy changing
-local mods = { 'cmd', 'alt', 'shift', 'ctrl' } -- Change this line to modify all shortcuts at once
+-- (Karabiner maps Caps Lock to ctrl+alt+shift)
+local hyper = { 'ctrl', 'alt', 'shift' } -- Change this line to modify all shortcuts at once
+local hyperCmd = { 'ctrl', 'alt', 'shift', 'cmd' } -- hyper + cmd, for extra shortcuts
 
--- General Shortcuts for Applications
-local appShortcuts = {
-  -- Key, Application
-  -- { "return", "iTerm" },
-  -- { "return", "kitty" },
-  { 'return', 'Ghostty' },
-  { 'E', 'Finder' },
-  { 'B', 'Google Chrome' },
-  -- { "B", "Firefox" },
-  -- { "B", "Brave Browser" },
-  -- { "B", "Vivaldi" },
-  -- { "P", "Bitwarden" },
-  -- { 'P', '1Password' },
-  { "P", "Proton Pass" },
-  -- { "P", "KeePassXC" },
-  -- { 'P', 'Enpass' },
-  { 'W', 'WeChat' },
-  { 'C', 'Visual Studio Code' },
-  -- { "C", "Cursor" },
-  -- { "C", "Windsurf" },
-  -- { "C", "Antigravity" },
-  -- { "T", "TickTick" },
-  -- { "T", "Todoist" },
-  { 'T', 'RTM' },
-  { 'S', 'Spotify' },
-  { 'O', 'OpenInTerminal-Lite' },
-  -- { "N", "Obsidian" },
-  { 'N', 'UpNote' },
-  -- { "A", "Antinote" },
-  { 'M', 'Mole' },
-}
+-- Helpers ---------------------------------------------------------------------
 
--- General Shortcuts for Links
-local linkShortcuts = {
-  -- Key, Description, URL
-  -- { "N", "Notion", "https://app.notion.com/" },
-  -- { "T", "RTM", "https://www.rememberthemilk.com/app/" },
-  -- { "T", "Todoist", "https://app.todoist.com/app/" },
-  { 'G', 'ChatGPT', 'https://chatgpt.com/' },
-  -- { "G", "Claude", "https://claude.ai/" },
-  -- { "G", "Gemini", "https://gemini.google.com/" },
-  -- { "D", "DeepSeek", "https://chat.deepseek.com/" },
-}
+-- Function to display a notification
+local function notify(message)
+  hs.notify.new({ title = 'Hammerspoon', informativeText = message }):send()
+end
 
--- Function to display notification and open an application
-local function notifyAndLaunchApp(appName)
-  local success = hs.application.launchOrFocus(appName)
-  -- if success then
-  -- 	hs.notify.new({ title = "Hammerspoon", informativeText = "Launched " .. appName }):send()
-  -- else
-  -- 	hs.notify.new({ title = "Hammerspoon", informativeText = "Failed to launch " .. appName }):send()
-  -- end
-  if not success then
-    hs.notify
-      .new({ title = 'Hammerspoon', informativeText = 'Failed to launch ' .. appName })
-      :send()
+-- Function to open an application, with a notification on failure
+local function launch(app)
+  return function()
+    if hs.application.launchOrFocus(app) then
+      -- notify('Launched ' .. app)
+    else
+      notify('Failed to launch ' .. app)
+    end
   end
 end
 
--- Function to display notification and open a URL
-local function notifyAndOpenURL(description, url)
-  -- hs.notify.new({ title = "Hammerspoon", informativeText = "Opening " .. description }):send()
-  local success = hs.urlevent.openURL(url)
-  if not success then
-    hs.notify
-      .new({ title = 'Hammerspoon', informativeText = 'Failed to open ' .. description })
-      :send()
+-- Function to open a URL, with a notification on failure
+local function open(url)
+  return function()
+    -- notify('Opening ' .. url)
+    if not hs.urlevent.openURL(url) then
+      notify('Failed to open ' .. url)
+    end
   end
 end
 
--- Create shortcuts for each application
-for _, app in ipairs(appShortcuts) do
-  hs.hotkey.bind(mods, app[1], function()
-    notifyAndLaunchApp(app[2])
-  end)
-end
-
--- Create shortcuts for each link
-for _, link in ipairs(linkShortcuts) do
-  hs.hotkey.bind(mods, link[1], function()
-    notifyAndOpenURL(link[2], link[3])
-  end)
-end
-
--- Other Shortcuts
-
--- -- Bind mods+T to OpenInTerminal-Lite in Finder and Terminal Emulator elsewhere
--- hs.hotkey.bind(mods, "return", function()
--- 	-- Check if Finder is the focused application
--- 	local frontApp = hs.application.frontmostApplication()
--- 	if frontApp:name() == "Finder" then
--- 		notifyAndLaunchApp("OpenInTerminal-Lite")
--- 	else
--- 		-- notifyAndLaunchApp("iTerm")
--- 		-- notifyAndLaunchApp("kitty")
--- 		notifyAndLaunchApp("Ghostty")
--- 	end
--- end)
-
--- Toggle keep-mac-awake (caffeinate -dimsu) with mods+A
+-- Toggle keep-mac-awake (caffeinate -dimsu)
 -- Hammerspoon does not load the shell PATH, so use the absolute path.
 local keepMacAwake = os.getenv('HOME') .. '/.chezmoi/dotfiles/bin/keep-mac-awake'
 
 local function runKeepMacAwake(action, callback)
-  hs.task
-    .new(keepMacAwake, function(exitCode, stdOut, stdErr)
-      callback(exitCode, (stdOut .. stdErr):gsub('%s+$', ''))
-    end, { action })
-    :start()
+  local task = hs.task.new(keepMacAwake, function(_, stdOut, stdErr)
+    local output = ((stdOut or '') .. (stdErr or '')):gsub('%s+$', '')
+    callback(output)
+  end, { action })
+
+  if not (task and task:start()) then
+    notify('Failed to run ' .. keepMacAwake)
+  end
 end
 
-hs.hotkey.bind(mods, 'A', function()
-  runKeepMacAwake('status', function(_, status)
-    local action = status:find('is running with PID') and 'stop' or 'start'
-    runKeepMacAwake(action, function(_, output)
-      hs.alert.show(output)
-    end)
+local function toggleKeepAwake()
+  runKeepMacAwake('status', function(status)
+    local running = status:find('is running with PID', 1, true)
+    runKeepMacAwake(running and 'stop' or 'start', hs.alert.show)
   end)
-end)
+end
 
--- Reload Hammerspoon config with mods+R
--- NOTE: One important detail to call out here is that hs.reload() destroys the current Lua interpreter and creates a
--- new one. If we had any code after hs.reload() in this function, it would not be called.
-hs.hotkey.bind(mods, 'R', function()
-  hs.reload()
-end)
+-- Shortcuts -------------------------------------------------------------------
+
+local shortcuts = {
+  -- Modifiers, Key, Action
+
+  -- General Shortcuts for Applications
+  { hyper, 'return', launch('Ghostty') },
+  { hyperCmd, 'return', launch('OpenInTerminal-Lite') },
+  { hyper, 'E', launch('Finder') },
+  { hyper, 'B', launch('Google Chrome') },
+  { hyper, 'P', launch('Enpass') },
+  { hyper, 'W', launch('WeChat') },
+  { hyper, 'T', launch('RTM') },
+  { hyper, 'S', launch('Spotify') },
+  { hyper, 'N', launch('UpNote') },
+  { hyper, 'M', launch('Mole') },
+  { hyper, 'R', launch('RexBeta') },
+
+  -- General Shortcuts for Links
+  { hyper, 'G', open('https://chatgpt.com/') }, -- ChatGPT
+
+  -- Other Shortcuts
+  -- Toggle keep-mac-awake
+  { hyperCmd, 'A', toggleKeepAwake },
+
+  -- Reload Hammerspoon config
+  -- NOTE: One important detail to call out here is that hs.reload() destroys the current Lua interpreter and creates a
+  -- new one. Any code after hs.reload() in the same function would not be called.
+  { hyperCmd, 'R', hs.reload },
+}
+
+-- Create all shortcuts
+for _, s in ipairs(shortcuts) do
+  hs.hotkey.bind(s[1], s[2], s[3])
+end
+
 -- Show notification after reload
 hs.alert.show('Hammerspoon config loaded')
 
 -- -- Better window switching with alt+tab
--- require('custom.alttab')
+-- require('custom.alttab')"
