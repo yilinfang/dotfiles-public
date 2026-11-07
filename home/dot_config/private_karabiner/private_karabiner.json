@@ -28,13 +28,13 @@
                         ]
                     },
                     {
-                        "description": "Caps Lock + Command -> Caps Lock, Caps Lock -> Left Control+Shift+Option",
+                        "description": "Caps Lock + Shift -> Caps Lock, Caps Lock -> Left Control+Shift+Option",
                         "manipulators": [
                             {
                                 "from": {
                                     "key_code": "caps_lock",
                                     "modifiers": {
-                                        "mandatory": ["command"],
+                                        "mandatory": ["shift"],
                                         "optional": ["caps_lock"]
                                     }
                                 },
