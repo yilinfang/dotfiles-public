@@ -63,6 +63,7 @@ local shortcuts = {
   { hyperCmd, 'return', launch('OpenInTerminal-Lite') },
   { hyper, 'E', launch('Finder') },
   { hyper, 'B', launch('Google Chrome') },
+  { hyper, 'C', launch('Visual Studio Code') },
   { hyper, 'P', launch('Enpass') },
   { hyper, 'W', launch('WeChat') },
   { hyper, 'T', launch('RTM') },
