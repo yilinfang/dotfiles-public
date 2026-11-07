@@ -69,7 +69,7 @@ local shortcuts = {
   { hyper, 'S', launch('Spotify') },
   { hyper, 'N', launch('UpNote') },
   { hyper, 'M', launch('Mole') },
-  { hyper, 'R', launch('RexBeta') },
+  { hyper, 'R', launch('Rex Beta') },
 
   -- General Shortcuts for Links
   { hyper, 'G', open('https://chatgpt.com/') }, -- ChatGPT
