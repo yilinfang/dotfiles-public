@@ -78,11 +78,6 @@ local shortcuts = {
   -- Other Shortcuts
   -- Toggle keep-mac-awake
   { hyperCmd, 'A', toggleKeepAwake },
-
-  -- Reload Hammerspoon config
-  -- NOTE: One important detail to call out here is that hs.reload() destroys the current Lua interpreter and creates a
-  -- new one. Any code after hs.reload() in the same function would not be called.
-  { hyperCmd, 'R', hs.reload },
 }
 
 -- Create all shortcuts
@@ -90,8 +85,9 @@ for _, s in ipairs(shortcuts) do
   hs.hotkey.bind(s[1], s[2], s[3])
 end
 
+-- Reload Hammerspoon config
+-- NOTE: One important detail to call out here is that hs.reload() destroys the current Lua interpreter and creates a
+-- new one. Any code after hs.reload() in the same function would not be called.
+hs.hotkey.bind(hyperCmd, 'R', hs.reload)
 -- Show notification after reload
 hs.alert.show('Hammerspoon config loaded')
-
--- -- Better window switching with alt+tab
--- require('custom.alttab')"
