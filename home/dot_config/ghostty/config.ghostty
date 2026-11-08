@@ -4,6 +4,7 @@ config-file = ?auto/theme.ghostty
 # Font
 font-family = ""
 font-family = "MonoLisaCode NL"
+adjust-underline-position = 3
 font-family = "Symbols Nerd Font Mono"
 
 # Window
