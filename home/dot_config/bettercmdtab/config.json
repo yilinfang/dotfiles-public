@@ -15,6 +15,7 @@
   "applicationsOnly" : false,
   "clickOutsideToDismiss" : false,
   "cycleTileWidths" : false,
+  "displayMode" : "activeWindow",
   "hideFromScreenSharing" : true,
   "hideMenuBarIcon" : true,
   "hoverActionsEnabled" : false,
@@ -23,6 +24,7 @@
   "mouseClickSelectionEnabled" : false,
   "mouseHoverSelectionEnabled" : false,
   "nextScopedShortcutID" : 2,
+  "revealDelayMs" : 100,
   "scopedShortcutList" : [
 
   ],
