@@ -25,7 +25,7 @@ prompt_new_tab_name = false
 status_indicators = "symbols"
 
 [ui.sound]
-enabled = false
+enabled = true
 
 [ui.toast]
 delivery = "terminal"
