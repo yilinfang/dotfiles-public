@@ -58,6 +58,7 @@
                     },
                     {
                         "description": "Hyper + Arrows to Page Up/Down/Home/End",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "from": {
