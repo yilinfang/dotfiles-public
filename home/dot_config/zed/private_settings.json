@@ -1,0 +1,67 @@
+{
+  "remove_trailing_whitespace_on_save": false,
+  "title_bar": {
+    "show_sign_in": false,
+  },
+  "show_whitespaces": "trailing",
+  "format_on_save": "on",
+  "ssh_connections": [
+    {
+      "host": "w3cil-24-gpu",
+      "args": [],
+      "projects": [
+        {
+          "paths": ["/home/yilin/data/trace_latest/new"],
+        },
+        {
+          "paths": ["/home/yilin/data/trace_latest/next"],
+        },
+      ],
+    },
+  ],
+  "base_keymap": "VSCode",
+  "buffer_font_family": "MonoLisaCode NL",
+  "buffer_font_size": 13.0,
+  "buffer_line_height": {
+    "custom": 1.3,
+  },
+  "cli_default_open_behavior": "new_window",
+  "disable_ai": true,
+  "icon_theme": {
+    "dark": "Zed (Default)",
+    "light": "Zed (Default)",
+    "mode": "dark",
+  },
+  "project_panel": {
+    "dock": "left",
+  },
+  "restore_on_startup": "launchpad",
+  "telemetry": {
+    "anthropic_retention": false,
+    "diagnostics": false,
+    "metrics": false,
+  },
+  "terminal": {
+    "font_fallbacks": ["Symbols Nerd Font Mono"],
+  },
+  "theme": {
+    "dark": "One Dark",
+    "light": "One Light",
+    "mode": "dark",
+  },
+  "ui_font_size": 16,
+  // Disable all lsp by default
+  "enable_language_server": false,
+  // Enable lsps on selected languages
+  "languages": {
+    "Python": { "enable_language_server": true },
+  },
+  // I don't use debugger
+  "debugger": {
+    "button": false,
+  },
+  "gutter": {
+    "breakpoints": false,
+    "runnables": false,
+  },
+}
