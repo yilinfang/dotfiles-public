@@ -23,7 +23,7 @@
   "buffer_font_family": "MonoLisaCode NL",
   "buffer_font_size": 13.0,
   "buffer_line_height": {
-    "custom": 1.3,
+    "custom": 1.25,
   },
   "cli_default_open_behavior": "new_window",
   "disable_ai": true,
