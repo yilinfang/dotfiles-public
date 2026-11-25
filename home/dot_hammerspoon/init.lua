@@ -65,13 +65,14 @@ local shortcuts = {
   -- { hyper, 'B', launch('Google Chrome') },
   { hyper, 'B', launch('Brave Browser') },
   { hyper, 'C', launch('Visual Studio Code') },
+  { hyper, 'Z', launch('Zed') },
   { hyper, 'P', launch('Enpass') },
   { hyper, 'W', launch('WeChat') },
   { hyper, 'T', launch('RTM') },
   { hyper, 'S', launch('Spotify') },
   { hyper, 'N', launch('UpNote') },
   { hyper, 'M', launch('Mole') },
-  { hyper, 'R', launch('Rex Beta') },
+  { hyper, 'R', launch('Rex') },
 
   -- General Shortcuts for Links
   { hyper, 'G', open('https://chatgpt.com/') }, -- ChatGPT
